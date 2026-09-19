@@ -162,6 +162,29 @@ sealed interface QuizUiState {
 - Compose previews must be provided for all major UI components and states.
 - Follow Material 3 theming; do not hardcode colors, padding, or fonts directly in composables.
 
+### 5.4 Core Design System & UI Component Discipline (MANDATORY)
+To guarantee 100% visual consistency, maintainability, and encapsulation across the entire application:
+
+1. **Always Use Core Design System Components**:
+   - **Never** use raw default Android or Material 3 components (`Button`, `OutlinedButton`, `Card`, `LinearProgressIndicator`, etc.) directly inside feature screens.
+   - **Always** use the centralized wrappers in `com.code.Quiz.core.ui.component.*`:
+     - `CodeQuizButton` instead of `Button` / `TextButton`.
+     - `CodeQuizCard` instead of `Card` / `Surface`.
+     - `CodeQuizOptionCard` for all quiz question answers.
+     - `CodeQuizProgressBar` for all progress bars.
+     - `StreakBadge` for all streak indicators.
+     - `CodeSnippetBlock` for all monospace code blocks.
+2. **Creation of New Components in `core`**:
+   - If a feature requires a UI widget or pattern that does not yet exist in `core/ui/component/`, the agent must create it inside `core/ui/component/<category>/` using official design tokens (`Color.kt`, `Spacing.kt`).
+   - Never build one-off, ad-hoc reusable UI widgets isolated inside a `feature/<name>/ui/` package.
+   - All newly created components in `core` must include `@Preview` definitions for all relevant variants.
+3. **Abstraction & Consolidation Principle (DRY UI)**:
+   - When a new UI requirement is very similar to an existing component in `core/ui/component/`, **never create a duplicate, near-identical component**.
+   - **Abstract the existing component**: generalize it by adding a new variant, style enum, configuration flag, or `@Composable` slot parameter so that a single unified base component serves both use cases cleanly.
+4. **Strict Token Adherence**:
+   - Spacing and padding must exclusively use `Spacing.*` tokens (`Spacing.xs`, `Spacing.sm`, `Spacing.md`, etc.). Never write raw magic numbers like `13.dp` or `18.dp`.
+
+
 ---
 
 ## 6. Idiomatic Kotlin Standards
@@ -202,10 +225,19 @@ com.code.Quiz/
 │   ├── database/                        # Central RoomDatabase & TypeConverters
 │   │   ├── CodeQuizDatabase.kt
 │   │   └── Converters.kt
-│   ├── theme/                           # Material 3 Theme, Color, Type
+│   ├── theme/                           # Material 3 Theme, Color, Type, Spacing
 │   │   ├── Color.kt
 │   │   ├── Theme.kt
-│   │   └── Type.kt
+│   │   ├── Type.kt
+│   │   └── Spacing.kt
+│   ├── ui/                              # Core Design System Components (Mandatory Base)
+│   │   └── component/
+│   │       ├── button/CodeQuizButton.kt
+│   │       ├── card/CodeQuizCard.kt
+│   │       ├── card/CodeQuizOptionCard.kt
+│   │       ├── badge/StreakBadge.kt
+│   │       ├── progress/CodeQuizProgressBar.kt
+│   │       └── code/CodeSnippetBlock.kt
 │   └── util/                            # Shared utilities and dispatchers
 │       └── DispatcherProvider.kt
 │
@@ -224,7 +256,6 @@ com.code.Quiz/
 │   │   │   ├── repository/QuizRepository.kt
 │   │   │   └── usecase/EvaluateAnswerUseCase.kt
 │   │   └── ui/
-│   │       ├── components/CodeSnippetCard.kt
 │   │       ├── QuizScreen.kt
 │   │       ├── QuizViewModel.kt
 │   │       └── QuizUiState.kt
@@ -241,8 +272,8 @@ com.code.Quiz/
 │   │   │   ├── repository/StreakRepository.kt
 │   │   │   └── usecase/UpdateStreakUseCase.kt
 │   │   └── ui/
-│   │       ├── components/StreakBadge.kt
-│   │       └── StreakBanner.kt
+│   │       ├── StreakBanner.kt
+│   │       └── StreakViewModel.kt
 │   │
 │   └── profile/                         # User Profile & Stats Feature
 │       ├── data/
@@ -276,3 +307,8 @@ Before completing any task or code modification, agents must verify:
 - [ ] Are Room entities converted to Domain models before leaving the Data layer?
 - [ ] Is the Kotlin code idiomatic (no `!!`, immutable `val`, sealed interfaces for states)?
 - [ ] Is the UI reactive using `StateFlow` and Jetpack Compose?
+- [ ] **Are all UI elements built using `core/ui/component/*` rather than raw Material 3 primitives (`Button`, `Card`, etc.)?**
+- [ ] **Were any new reusable UI components added to `core/ui/component/` rather than siloed inside a feature?**
+- [ ] **Are similar components consolidated and abstracted via variants/slots rather than duplicated?**
+- [ ] **Are all paddings and spacings using `Spacing.*` tokens instead of hardcoded dp values?**
+
