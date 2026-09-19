@@ -1,6 +1,8 @@
 package com.code.Quiz.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +15,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -37,29 +42,45 @@ import com.code.Quiz.core.ui.component.mascot.MascotState
 import com.code.Quiz.feature.course.ui.CourseLevelsScreen
 import com.code.Quiz.feature.course.ui.CoursePathScreen
 import com.code.Quiz.feature.onboarding.ui.OnboardingScreen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-
 fun AppNavGraph(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    appNavViewModel: AppNavViewModel = koinViewModel()
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = OnboardingRoute,
-        modifier = modifier
-    ) {
-        composable<OnboardingRoute> {
-            OnboardingScreen(
-                onFinishOnboarding = {
-                    navController.navigate(HomeRoute) {
-                        popUpTo<OnboardingRoute> {
-                            inclusive = true
+    val isOnboardingCompleted by appNavViewModel.isOnboardingCompleted.collectAsState()
+
+    if (isOnboardingCompleted == null) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(DarkBackground)
+        )
+        return
+    }
+
+    val startDestination: Any = if (isOnboardingCompleted == true) HomeRoute else OnboardingRoute
+
+    key(startDestination) {
+        NavHost(
+            navController = navController,
+            startDestination = startDestination,
+            modifier = modifier
+        ) {
+            composable<OnboardingRoute> {
+                OnboardingScreen(
+                    onFinishOnboarding = {
+                        appNavViewModel.completeOnboarding()
+                        navController.navigate(HomeRoute) {
+                            popUpTo<OnboardingRoute> {
+                                inclusive = true
+                            }
                         }
                     }
-                }
-            )
-        }
+                )
+            }
 
         composable<HomeRoute> {
             CoursePathScreen(
@@ -101,6 +122,7 @@ fun AppNavGraph(
             )
         }
     }
+}
 }
 
 @Composable
