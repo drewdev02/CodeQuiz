@@ -1,4 +1,4 @@
-package com.code.Quiz.ui.theme
+package com.code.Quiz.core.theme
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -28,8 +28,10 @@ val TextSecondary = Color(0xFF94A3B8)
 val TextMuted = Color(0xFF64748B)
 
 // Gradients
-val HeroGradient = Brush.horizontalGradient(listOf(AccentCyan, Color(0xFF7B61FF)))
+val HeroGradient = Brush.horizontalGradient(
+    colors = listOf(AccentCyan, Color(0xFF7B61FF))
+)
 val GradientHero = HeroGradient
 val GradientPurpleGlow = Brush.verticalGradient(
-    listOf(AccentPurple.copy(alpha = 0.2f), Color.Transparent)
+    colors = listOf(AccentPurple.copy(alpha = 0.2f), Color.Transparent)
 )
