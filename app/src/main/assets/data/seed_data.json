@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "courses": [
+    {
+      "id": "intro_programming",
+      "title": "Curso de introducción a la programación",
+      "description": "Aprende los fundamentos de la computación, pensamiento lógico, variables y estructuras de control.",
+      "order": 1,
+      "badge": "Curso Top",
+      "iconType": "ROCKET",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "intro_prog_level_1",
+          "levelNumber": 1,
+          "title": "Variables y Tipos de Datos",
+          "description": "Aprende qué es una variable y cómo almacenar datos en memoria.",
+          "status": "COMPLETED",
+          "totalExercises": 5,
+          "xpReward": 30
+        },
+        {
+          "id": "intro_prog_level_2",
+          "levelNumber": 2,
+          "title": "Operadores y Expresiones",
+          "description": "Operaciones aritméticas, lógicas y de comparación para transformar datos.",
+          "status": "COMPLETED",
+          "totalExercises": 5,
+          "xpReward": 35
+        },
+        {
+          "id": "intro_prog_level_3",
+          "levelNumber": 3,
+          "title": "Estructuras Condicionales",
+          "description": "Toma decisiones en tu código evaluando expresiones booleanas con if, else y when.",
+          "status": "ACTIVE",
+          "totalExercises": 6,
+          "xpReward": 40
+        },
+        {
+          "id": "intro_prog_level_4",
+          "levelNumber": 4,
+          "title": "Bucles y Ciclos",
+          "description": "Repite instrucciones eficientemente con bucles while y for.",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 45
+        },
+        {
+          "id": "intro_prog_level_5",
+          "levelNumber": 5,
+          "title": "Funciones y Modularidad",
+          "description": "Divide tu código en bloques reutilizables, parámetros y retornos limpios.",
+          "status": "LOCKED",
+          "totalExercises": 7,
+          "xpReward": 50
+        },
+        {
+          "id": "intro_prog_level_6",
+          "levelNumber": 6,
+          "title": "Arreglos y Colecciones",
+          "description": "Almacena conjuntos de elementos y accede a ellos por índice.",
+          "status": "LOCKED",
+          "totalExercises": 8,
+          "xpReward": 60
+        },
+        {
+          "id": "intro_prog_level_7",
+          "levelNumber": 7,
+          "title": "Algoritmos y Reto Final",
+          "description": "Pon a prueba todo lo aprendido en el examen integrador de lógica algorítmica.",
+          "status": "LOCKED",
+          "totalExercises": 10,
+          "xpReward": 100
+        }
+      ]
+    },
+    {
+      "id": "kotlin_basics",
+      "title": "Fundamentos de Kotlin",
+      "description": "Sintaxis moderna, inmutabilidad, funciones, clases selladas y null safety sin rodeos.",
+      "order": 2,
+      "badge": "Recomendado",
+      "iconType": "CODE",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "kotlin_level_1",
+          "levelNumber": 1,
+          "title": "Sintaxis y Val/Var",
+          "description": "Inmutabilidad con val vs var y tipos de datos primitivos en Kotlin.",
+          "status": "ACTIVE",
+          "totalExercises": 5,
+          "xpReward": 30
+        },
+        {
+          "id": "kotlin_level_2",
+          "levelNumber": 2,
+          "title": "Funciones y Lambdas",
+          "description": "Parámetros nombrados, valores por defecto y funciones de orden superior.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 35
+        },
+        {
+          "id": "kotlin_level_3",
+          "levelNumber": 3,
+          "title": "Clases y Data Classes",
+          "description": "Programación orientada a objetos idiomática, data classes y properties.",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 40
+        },
+        {
+          "id": "kotlin_level_4",
+          "levelNumber": 4,
+          "title": "Null Safety y Elvis",
+          "description": "El sistema de tipos no nulables de Kotlin, safe calls (?.) y operador Elvis (?:).",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 45
+        },
+        {
+          "id": "kotlin_level_5",
+          "levelNumber": 5,
+          "title": "Colecciones y Flow",
+          "description": "Listas, mapas, secuencias reactivas y operaciones funcionales avanzadas.",
+          "status": "LOCKED",
+          "totalExercises": 8,
+          "xpReward": 55
+        }
+      ]
+    },
+    {
+      "id": "data_structures",
+      "title": "Estructuras de Datos Básicas",
+      "description": "Listas, pilas, colas, mapas y árboles explicados con retos visuales e interactivos.",
+      "order": 3,
+      "badge": null,
+      "iconType": "DATABASE",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "data_struct_level_1",
+          "levelNumber": 1,
+          "title": "Arreglos y Matrices",
+          "description": "Estructuras contiguas en memoria, acceso indexado y matrices bidimensionales.",
+          "status": "ACTIVE",
+          "totalExercises": 5,
+          "xpReward": 30
+        },
+        {
+          "id": "data_struct_level_2",
+          "levelNumber": 2,
+          "title": "Listas Enlazadas",
+          "description": "Nodos, punteros, inserción y recorrido en listas enlazadas simples y dobles.",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 35
+        },
+        {
+          "id": "data_struct_level_3",
+          "levelNumber": 3,
+          "title": "Pilas y Colas",
+          "description": "Conceptos LIFO y FIFO implementados en memoria y casos de uso comunes.",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 40
+        },
+        {
+          "id": "data_struct_level_4",
+          "levelNumber": 4,
+          "title": "Tablas Hash",
+          "description": "Funciones hash, resolución de colisiones y búsquedas en tiempo constante promedio.",
+          "status": "LOCKED",
+          "totalExercises": 7,
+          "xpReward": 50
+        },
+        {
+          "id": "data_struct_level_5",
+          "levelNumber": 5,
+          "title": "Árboles Binarios",
+          "description": "Estructuras jerárquicas, recorridos in-order, pre-order y post-order.",
+          "status": "LOCKED",
+          "totalExercises": 8,
+          "xpReward": 60
+        }
+      ]
+    },
+    {
+      "id": "algorithms_logic",
+      "title": "Algoritmos y Resolución de Problemas",
+      "description": "Búsquedas, ordenamientos y análisis de complejidad de forma práctica.",
+      "order": 4,
+      "badge": "Avanzado",
+      "iconType": "TERMINAL",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "algo_logic_level_1",
+          "levelNumber": 1,
+          "title": "Pensamiento Computacional",
+          "description": "Descomposición, reconocimiento de patrones, abstracción y diseño algorítmico.",
+          "status": "ACTIVE",
+          "totalExercises": 5,
+          "xpReward": 30
+        },
+        {
+          "id": "algo_logic_level_2",
+          "levelNumber": 2,
+          "title": "Búsqueda Lineal y Binaria",
+          "description": "Búsqueda en arreglos no ordenados vs ordenados y división y conquista.",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 35
+        },
+        {
+          "id": "algo_logic_level_3",
+          "levelNumber": 3,
+          "title": "Ordenamiento Burbuja e Inserción",
+          "description": "Algoritmos elementales de ordenación, comparaciones e intercambios paso a paso.",
+          "status": "LOCKED",
+          "totalExercises": 6,
+          "xpReward": 40
+        },
+        {
+          "id": "algo_logic_level_4",
+          "levelNumber": 4,
+          "title": "Recursión",
+          "description": "Caso base, caso inductivo y llamadas recursivas en la pila de ejecución.",
+          "status": "LOCKED",
+          "totalExercises": 7,
+          "xpReward": 50
+        },
+        {
+          "id": "algo_logic_level_5",
+          "levelNumber": 5,
+          "title": "Complejidad Big-O",
+          "description": "Análisis asintótico de tiempo y espacio para optimizar algoritmos.",
+          "status": "LOCKED",
+          "totalExercises": 8,
+          "xpReward": 60
+        }
+      ]
+    }
+  ]
+}

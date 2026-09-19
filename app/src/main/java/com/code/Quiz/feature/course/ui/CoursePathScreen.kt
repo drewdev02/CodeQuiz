@@ -1,15 +1,18 @@
 package com.code.Quiz.feature.course.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,13 +26,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.code.Quiz.core.theme.AccentPurple
 import com.code.Quiz.core.theme.CodeQuizTheme
 import com.code.Quiz.core.theme.DarkBackground
 import com.code.Quiz.core.theme.Spacing
 import com.code.Quiz.core.theme.TextPrimary
 import com.code.Quiz.core.theme.TextSecondary
 import com.code.Quiz.core.ui.component.badge.StreakBadge
+import com.code.Quiz.core.ui.component.button.CodeQuizButton
+import com.code.Quiz.core.ui.component.mascot.CodeQuizMascot
+import com.code.Quiz.core.ui.component.mascot.MascotState
+import com.code.Quiz.core.ui.component.progress.CodeQuizProgressBar
 import com.code.Quiz.feature.course.domain.model.Course
 import com.code.Quiz.feature.course.domain.model.CourseIconType
 import com.code.Quiz.feature.course.ui.components.CourseCard
@@ -51,6 +57,7 @@ fun CoursePathScreen(
     CoursePathContent(
         uiState = uiState,
         onCourseSelected = onCourseSelected,
+        onRetry = { viewModel.retry() },
         modifier = modifier
     )
 }
@@ -62,6 +69,7 @@ fun CoursePathScreen(
 fun CoursePathContent(
     uiState: CourseUiState,
     onCourseSelected: (courseId: String, title: String) -> Unit,
+    onRetry: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -94,33 +102,79 @@ fun CoursePathContent(
     ) { innerPadding ->
         when (uiState) {
             is CourseUiState.Loading -> {
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding),
-                    contentAlignment = Alignment.Center
+                        .padding(innerPadding)
+                        .padding(Spacing.lg),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(40.dp),
-                        color = AccentPurple,
-                        strokeWidth = 3.dp
+                    CodeQuizMascot(
+                        state = MascotState.THINKING,
+                        modifier = Modifier.size(180.dp)
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.lg))
+                    Text(
+                        text = "Preparando tus desafíos...",
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = TextPrimary,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.xs))
+                    Text(
+                        text = "Configurando tus rutas y retos de código",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontSize = 14.sp
+                        ),
+                        color = TextSecondary,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.xl))
+                    CodeQuizProgressBar(
+                        progress = 0.7f,
+                        modifier = Modifier.fillMaxWidth(0.6f)
                     )
                 }
             }
 
             is CourseUiState.Error -> {
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
                         .padding(Spacing.lg),
-                    contentAlignment = Alignment.Center
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
+                    CodeQuizMascot(
+                        state = MascotState.ERROR,
+                        modifier = Modifier.size(150.dp)
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.lg))
+                    Text(
+                        text = "No pudimos cargar tus cursos",
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = TextPrimary,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.xs))
                     Text(
                         text = uiState.message,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         color = TextSecondary,
                         textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.lg))
+                    CodeQuizButton(
+                        text = "Reintentar",
+                        onClick = onRetry
                     )
                 }
             }
@@ -206,6 +260,28 @@ private fun CoursePathScreenPreview() {
                     )
                 )
             ),
+            onCourseSelected = { _, _ -> }
+        )
+    }
+}
+
+@Preview(name = "CoursePathScreen Loading Preview", showBackground = true, backgroundColor = 0xFF020813)
+@Composable
+private fun CoursePathScreenLoadingPreview() {
+    CodeQuizTheme {
+        CoursePathContent(
+            uiState = CourseUiState.Loading,
+            onCourseSelected = { _, _ -> }
+        )
+    }
+}
+
+@Preview(name = "CoursePathScreen Error Preview", showBackground = true, backgroundColor = 0xFF020813)
+@Composable
+private fun CoursePathScreenErrorPreview() {
+    CodeQuizTheme {
+        CoursePathContent(
+            uiState = CourseUiState.Error("Fallo de conexión al cargar cursos"),
             onCourseSelected = { _, _ -> }
         )
     }
