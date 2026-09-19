@@ -1,32 +1,40 @@
 package com.code.Quiz.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = AccentPurple,
+    onPrimary = TextPrimary,
+    primaryContainer = AccentPurpleDark,
+    onPrimaryContainer = TextPrimary,
+    secondary = AccentCyan,
+    onSecondary = DarkBackground,
+    background = DarkBackground,
+    onBackground = TextPrimary,
+    surface = DarkSurface,
+    onSurface = TextPrimary,
+    surfaceVariant = DarkSurfaceElevated,
+    onSurfaceVariant = TextSecondary,
+    outline = DarkSurfaceBorder,
+    error = ErrorRed,
+    onError = TextPrimary
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-)
+// CodeQuiz is dark-first / dark-exclusive
+private val LightColorScheme = DarkColorScheme
 
 @Composable
 fun CodeQuizTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -41,7 +49,7 @@ fun CodeQuizTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = com.code.Quiz.ui.theme.Typography,
         content = content
     )
 }
