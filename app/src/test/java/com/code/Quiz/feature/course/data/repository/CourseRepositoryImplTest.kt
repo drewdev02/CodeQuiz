@@ -54,4 +54,54 @@ class CourseRepositoryImplTest {
         assertEquals(CourseIconType.TERMINAL, course4.iconType)
         assertTrue(course4.isUnlocked)
     }
+
+    @Test
+    fun getCourseLevels_introProgramming_emitsSevenRealisticLevels() = runBlocking {
+        val levels = repository.getCourseLevels("intro_programming").first()
+
+        assertEquals(7, levels.size)
+
+        // Level 1: Completed
+        assertEquals("intro_prog_level_1", levels[0].id)
+        assertEquals(1, levels[0].levelNumber)
+        assertEquals("Variables y Tipos de Datos", levels[0].title)
+        assertEquals(com.code.Quiz.feature.course.domain.model.LevelStatus.COMPLETED, levels[0].status)
+        assertEquals(5, levels[0].totalExercises)
+        assertEquals(30, levels[0].xpReward)
+
+        // Level 2: Completed
+        assertEquals("intro_prog_level_2", levels[1].id)
+        assertEquals(2, levels[1].levelNumber)
+        assertEquals("Operadores y Expresiones", levels[1].title)
+        assertEquals(com.code.Quiz.feature.course.domain.model.LevelStatus.COMPLETED, levels[1].status)
+
+        // Level 3: Active
+        assertEquals("intro_prog_level_3", levels[2].id)
+        assertEquals(3, levels[2].levelNumber)
+        assertEquals("Estructuras Condicionales", levels[2].title)
+        assertEquals(com.code.Quiz.feature.course.domain.model.LevelStatus.ACTIVE, levels[2].status)
+
+        // Level 4: Locked
+        assertEquals("intro_prog_level_4", levels[3].id)
+        assertEquals(4, levels[3].levelNumber)
+        assertEquals("Bucles y Ciclos", levels[3].title)
+        assertEquals(com.code.Quiz.feature.course.domain.model.LevelStatus.LOCKED, levels[3].status)
+
+        // Level 7: Locked final exam
+        assertEquals("intro_prog_level_7", levels[6].id)
+        assertEquals(7, levels[6].levelNumber)
+        assertEquals("Algoritmos y Reto Final", levels[6].title)
+        assertEquals(com.code.Quiz.feature.course.domain.model.LevelStatus.LOCKED, levels[6].status)
+        assertEquals(10, levels[6].totalExercises)
+        assertEquals(100, levels[6].xpReward)
+    }
+
+    @Test
+    fun getCourseLevels_defaultCourse_emitsLevels() = runBlocking {
+        val levels = repository.getCourseLevels("custom_course").first()
+
+        assertTrue(levels.isNotEmpty())
+        assertEquals("custom_course", levels[0].courseId)
+    }
 }
+

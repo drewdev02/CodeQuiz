@@ -34,10 +34,12 @@ import com.code.Quiz.core.ui.component.button.CodeQuizButtonVariant
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.mascot.CodeQuizMascot
 import com.code.Quiz.core.ui.component.mascot.MascotState
+import com.code.Quiz.feature.course.ui.CourseLevelsScreen
 import com.code.Quiz.feature.course.ui.CoursePathScreen
 import com.code.Quiz.feature.onboarding.ui.OnboardingScreen
 
 @Composable
+
 fun AppNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
@@ -62,10 +64,28 @@ fun AppNavGraph(
         composable<HomeRoute> {
             CoursePathScreen(
                 onCourseSelected = { courseId, title ->
-                    navController.navigate(QuizRoute(lessonId = courseId, title = title))
+                    navController.navigate(
+                        CourseLevelsRoute(
+                            courseId = courseId,
+                            courseTitle = title
+                        )
+                    )
                 }
             )
         }
+
+        composable<CourseLevelsRoute> { backStackEntry ->
+            val route = backStackEntry.toRoute<CourseLevelsRoute>()
+            CourseLevelsScreen(
+                courseId = route.courseId,
+                courseTitle = route.courseTitle,
+                onBack = { navController.popBackStack() },
+                onStartLevel = { levelId, title ->
+                    navController.navigate(QuizRoute(lessonId = levelId, title = title))
+                }
+            )
+        }
+
 
         composable<QuizRoute> { backStackEntry ->
             val route = backStackEntry.toRoute<QuizRoute>()

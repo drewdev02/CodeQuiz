@@ -9,7 +9,14 @@ data object OnboardingRoute
 data object HomeRoute
 
 @Serializable
+data class CourseLevelsRoute(
+    val courseId: String,
+    val courseTitle: String
+)
+
+@Serializable
 data class QuizRoute(
     val lessonId: String,
     val title: String = ""
 )
+
