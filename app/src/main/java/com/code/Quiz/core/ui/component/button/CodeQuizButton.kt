@@ -43,6 +43,8 @@ enum class CodeQuizButtonVariant {
     Ghost
 }
 
+typealias ButtonVariant = CodeQuizButtonVariant
+
 @Composable
 fun CodeQuizButton(
     text: String,

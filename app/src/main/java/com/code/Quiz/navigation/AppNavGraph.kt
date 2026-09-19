@@ -34,6 +34,7 @@ import com.code.Quiz.core.ui.component.button.CodeQuizButtonVariant
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.mascot.CodeQuizMascot
 import com.code.Quiz.core.ui.component.mascot.MascotState
+import com.code.Quiz.feature.course.ui.CoursePathScreen
 import com.code.Quiz.feature.onboarding.ui.OnboardingScreen
 
 @Composable
@@ -59,9 +60,9 @@ fun AppNavGraph(
         }
 
         composable<HomeRoute> {
-            HomeScreen(
-                onStartQuiz = { lessonId, title ->
-                    navController.navigate(QuizRoute(lessonId = lessonId, title = title))
+            CoursePathScreen(
+                onCourseSelected = { courseId, title ->
+                    navController.navigate(QuizRoute(lessonId = courseId, title = title))
                 }
             )
         }
