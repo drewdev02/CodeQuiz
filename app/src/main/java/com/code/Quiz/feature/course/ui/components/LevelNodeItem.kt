@@ -258,11 +258,22 @@ fun LevelNodeItem(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(Spacing.sm)
                         ) {
-                            Text(
-                                text = "🎯 ${level.totalExercises} micro-retos",
-                                style = MaterialTheme.typography.labelSmall,
-                                color = TextSecondary
-                            )
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
+                            ) {
+                                Icon(
+                                    painter = painterResource(R.drawable.ic_target),
+                                    contentDescription = null,
+                                    tint = AccentCyan,
+                                    modifier = Modifier.size(13.dp)
+                                )
+                                Text(
+                                    text = "${level.totalExercises} micro-retos",
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = TextSecondary
+                                )
+                            }
 
                             CodeQuizBadge(
                                 text = "+${level.xpReward} XP",
@@ -333,11 +344,22 @@ fun LevelNodeItem(
 
                     Spacer(modifier = Modifier.height(Spacing.sm))
 
-                    Text(
-                        text = "🎯 ${level.totalExercises} micro-retos",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = if (level.status == LevelStatus.LOCKED) TextMuted else TextSecondary
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_target),
+                            contentDescription = null,
+                            tint = if (level.status == LevelStatus.LOCKED) TextMuted else AccentCyan,
+                            modifier = Modifier.size(13.dp)
+                        )
+                        Text(
+                            text = "${level.totalExercises} micro-retos",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = if (level.status == LevelStatus.LOCKED) TextMuted else TextSecondary
+                        )
+                    }
                 }
             }
         }
