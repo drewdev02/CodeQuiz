@@ -75,8 +75,8 @@ val onboardingSlides = listOf(
 fun OnboardingScreen(
     modifier: Modifier = Modifier,
     slides: List<OnboardingSlide> = onboardingSlides,
-    onFinish: () -> Unit = {},
-    onSkip: () -> Unit = onFinish
+    onFinishOnboarding: () -> Unit = {},
+    onSkip: () -> Unit = onFinishOnboarding
 ) {
     val pagerState = rememberPagerState(pageCount = { slides.size })
     val coroutineScope = rememberCoroutineScope()
@@ -184,7 +184,7 @@ fun OnboardingScreen(
                         text = if (isLastPage) "Empezar" else "Siguiente",
                         onClick = {
                             if (isLastPage) {
-                                onFinish()
+                                onFinishOnboarding()
                             } else {
                                 coroutineScope.launch {
                                     pagerState.animateScrollToPage(pagerState.currentPage + 1)

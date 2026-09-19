@@ -71,7 +71,7 @@ To maintain high cohesion and low coupling:
 
 1. **No Direct UI/Data Coupling**: A feature must **never** directly import or reference classes from another feature's `ui` or `data` packages.
 2. **Communication via Domain Abstractions**: If `feature/quiz` needs data or actions from `feature/streak`, it must communicate through public domain models or shared interfaces defined in `core/` or exported via domain contracts.
-3. **Navigation Independence**: Navigation between features is coordinated at the app root level (`ui/navigation/`) using route destinations and arguments, never by direct tight coupling between screens.
+3. **Navigation Independence**: Navigation between features is coordinated at the app root level (`navigation/`) using route destinations and arguments, never by direct tight coupling between screens.
 4. **Future Multi-Module Readiness**: Because each feature is self-contained with its own `domain`, `data`, `ui`, and `di`, any feature can be extracted into an independent Gradle module (e.g., `:feature:quiz`) in the future with zero refactoring.
 
 ---
@@ -281,13 +281,13 @@ com.code.Quiz/
 │       ├── domain/
 │       └── ui/
 │
+├── navigation/                          # Root navigation module (Type-Safe Navigation 2.8+)
+│   ├── Routes.kt
+│   └── AppNavGraph.kt
+│
 ├── di/                                  # Central Koin setup
 │   ├── CoreModule.kt                    # Core dependencies (Database, Dispatchers)
 │   └── AppModule.kt                     # Aggregates all feature modules
-│
-├── ui/
-│   └── navigation/                      # App-level navigation graph
-│       └── AppNavGraph.kt
 │
 ├── MainActivity.kt                      # Main Activity hosting AppNavGraph
 └── CodeQuizApplication.kt               # Initializes Koin with appModules
