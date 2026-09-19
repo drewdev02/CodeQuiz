@@ -23,4 +23,10 @@ interface CourseLevelDao {
 
     @Query("SELECT COUNT(*) FROM course_levels")
     suspend fun count(): Int
+
+    @Query("SELECT * FROM course_levels WHERE id = :levelId LIMIT 1")
+    suspend fun getLevelById(levelId: String): CourseLevelEntity?
+
+    @Query("SELECT * FROM course_levels WHERE courseId = :courseId ORDER BY levelNumber ASC")
+    suspend fun getLevelsByCourse(courseId: String): List<CourseLevelEntity>
 }

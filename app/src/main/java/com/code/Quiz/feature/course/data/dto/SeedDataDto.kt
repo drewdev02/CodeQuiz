@@ -37,5 +37,29 @@ data class CourseLevelSeedDto(
     val description: String,
     val status: String = "LOCKED",
     val totalExercises: Int = 5,
-    val xpReward: Int = 30
+    val xpReward: Int = 30,
+    val exercises: List<ExerciseSeedDto> = emptyList()
+)
+
+/**
+ * DTO representing an exercise micro-challenge inside a level in seed data.
+ */
+@Serializable
+data class ExerciseSeedDto(
+    val id: String,
+    val question: String,
+    val codeSnippet: String? = null,
+    val language: String = "Kotlin",
+    val options: List<ExerciseOptionSeedDto> = emptyList(),
+    val explanation: String
+)
+
+/**
+ * DTO representing an option inside an exercise in seed data.
+ */
+@Serializable
+data class ExerciseOptionSeedDto(
+    val id: String,
+    val text: String,
+    val isCorrect: Boolean
 )

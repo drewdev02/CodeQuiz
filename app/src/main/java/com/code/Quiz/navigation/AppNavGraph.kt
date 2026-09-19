@@ -42,6 +42,7 @@ import com.code.Quiz.core.ui.component.mascot.MascotState
 import com.code.Quiz.feature.course.ui.CourseLevelsScreen
 import com.code.Quiz.feature.course.ui.CoursePathScreen
 import com.code.Quiz.feature.onboarding.ui.OnboardingScreen
+import com.code.Quiz.feature.quiz.ui.QuizScreen
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -82,47 +83,42 @@ fun AppNavGraph(
                 )
             }
 
-        composable<HomeRoute> {
-            CoursePathScreen(
-                onCourseSelected = { courseId, title ->
-                    navController.navigate(
-                        CourseLevelsRoute(
-                            courseId = courseId,
-                            courseTitle = title
+            composable<HomeRoute> {
+                CoursePathScreen(
+                    onCourseSelected = { courseId, title ->
+                        navController.navigate(
+                            CourseLevelsRoute(
+                                courseId = courseId,
+                                courseTitle = title
+                            )
                         )
-                    )
-                }
-            )
-        }
-
-        composable<CourseLevelsRoute> { backStackEntry ->
-            val route = backStackEntry.toRoute<CourseLevelsRoute>()
-            CourseLevelsScreen(
-                courseId = route.courseId,
-                courseTitle = route.courseTitle,
-                onBack = { navController.popBackStack() },
-                onStartLevel = { levelId, title ->
-                    navController.navigate(QuizRoute(lessonId = levelId, title = title))
-                }
-            )
-        }
-
-
-        composable<QuizRoute> { backStackEntry ->
-            val route = backStackEntry.toRoute<QuizRoute>()
-            QuizPlaceholderScreen(
-                route = route,
-                onExit = {
-                    navController.navigate(HomeRoute) {
-                        popUpTo<HomeRoute> {
-                            inclusive = false
-                        }
                     }
-                }
-            )
+                )
+            }
+
+            composable<CourseLevelsRoute> { backStackEntry ->
+                val route = backStackEntry.toRoute<CourseLevelsRoute>()
+                CourseLevelsScreen(
+                    courseId = route.courseId,
+                    courseTitle = route.courseTitle,
+                    onBack = { navController.popBackStack() },
+                    onStartLevel = { levelId, title ->
+                        navController.navigate(QuizRoute(lessonId = levelId, title = title))
+                    }
+                )
+            }
+
+
+            composable<QuizRoute> { backStackEntry ->
+                val route = backStackEntry.toRoute<QuizRoute>()
+                QuizScreen(
+                    levelId = route.lessonId,
+                    levelTitle = route.title,
+                    onExit = { navController.popBackStack() }
+                )
+            }
         }
     }
-}
 }
 
 @Composable
@@ -294,7 +290,11 @@ private fun HomeScreenPreview() {
     }
 }
 
-@Preview(name = "Quiz Placeholder Screen Preview", showBackground = true, backgroundColor = 0xFF020813)
+@Preview(
+    name = "Quiz Placeholder Screen Preview",
+    showBackground = true,
+    backgroundColor = 0xFF020813
+)
 @Composable
 private fun QuizPlaceholderScreenPreview() {
     CodeQuizTheme {

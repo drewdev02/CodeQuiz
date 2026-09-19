@@ -17,7 +17,154 @@
           "description": "Aprende qué es una variable y cómo almacenar datos en memoria.",
           "status": "COMPLETED",
           "totalExercises": 5,
-          "xpReward": 30
+          "xpReward": 30,
+          "exercises": [
+            {
+              "id": "intro_prog_l1_ex1",
+              "question": "¿Cuál es la palabra clave en Kotlin para declarar una variable inmutable de solo lectura?",
+              "codeSnippet": "val pi = 3.14159\npi = 3.14 // ¿Es válido?",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "var",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "val",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "let",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "const",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Kotlin, 'val' declara referencias inmutables (de solo lectura). Una vez inicializada, no puede ser reasignada."
+            },
+            {
+              "id": "intro_prog_l1_ex2",
+              "question": "¿Qué imprimirá en consola este código?",
+              "codeSnippet": "var score = 10\nscore += 5\nprintln(score)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "15",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "5",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error de compilación",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Al usar 'var', la variable es mutable. Operar '+=' suma 5 a 10, resultando en 15."
+            },
+            {
+              "id": "intro_prog_l1_ex3",
+              "question": "¿Cuál es el tipo de dato inferido automáticamente para la variable 'name'?",
+              "codeSnippet": "val name = \"CodeQuiz\"",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Char",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "String",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Text",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Any",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Kotlin realiza inferencia de tipos y deduce 'String' para literales delimitados por comillas dobles."
+            },
+            {
+              "id": "intro_prog_l1_ex4",
+              "question": "¿Qué tipo de dato numérico se infiere por defecto para el literal entero 42?",
+              "codeSnippet": "val level = 42",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Int",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Long",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Short",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Byte",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Los números enteros estándar sin sufijo se infieren automáticamente como 'Int' (32 bits)."
+            },
+            {
+              "id": "intro_prog_l1_ex5",
+              "question": "¿Cuál de las siguientes sentencias causará un error de compilación?",
+              "codeSnippet": "val total = 100\ntotal = 200",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Reasignar una variable 'val'",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "No incluir punto y coma",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "No declarar el tipo explícito : Int",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Declarar un valor entero positivo",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las variables definidas con 'val' no permiten reasignación después de su inicialización."
+            }
+          ]
         },
         {
           "id": "intro_prog_level_2",
@@ -26,7 +173,154 @@
           "description": "Operaciones aritméticas, lógicas y de comparación para transformar datos.",
           "status": "COMPLETED",
           "totalExercises": 5,
-          "xpReward": 35
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "intro_prog_l2_ex1",
+              "question": "¿Cuál es el resultado de la siguiente expresión booleana?",
+              "codeSnippet": "val result = (5 > 3) && (2 == 4)\nprintln(result)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "true",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "false",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "null",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "1",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El operador '&&' (AND lógico) requiere que ambas condiciones sean verdaderas. Como (2 == 4) es false, el resultado es false."
+            },
+            {
+              "id": "intro_prog_l2_ex2",
+              "question": "¿Qué valor almacenará la variable 'remainder' tras ejecutar esta operación?",
+              "codeSnippet": "val remainder = 14 % 4",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "3",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "2",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "3.5",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "1",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El operador '%' calcula el residuo de la división entera. 14 dividido por 4 es 3 con residuo 2 (4 * 3 + 2 = 14)."
+            },
+            {
+              "id": "intro_prog_l2_ex3",
+              "question": "¿Cuál es la salida de este código que combina operadores de incremento?",
+              "codeSnippet": "var count = 5\nval next = ++count\nprintln(\"$count, $next\")",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "5, 6",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "6, 6",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "6, 5",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "5, 5",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El prefijo '++' incrementa la variable 'count' a 6 antes de evaluar y asignar su valor a 'next'."
+            },
+            {
+              "id": "intro_prog_l2_ex4",
+              "question": "¿Qué operador se utiliza para verificar si dos referencias no son iguales en valor en Kotlin?",
+              "codeSnippet": "val isEqual = (a != b)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "!=",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "<>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "is not",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "!==",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Kotlin, '!=' compara la igualdad estructural (equivalente a !a.equals(b))."
+            },
+            {
+              "id": "intro_prog_l2_ex5",
+              "question": "¿Qué imprimirá la concatenación usando plantillas de texto (String templates)?",
+              "codeSnippet": "val dev = \"Ada\"\nprintln(\"Hola $dev, longitud: ${dev.length}\")",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Hola Ada, longitud: 3",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Hola $dev, longitud: 3",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Hola Ada, longitud: dev.length",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Hola Ada",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las plantillas de texto permiten incrustar variables con '$' y expresiones complejas con '${...}'."
+            }
+          ]
         },
         {
           "id": "intro_prog_level_3",
@@ -34,8 +328,155 @@
           "title": "Estructuras Condicionales",
           "description": "Toma decisiones en tu código evaluando expresiones booleanas con if, else y when.",
           "status": "ACTIVE",
-          "totalExercises": 6,
-          "xpReward": 40
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "intro_prog_l3_ex1",
+              "question": "¿Qué imprimirá esta estructura condicional 'if-else' como expresión?",
+              "codeSnippet": "val score = 85\nval result = if (score >= 90) \"Excelente\" else \"Aprobado\"\nprintln(result)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Excelente",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Aprobado",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "85",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "true",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Kotlin, 'if' es una expresión que devuelve un valor. Dado que 85 < 90, se ejecuta la rama 'else' que retorna 'Aprobado'."
+            },
+            {
+              "id": "intro_prog_l3_ex2",
+              "question": "¿Cuál es la palabra clave de Kotlin que reemplaza y mejora el 'switch' tradicional de Java y C?",
+              "codeSnippet": "val answer = when (code) {\n    200 -> \"OK\"\n    404 -> \"Not Found\"\n    else -> \"Unknown\"\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "select",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "switch",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "when",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "match",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'when' es la construcción idiomática de control de flujo de Kotlin, mucho más potente y segura que switch."
+            },
+            {
+              "id": "intro_prog_l3_ex3",
+              "question": "¿Qué imprimirá este bloque 'when'?",
+              "codeSnippet": "val x = 7\nwhen (x) {\n    in 1..5 -> println(\"Rango bajo\")\n    in 6..10 -> println(\"Rango medio\")\n    else -> println(\"Otro\")\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Rango bajo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Rango medio",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Otro",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "7",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El número 7 está contenido en el rango inclusivo '6..10', por lo que imprime 'Rango medio'."
+            },
+            {
+              "id": "intro_prog_l3_ex4",
+              "question": "¿Qué valor tendrá la variable 'status'?",
+              "codeSnippet": "val isOnline = false\nval status = if (isOnline) \"Conectado\" else \"Desconectado\"",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "\"Conectado\"",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "\"Desconectado\"",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "false",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "null",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Dado que 'isOnline' es false, se evalúa la rama 'else', asignando \"Desconectado\"."
+            },
+            {
+              "id": "intro_prog_l3_ex5",
+              "question": "¿Es obligatorio el bloque 'else' cuando 'when' o 'if' se usan como expresiones asignadas a una variable?",
+              "codeSnippet": "val res = if (x > 0) 1 else -1",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Sí, para garantizar que todos los posibles caminos retornen un valor",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "No, es completamente opcional",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Solo es obligatorio para números negativos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Depende del compilador",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Cuando 'if' se usa como expresión, la cláusula 'else' es obligatoria para garantizar la exhaustividad."
+            }
+          ]
         },
         {
           "id": "intro_prog_level_4",
@@ -43,8 +484,155 @@
           "title": "Bucles y Ciclos",
           "description": "Repite instrucciones eficientemente con bucles while y for.",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 45
+          "totalExercises": 5,
+          "xpReward": 45,
+          "exercises": [
+            {
+              "id": "intro_prog_level_4_ex1",
+              "question": "En el contexto de 'Bucles y Ciclos', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "intro_prog_level_4_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "intro_prog_level_4_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "intro_prog_level_4_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "intro_prog_level_4_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "intro_prog_level_5",
@@ -52,8 +640,155 @@
           "title": "Funciones y Modularidad",
           "description": "Divide tu código en bloques reutilizables, parámetros y retornos limpios.",
           "status": "LOCKED",
-          "totalExercises": 7,
-          "xpReward": 50
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "intro_prog_level_5_ex1",
+              "question": "En el contexto de 'Funciones y Modularidad', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "intro_prog_level_5_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "intro_prog_level_5_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "intro_prog_level_5_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "intro_prog_level_5_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "intro_prog_level_6",
@@ -61,8 +796,155 @@
           "title": "Arreglos y Colecciones",
           "description": "Almacena conjuntos de elementos y accede a ellos por índice.",
           "status": "LOCKED",
-          "totalExercises": 8,
-          "xpReward": 60
+          "totalExercises": 5,
+          "xpReward": 60,
+          "exercises": [
+            {
+              "id": "intro_prog_level_6_ex1",
+              "question": "En el contexto de 'Arreglos y Colecciones', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "intro_prog_level_6_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "intro_prog_level_6_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "intro_prog_level_6_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "intro_prog_level_6_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "intro_prog_level_7",
@@ -70,8 +952,155 @@
           "title": "Algoritmos y Reto Final",
           "description": "Pon a prueba todo lo aprendido en el examen integrador de lógica algorítmica.",
           "status": "LOCKED",
-          "totalExercises": 10,
-          "xpReward": 100
+          "totalExercises": 5,
+          "xpReward": 100,
+          "exercises": [
+            {
+              "id": "intro_prog_level_7_ex1",
+              "question": "En el contexto de 'Algoritmos y Reto Final', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "intro_prog_level_7_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "intro_prog_level_7_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "intro_prog_level_7_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "intro_prog_level_7_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         }
       ]
     },
@@ -91,7 +1120,154 @@
           "description": "Inmutabilidad con val vs var y tipos de datos primitivos en Kotlin.",
           "status": "ACTIVE",
           "totalExercises": 5,
-          "xpReward": 30
+          "xpReward": 30,
+          "exercises": [
+            {
+              "id": "kotlin_level_1_ex1",
+              "question": "En el contexto de 'Sintaxis y Val/Var', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "kotlin_level_1_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "kotlin_level_1_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "kotlin_level_1_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "kotlin_level_1_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "kotlin_level_2",
@@ -100,7 +1276,154 @@
           "description": "Parámetros nombrados, valores por defecto y funciones de orden superior.",
           "status": "LOCKED",
           "totalExercises": 5,
-          "xpReward": 35
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "kotlin_level_2_ex1",
+              "question": "En el contexto de 'Funciones y Lambdas', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "kotlin_level_2_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "kotlin_level_2_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "kotlin_level_2_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "kotlin_level_2_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "kotlin_level_3",
@@ -108,8 +1431,155 @@
           "title": "Clases y Data Classes",
           "description": "Programación orientada a objetos idiomática, data classes y properties.",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 40
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "kotlin_level_3_ex1",
+              "question": "En el contexto de 'Clases y Data Classes', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "kotlin_level_3_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "kotlin_level_3_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "kotlin_level_3_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "kotlin_level_3_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "kotlin_level_4",
@@ -117,8 +1587,155 @@
           "title": "Null Safety y Elvis",
           "description": "El sistema de tipos no nulables de Kotlin, safe calls (?.) y operador Elvis (?:).",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 45
+          "totalExercises": 5,
+          "xpReward": 45,
+          "exercises": [
+            {
+              "id": "kotlin_level_4_ex1",
+              "question": "En el contexto de 'Null Safety y Elvis', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "kotlin_level_4_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "kotlin_level_4_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "kotlin_level_4_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "kotlin_level_4_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "kotlin_level_5",
@@ -126,8 +1743,155 @@
           "title": "Colecciones y Flow",
           "description": "Listas, mapas, secuencias reactivas y operaciones funcionales avanzadas.",
           "status": "LOCKED",
-          "totalExercises": 8,
-          "xpReward": 55
+          "totalExercises": 5,
+          "xpReward": 55,
+          "exercises": [
+            {
+              "id": "kotlin_level_5_ex1",
+              "question": "En el contexto de 'Colecciones y Flow', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "kotlin_level_5_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "kotlin_level_5_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "kotlin_level_5_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "kotlin_level_5_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         }
       ]
     },
@@ -147,7 +1911,154 @@
           "description": "Estructuras contiguas en memoria, acceso indexado y matrices bidimensionales.",
           "status": "ACTIVE",
           "totalExercises": 5,
-          "xpReward": 30
+          "xpReward": 30,
+          "exercises": [
+            {
+              "id": "data_struct_level_1_ex1",
+              "question": "En el contexto de 'Arreglos y Matrices', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "data_struct_level_1_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "data_struct_level_1_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "data_struct_level_1_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "data_struct_level_1_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "data_struct_level_2",
@@ -155,8 +2066,155 @@
           "title": "Listas Enlazadas",
           "description": "Nodos, punteros, inserción y recorrido en listas enlazadas simples y dobles.",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 35
+          "totalExercises": 5,
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "data_struct_level_2_ex1",
+              "question": "En el contexto de 'Listas Enlazadas', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "data_struct_level_2_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "data_struct_level_2_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "data_struct_level_2_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "data_struct_level_2_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "data_struct_level_3",
@@ -164,8 +2222,155 @@
           "title": "Pilas y Colas",
           "description": "Conceptos LIFO y FIFO implementados en memoria y casos de uso comunes.",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 40
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "data_struct_level_3_ex1",
+              "question": "En el contexto de 'Pilas y Colas', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "data_struct_level_3_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "data_struct_level_3_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "data_struct_level_3_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "data_struct_level_3_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "data_struct_level_4",
@@ -173,8 +2378,155 @@
           "title": "Tablas Hash",
           "description": "Funciones hash, resolución de colisiones y búsquedas en tiempo constante promedio.",
           "status": "LOCKED",
-          "totalExercises": 7,
-          "xpReward": 50
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "data_struct_level_4_ex1",
+              "question": "En el contexto de 'Tablas Hash', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "data_struct_level_4_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "data_struct_level_4_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "data_struct_level_4_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "data_struct_level_4_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "data_struct_level_5",
@@ -182,8 +2534,155 @@
           "title": "Árboles Binarios",
           "description": "Estructuras jerárquicas, recorridos in-order, pre-order y post-order.",
           "status": "LOCKED",
-          "totalExercises": 8,
-          "xpReward": 60
+          "totalExercises": 5,
+          "xpReward": 60,
+          "exercises": [
+            {
+              "id": "data_struct_level_5_ex1",
+              "question": "En el contexto de 'Árboles Binarios', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "data_struct_level_5_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "data_struct_level_5_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "data_struct_level_5_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "data_struct_level_5_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         }
       ]
     },
@@ -203,7 +2702,154 @@
           "description": "Descomposición, reconocimiento de patrones, abstracción y diseño algorítmico.",
           "status": "ACTIVE",
           "totalExercises": 5,
-          "xpReward": 30
+          "xpReward": 30,
+          "exercises": [
+            {
+              "id": "algo_logic_level_1_ex1",
+              "question": "En el contexto de 'Pensamiento Computacional', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "algo_logic_level_1_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "algo_logic_level_1_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "algo_logic_level_1_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "algo_logic_level_1_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "algo_logic_level_2",
@@ -211,8 +2857,155 @@
           "title": "Búsqueda Lineal y Binaria",
           "description": "Búsqueda en arreglos no ordenados vs ordenados y división y conquista.",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 35
+          "totalExercises": 5,
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "algo_logic_level_2_ex1",
+              "question": "En el contexto de 'Búsqueda Lineal y Binaria', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "algo_logic_level_2_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "algo_logic_level_2_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "algo_logic_level_2_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "algo_logic_level_2_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "algo_logic_level_3",
@@ -220,8 +3013,155 @@
           "title": "Ordenamiento Burbuja e Inserción",
           "description": "Algoritmos elementales de ordenación, comparaciones e intercambios paso a paso.",
           "status": "LOCKED",
-          "totalExercises": 6,
-          "xpReward": 40
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "algo_logic_level_3_ex1",
+              "question": "En el contexto de 'Ordenamiento Burbuja e Inserción', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "algo_logic_level_3_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "algo_logic_level_3_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "algo_logic_level_3_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "algo_logic_level_3_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "algo_logic_level_4",
@@ -229,8 +3169,155 @@
           "title": "Recursión",
           "description": "Caso base, caso inductivo y llamadas recursivas en la pila de ejecución.",
           "status": "LOCKED",
-          "totalExercises": 7,
-          "xpReward": 50
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "algo_logic_level_4_ex1",
+              "question": "En el contexto de 'Recursión', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "algo_logic_level_4_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "algo_logic_level_4_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "algo_logic_level_4_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "algo_logic_level_4_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         },
         {
           "id": "algo_logic_level_5",
@@ -238,8 +3325,155 @@
           "title": "Complejidad Big-O",
           "description": "Análisis asintótico de tiempo y espacio para optimizar algoritmos.",
           "status": "LOCKED",
-          "totalExercises": 8,
-          "xpReward": 60
+          "totalExercises": 5,
+          "xpReward": 60,
+          "exercises": [
+            {
+              "id": "algo_logic_level_5_ex1",
+              "question": "En el contexto de 'Complejidad Big-O', ¿cuál es la mejor práctica recomendada?",
+              "codeSnippet": "fun executeTask(): Boolean {\n    return true\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Priorizar inmutabilidad y funciones puras",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Usar variables globales mutables",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ignorar el manejo de errores",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Evitar modularizar el código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La inmutabilidad y las funciones puras facilitan la predictibilidad, el testing y el mantenimiento del software."
+            },
+            {
+              "id": "algo_logic_level_5_ex2",
+              "question": "¿Qué valor retorna esta función de ejemplo?",
+              "codeSnippet": "fun calculate(): Int {\n    val base = 10\n    return base * 2\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "10",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "20",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La variable base vale 10, multiplicada por 2 retorna 20."
+            },
+            {
+              "id": "algo_logic_level_5_ex3",
+              "question": "¿Cuál es la ventaja de utilizar estructuras de datos inmutables en Kotlin?",
+              "codeSnippet": "val items = listOf(1, 2, 3)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Evitan efectos secundarios no deseados y son seguras para hilos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Permiten modificar elementos desde cualquier parte del código",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Ocupan el doble de memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Requieren escribir más código",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las colecciones de solo lectura evitan modificaciones accidentales por parte de múltiples hilos o funciones."
+            },
+            {
+              "id": "algo_logic_level_5_ex4",
+              "question": "¿Qué hace el operador seguro (?.) en Kotlin?",
+              "codeSnippet": "val length = text?.length",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Lanza un NullPointerException si text es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Ejecuta la llamada solo si la referencia no es nula, o devuelve null",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Asigna un valor por defecto si es nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Convierte el tipo a no nulo forzosamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El safe call operator '?.' evita caídas por NullPointerException ejecutando el método solo si la referencia no es nula."
+            },
+            {
+              "id": "algo_logic_level_5_ex5",
+              "question": "¿Cuál es la complejidad temporal promedio de acceso a un elemento en un arreglo por su índice?",
+              "codeSnippet": "val first = array[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) - Tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) - Tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - Logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - Cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un arreglo o memoria contigua, el cálculo de dirección base + índice permite acceso inmediato en tiempo constante O(1)."
+            }
+          ]
         }
       ]
     }

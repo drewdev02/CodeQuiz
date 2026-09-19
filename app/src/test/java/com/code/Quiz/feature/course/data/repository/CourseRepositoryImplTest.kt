@@ -161,6 +161,12 @@ class CourseRepositoryImplTest {
         }
 
         override suspend fun count(): Int = levelsFlow.value.size
+
+        override suspend fun getLevelById(levelId: String): CourseLevelEntity? =
+            levelsFlow.value.find { it.id == levelId }
+
+        override suspend fun getLevelsByCourse(courseId: String): List<CourseLevelEntity> =
+            levelsFlow.value.filter { it.courseId == courseId }.sortedBy { it.levelNumber }
     }
 
     class FakeDatabaseSeeder(

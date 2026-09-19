@@ -9,19 +9,23 @@ import com.code.Quiz.feature.course.data.dao.CourseLevelDao
 import com.code.Quiz.feature.course.data.dto.SeedDataDto
 import com.code.Quiz.feature.course.data.entity.CourseEntity
 import com.code.Quiz.feature.course.data.entity.CourseLevelEntity
+import com.code.Quiz.feature.quiz.data.dao.ExerciseDao
+import com.code.Quiz.feature.quiz.data.entity.ExerciseEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 /**
  * Seeder responsible for populating the local Room database with initial
- * courses and levels data from the bundled seed JSON asset.
+ * courses, levels, and exercises data from the bundled seed JSON asset.
  */
 open class DatabaseSeeder(
     private val context: Context? = null,
     private val database: CodeQuizDatabase? = null,
     private val courseDao: CourseDao? = null,
     private val courseLevelDao: CourseLevelDao? = null,
+    private val exerciseDao: ExerciseDao? = null,
     private val dispatcherProvider: DispatcherProvider? = null
 ) {
 
@@ -31,7 +35,7 @@ open class DatabaseSeeder(
     }
 
     /**
-     * Seeds initial courses and course levels if the database is currently empty.
+     * Seeds initial courses, course levels, and exercises if the database is currently empty.
      * Returns true if database was seeded, false if already populated.
      */
     open suspend fun seedIfNeeded(): Boolean {
@@ -42,7 +46,10 @@ open class DatabaseSeeder(
             val db = database ?: return@withContext false
             val ctx = context ?: return@withContext false
 
-            if (cDao.count() > 0) {
+            val shouldSeedCourses = cDao.count() == 0
+            val shouldSeedExercises = exerciseDao != null && exerciseDao.count() == 0
+
+            if (!shouldSeedCourses && !shouldSeedExercises) {
                 return@withContext false
             }
 
@@ -78,9 +85,30 @@ open class DatabaseSeeder(
                 }
             }
 
+            val exercises = seedData.courses.flatMap { courseDto ->
+                courseDto.levels.flatMap { levelDto ->
+                    levelDto.exercises.map { exerciseDto ->
+                        ExerciseEntity(
+                            id = exerciseDto.id,
+                            levelId = levelDto.id,
+                            question = exerciseDto.question,
+                            codeSnippet = exerciseDto.codeSnippet,
+                            language = exerciseDto.language,
+                            optionsJson = json.encodeToString(exerciseDto.options),
+                            explanation = exerciseDto.explanation
+                        )
+                    }
+                }
+            }
+
             db.withTransaction {
-                cDao.insertCourses(courses)
-                clDao.insertLevels(levels)
+                if (shouldSeedCourses) {
+                    cDao.insertCourses(courses)
+                    clDao.insertLevels(levels)
+                }
+                if (shouldSeedExercises && exercises.isNotEmpty()) {
+                    exerciseDao?.insertExercises(exercises)
+                }
             }
 
             true
