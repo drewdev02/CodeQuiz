@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,9 +24,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.code.Quiz.core.theme.CodeQuizTheme
@@ -39,9 +43,12 @@ import com.code.Quiz.core.ui.component.button.CodeQuizButtonVariant
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.mascot.CodeQuizMascot
 import com.code.Quiz.core.ui.component.mascot.MascotState
+import com.code.Quiz.core.ui.component.navigation.BottomBarTab
+import com.code.Quiz.core.ui.component.navigation.CodeQuizBottomBar
 import com.code.Quiz.feature.course.ui.CourseLevelsScreen
 import com.code.Quiz.feature.course.ui.CoursePathScreen
 import com.code.Quiz.feature.onboarding.ui.OnboardingScreen
+import com.code.Quiz.feature.profile.ui.ProgressScreen
 import com.code.Quiz.feature.quiz.ui.QuizScreen
 import org.koin.androidx.compose.koinViewModel
 
@@ -62,60 +69,113 @@ fun AppNavGraph(
         return
     }
 
-    val startDestination: Any = if (isOnboardingCompleted == true) HomeRoute else OnboardingRoute
+    val startDestination: Any = if (isOnboardingCompleted == true) CoursesRoute else OnboardingRoute
 
-    key(startDestination) {
-        NavHost(
-            navController = navController,
-            startDestination = startDestination,
-            modifier = modifier
-        ) {
-            composable<OnboardingRoute> {
-                OnboardingScreen(
-                    onFinishOnboarding = {
-                        appNavViewModel.completeOnboarding()
-                        navController.navigate(HomeRoute) {
-                            popUpTo<OnboardingRoute> {
-                                inclusive = true
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    val isCoursesRoute = currentDestination?.hasRoute(CoursesRoute::class) == true
+    val isProgressRoute = currentDestination?.hasRoute(ProgressRoute::class) == true
+    val showBottomBar = isCoursesRoute || isProgressRoute
+
+    val currentTab = if (isProgressRoute) BottomBarTab.PROGRESS else BottomBarTab.COURSES
+
+    Scaffold(
+        modifier = modifier.fillMaxSize(),
+        containerColor = DarkBackground,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        bottomBar = {
+            if (showBottomBar) {
+                CodeQuizBottomBar(
+                    currentTab = currentTab,
+                    onTabSelected = { selectedTab ->
+                        val targetRoute: Any = when (selectedTab) {
+                            BottomBarTab.COURSES -> CoursesRoute
+                            BottomBarTab.PROGRESS -> ProgressRoute
+                        }
+                        navController.navigate(targetRoute) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
                             }
+                            launchSingleTop = true
+                            restoreState = true
                         }
                     }
                 )
             }
+        }
+    ) { innerPadding ->
+        key(startDestination) {
+            NavHost(
+                navController = navController,
+                startDestination = startDestination,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                composable<OnboardingRoute> {
+                    OnboardingScreen(
+                        onFinishOnboarding = {
+                            appNavViewModel.completeOnboarding()
+                            navController.navigate(CoursesRoute) {
+                                popUpTo<OnboardingRoute> {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    )
+                }
 
-            composable<HomeRoute> {
-                CoursePathScreen(
-                    onCourseSelected = { courseId, title ->
-                        navController.navigate(
-                            CourseLevelsRoute(
-                                courseId = courseId,
-                                courseTitle = title
+                composable<CoursesRoute> {
+                    CoursePathScreen(
+                        onCourseSelected = { courseId, title ->
+                            navController.navigate(
+                                CourseLevelsRoute(
+                                    courseId = courseId,
+                                    courseTitle = title
+                                )
                             )
-                        )
-                    }
-                )
-            }
+                        }
+                    )
+                }
 
-            composable<CourseLevelsRoute> { backStackEntry ->
-                val route = backStackEntry.toRoute<CourseLevelsRoute>()
-                CourseLevelsScreen(
-                    courseId = route.courseId,
-                    courseTitle = route.courseTitle,
-                    onBack = { navController.popBackStack() },
-                    onStartLevel = { levelId, title ->
-                        navController.navigate(QuizRoute(lessonId = levelId, title = title))
-                    }
-                )
-            }
+                composable<ProgressRoute> {
+                    ProgressScreen()
+                }
 
+                composable<HomeRoute> {
+                    CoursePathScreen(
+                        onCourseSelected = { courseId, title ->
+                            navController.navigate(
+                                CourseLevelsRoute(
+                                    courseId = courseId,
+                                    courseTitle = title
+                                )
+                            )
+                        }
+                    )
+                }
 
-            composable<QuizRoute> { backStackEntry ->
-                val route = backStackEntry.toRoute<QuizRoute>()
-                QuizScreen(
-                    levelId = route.lessonId,
-                    levelTitle = route.title,
-                    onExit = { navController.popBackStack() }
-                )
+                composable<CourseLevelsRoute> { backStackEntry ->
+                    val route = backStackEntry.toRoute<CourseLevelsRoute>()
+                    CourseLevelsScreen(
+                        courseId = route.courseId,
+                        courseTitle = route.courseTitle,
+                        onBack = { navController.popBackStack() },
+                        onStartLevel = { levelId, title ->
+                            navController.navigate(QuizRoute(lessonId = levelId, title = title))
+                        }
+                    )
+                }
+
+                composable<QuizRoute> { backStackEntry ->
+                    val route = backStackEntry.toRoute<QuizRoute>()
+                    QuizScreen(
+                        levelId = route.lessonId,
+                        levelTitle = route.title,
+                        onExit = { navController.popBackStack() }
+                    )
+                }
             }
         }
     }
