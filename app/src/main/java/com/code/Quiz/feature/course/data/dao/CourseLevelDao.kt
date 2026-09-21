@@ -24,6 +24,9 @@ interface CourseLevelDao {
     @Query("SELECT COUNT(*) FROM course_levels")
     suspend fun count(): Int
 
+    @Query("SELECT COUNT(*) FROM course_levels WHERE status = 'COMPLETED'")
+    fun getCompletedLevelsCount(): Flow<Int>
+
     @Query("SELECT * FROM course_levels WHERE id = :levelId LIMIT 1")
     suspend fun getLevelById(levelId: String): CourseLevelEntity?
 

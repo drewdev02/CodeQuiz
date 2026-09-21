@@ -57,7 +57,10 @@ import com.code.Quiz.feature.course.domain.model.CourseLevel
 import com.code.Quiz.feature.course.domain.model.LevelStatus
 import com.code.Quiz.feature.course.ui.components.LevelDetailBottomSheet
 import com.code.Quiz.feature.course.ui.components.LevelNodeItem
+import com.code.Quiz.feature.streak.domain.model.Streak
+import com.code.Quiz.feature.streak.domain.usecase.GetStreakUseCase
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 /**
  * Stateful entry point for the Gamified Course Levels Map screen.
@@ -71,17 +74,20 @@ fun CourseLevelsScreen(
     onBack: () -> Unit,
     onStartLevel: (levelId: String, title: String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: CourseLevelsViewModel = koinViewModel()
+    viewModel: CourseLevelsViewModel = koinViewModel(),
+    getStreakUseCase: GetStreakUseCase = koinInject()
 ) {
     LaunchedEffect(courseId, courseTitle) {
         viewModel.loadLevels(courseId, courseTitle)
     }
 
     val uiState by viewModel.uiState.collectAsState()
+    val streak by getStreakUseCase().collectAsState(initial = Streak(0, 0, null, false))
 
     CourseLevelsContent(
         uiState = uiState,
         courseTitleFallback = courseTitle,
+        streakCount = streak.currentStreak,
         onBack = onBack,
         onSelectLevel = viewModel::onSelectLevel,
         onStartLevel = onStartLevel,
@@ -99,6 +105,7 @@ fun CourseLevelsContent(
     onBack: () -> Unit,
     onSelectLevel: (CourseLevel?) -> Unit,
     onStartLevel: (levelId: String, title: String) -> Unit,
+    streakCount: Int = 1,
     modifier: Modifier = Modifier
 ) {
     val displayTitle = if (uiState is CourseLevelsUiState.Success) {
@@ -137,7 +144,7 @@ fun CourseLevelsContent(
                 )
 
                 // Streak Badge
-                StreakBadge(streakCount = 1)
+                StreakBadge(streakCount = streakCount)
             }
         }
     ) { innerPadding ->

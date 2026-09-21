@@ -40,7 +40,10 @@ import com.code.Quiz.feature.course.domain.model.Course
 import com.code.Quiz.feature.course.domain.model.CourseIconType
 import com.code.Quiz.feature.course.ui.components.CourseCard
 import com.code.Quiz.feature.course.ui.components.PathNodeConnector
+import com.code.Quiz.feature.streak.domain.model.Streak
+import com.code.Quiz.feature.streak.domain.usecase.GetStreakUseCase
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 /**
  * Stateful entry point for the Course Roadmap Path screen.
@@ -50,12 +53,15 @@ import org.koin.androidx.compose.koinViewModel
 fun CoursePathScreen(
     onCourseSelected: (courseId: String, title: String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: CourseViewModel = koinViewModel()
+    viewModel: CourseViewModel = koinViewModel(),
+    getStreakUseCase: GetStreakUseCase = koinInject()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val streak by getStreakUseCase().collectAsState(initial = Streak(0, 0, null, false))
 
     CoursePathContent(
         uiState = uiState,
+        streakCount = streak.currentStreak,
         onCourseSelected = onCourseSelected,
         onRetry = { viewModel.retry() },
         modifier = modifier
@@ -70,6 +76,7 @@ fun CoursePathContent(
     uiState: CourseUiState,
     onCourseSelected: (courseId: String, title: String) -> Unit,
     onRetry: () -> Unit = {},
+    streakCount: Int = 1,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -94,7 +101,7 @@ fun CoursePathContent(
                 )
 
                 StreakBadge(
-                    streakCount = 1,
+                    streakCount = streakCount,
                     modifier = Modifier.align(Alignment.CenterEnd)
                 )
             }

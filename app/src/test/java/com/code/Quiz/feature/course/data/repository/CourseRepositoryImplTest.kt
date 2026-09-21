@@ -162,6 +162,9 @@ class CourseRepositoryImplTest {
 
         override suspend fun count(): Int = levelsFlow.value.size
 
+        override fun getCompletedLevelsCount(): Flow<Int> =
+            levelsFlow.map { list -> list.count { it.status == "COMPLETED" } }
+
         override suspend fun getLevelById(levelId: String): CourseLevelEntity? =
             levelsFlow.value.find { it.id == levelId }
 

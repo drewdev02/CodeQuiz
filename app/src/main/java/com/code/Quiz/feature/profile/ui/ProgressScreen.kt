@@ -13,10 +13,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.code.Quiz.core.theme.AccentCyan
+import com.code.Quiz.core.theme.AccentPurple
 import com.code.Quiz.core.theme.CodeQuizTheme
 import com.code.Quiz.core.theme.DarkBackground
 import com.code.Quiz.core.theme.Spacing
@@ -38,11 +42,35 @@ import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.card.CodeQuizCardVariant
 import com.code.Quiz.core.ui.component.mascot.CodeQuizMascot
 import com.code.Quiz.core.ui.component.mascot.MascotState
+import com.code.Quiz.feature.profile.domain.model.UserProgressStats
+import com.code.Quiz.feature.profile.ui.components.DuolingoStreakCard
+import com.code.Quiz.feature.streak.domain.model.Streak
+import com.code.Quiz.feature.streak.domain.model.WeekDayStatus
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProgressScreen(
+    modifier: Modifier = Modifier,
+    viewModel: ProgressViewModel = koinViewModel()
+) {
+    val uiState by viewModel.uiState.collectAsState()
+
+    ProgressScreenContent(
+        uiState = uiState,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun ProgressScreenContent(
+    uiState: ProgressUiState,
     modifier: Modifier = Modifier
 ) {
+    val currentStreakCount = when (uiState) {
+        is ProgressUiState.Success -> uiState.stats.streak.currentStreak
+        else -> 0
+    }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = DarkBackground,
@@ -65,77 +93,141 @@ fun ProgressScreen(
                 )
 
                 StreakBadge(
-                    streakCount = 1,
+                    streakCount = currentStreakCount,
                     modifier = Modifier.align(Alignment.CenterEnd)
                 )
             }
         }
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = Spacing.lg, vertical = Spacing.md),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(Spacing.md))
-
-            CodeQuizMascot(
-                state = MascotState.IDLE,
-                modifier = Modifier.size(180.dp)
-            )
-
-            Spacer(modifier = Modifier.height(Spacing.lg))
-
-            Text(
-                text = "Estadísticas y Logros",
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
-                ),
-                color = TextPrimary,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(Spacing.xs))
-
-            Text(
-                text = "Próximamente podrás consultar aquí tu racha histórica, experiencia (XP), precisión de retos y trofeos.",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontSize = 14.sp
-                ),
-                color = TextSecondary,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = Spacing.sm)
-            )
-
-            Spacer(modifier = Modifier.height(Spacing.xl))
-
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(Spacing.sm)
-            ) {
-                StatItemCard(
-                    label = "Racha actual",
-                    value = "🔥 1 día",
-                    valueColor = StreakOrange
-                )
-
-                StatItemCard(
-                    label = "Experiencia",
-                    value = "✦ +70 XP",
-                    valueColor = SuccessMint
-                )
-
-                StatItemCard(
-                    label = "Retos resueltos",
-                    value = "◎ 10 micro-retos",
-                    valueColor = AccentCyan
-                )
+        when (uiState) {
+            is ProgressUiState.Loading -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator(color = AccentCyan)
+                    Spacer(modifier = Modifier.height(Spacing.md))
+                    Text(
+                        text = "Cargando tus estadísticas...",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = TextSecondary
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(Spacing.xl))
+            is ProgressUiState.Error -> {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .padding(horizontal = Spacing.lg),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    CodeQuizMascot(
+                        state = MascotState.ERROR,
+                        modifier = Modifier.size(160.dp)
+                    )
+                    Spacer(modifier = Modifier.height(Spacing.md))
+                    Text(
+                        text = uiState.message,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = TextSecondary,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
+            is ProgressUiState.Success -> {
+                val stats = uiState.stats
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .verticalScroll(rememberScrollState())
+                        .padding(horizontal = Spacing.lg, vertical = Spacing.md),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(modifier = Modifier.height(Spacing.xs))
+
+                    CodeQuizMascot(
+                        state = if (stats.streak.isActiveToday) MascotState.CELEBRATION else MascotState.IDLE,
+                        modifier = Modifier.size(160.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(Spacing.md))
+
+                    Text(
+                        text = "Estadísticas y Logros",
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = TextPrimary,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Spacer(modifier = Modifier.height(Spacing.xs))
+
+                    Text(
+                        text = "Monitorea tus rachas diarias, XP acumulada y retos resueltos en tu camino como programador.",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontSize = 14.sp
+                        ),
+                        color = TextSecondary,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = Spacing.sm)
+                    )
+
+                    Spacer(modifier = Modifier.height(Spacing.lg))
+
+                    // Duolingo Streak Card with Week Row & Month Calendar
+                    DuolingoStreakCard(stats = stats)
+
+                    Spacer(modifier = Modifier.height(Spacing.lg))
+
+                    // Dynamic Stat Item Cards
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+                    ) {
+                        StatItemCard(
+                            label = "Racha actual",
+                            value = "🔥 ${stats.streak.currentStreak} ${if (stats.streak.currentStreak == 1) "día" else "días"}",
+                            valueColor = StreakOrange
+                        )
+
+                        StatItemCard(
+                            label = "Racha récord",
+                            value = "🏆 ${stats.streak.maxStreak} ${if (stats.streak.maxStreak == 1) "día" else "días"}",
+                            valueColor = StreakOrange
+                        )
+
+                        StatItemCard(
+                            label = "Experiencia total",
+                            value = "✦ +${stats.totalXp} XP",
+                            valueColor = SuccessMint
+                        )
+
+                        StatItemCard(
+                            label = "Retos resueltos",
+                            value = "◎ ${stats.totalExercisesCompleted} micro-retos",
+                            valueColor = AccentCyan
+                        )
+
+                        StatItemCard(
+                            label = "Niveles completados",
+                            value = "⭐ ${stats.completedLevelsCount} niveles",
+                            valueColor = AccentPurple
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(Spacing.xl))
+                }
+            }
         }
     }
 }
@@ -180,6 +272,30 @@ private fun StatItemCard(
 @Composable
 private fun ProgressScreenPreview() {
     CodeQuizTheme {
-        ProgressScreen()
+        ProgressScreenContent(
+            uiState = ProgressUiState.Success(
+                stats = UserProgressStats(
+                    streak = Streak(
+                        currentStreak = 3,
+                        maxStreak = 7,
+                        lastActiveDate = "2026-09-20",
+                        isActiveToday = true
+                    ),
+                    totalXp = 240,
+                    totalExercisesCompleted = 25,
+                    completedLevelsCount = 2,
+                    weekStreak = listOf(
+                        WeekDayStatus("L", 15, "2026-09-15", isCompleted = true, isToday = false, isFuture = false),
+                        WeekDayStatus("M", 16, "2026-09-16", isCompleted = true, isToday = false, isFuture = false),
+                        WeekDayStatus("M", 17, "2026-09-17", isCompleted = false, isToday = false, isFuture = false),
+                        WeekDayStatus("J", 18, "2026-09-18", isCompleted = true, isToday = false, isFuture = false),
+                        WeekDayStatus("V", 19, "2026-09-19", isCompleted = true, isToday = false, isFuture = false),
+                        WeekDayStatus("S", 20, "2026-09-20", isCompleted = true, isToday = true, isFuture = false),
+                        WeekDayStatus("D", 21, "2026-09-21", isCompleted = false, isToday = false, isFuture = true)
+                    ),
+                    activeDatesThisMonth = setOf("2026-09-15", "2026-09-16", "2026-09-18", "2026-09-19", "2026-09-20")
+                )
+            )
+        )
     }
 }

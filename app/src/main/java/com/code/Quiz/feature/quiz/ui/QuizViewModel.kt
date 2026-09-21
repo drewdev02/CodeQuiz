@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.code.Quiz.feature.quiz.domain.usecase.CompleteLevelUseCase
 import com.code.Quiz.feature.quiz.domain.usecase.EvaluateAnswerUseCase
 import com.code.Quiz.feature.quiz.domain.usecase.GetLevelExercisesUseCase
+import com.code.Quiz.feature.streak.domain.usecase.RecordDailyActivityUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 class QuizViewModel(
     private val getLevelExercisesUseCase: GetLevelExercisesUseCase,
     private val completeLevelUseCase: CompleteLevelUseCase,
+    private val recordDailyActivityUseCase: RecordDailyActivityUseCase,
     private val evaluateAnswerUseCase: EvaluateAnswerUseCase = EvaluateAnswerUseCase()
 ) : ViewModel() {
 
@@ -103,6 +105,10 @@ class QuizViewModel(
                         courseId = "",
                         levelId = state.levelId,
                         xpEarned = xpEarned
+                    )
+                    recordDailyActivityUseCase(
+                        xpEarned = xpEarned,
+                        exercisesCount = correctAnswers
                     )
                 }
 

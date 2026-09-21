@@ -40,6 +40,7 @@ val coreModule = module {
     single { get<CodeQuizDatabase>().courseLevelDao() }
     single { get<CodeQuizDatabase>().exerciseDao() }
     single { get<CodeQuizDatabase>().articleDao() }
+    single { get<CodeQuizDatabase>().streakDao() }
 
     viewModelOf(::AppNavViewModel)
 }

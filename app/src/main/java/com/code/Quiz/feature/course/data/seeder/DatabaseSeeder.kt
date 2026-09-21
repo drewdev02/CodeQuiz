@@ -13,14 +13,18 @@ import com.code.Quiz.feature.library.data.dao.ArticleDao
 import com.code.Quiz.feature.library.data.entity.ArticleEntity
 import com.code.Quiz.feature.quiz.data.dao.ExerciseDao
 import com.code.Quiz.feature.quiz.data.entity.ExerciseEntity
+import com.code.Quiz.feature.streak.data.dao.StreakDao
+import com.code.Quiz.feature.streak.data.entity.DailyActivityEntity
+import com.code.Quiz.feature.streak.data.entity.StreakEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.time.LocalDate
 
 /**
  * Seeder responsible for populating the local Room database with initial
- * courses, levels, exercises, and library articles data from the bundled seed JSON asset.
+ * courses, levels, exercises, library articles, and streak data from the bundled seed JSON asset.
  */
 open class DatabaseSeeder(
     private val context: Context? = null,
@@ -29,6 +33,7 @@ open class DatabaseSeeder(
     private val courseLevelDao: CourseLevelDao? = null,
     private val exerciseDao: ExerciseDao? = null,
     private val articleDao: ArticleDao? = null,
+    private val streakDao: StreakDao? = null,
     private val dispatcherProvider: DispatcherProvider? = null
 ) {
 
@@ -52,8 +57,9 @@ open class DatabaseSeeder(
             val shouldSeedCourses = cDao.count() == 0
             val shouldSeedExercises = exerciseDao != null && exerciseDao.count() == 0
             val shouldSeedArticles = articleDao != null && articleDao.count() == 0
+            val shouldSeedStreak = streakDao != null && streakDao.getStreak() == null
 
-            if (!shouldSeedCourses && !shouldSeedExercises && !shouldSeedArticles) {
+            if (!shouldSeedCourses && !shouldSeedExercises && !shouldSeedArticles && !shouldSeedStreak) {
                 return@withContext false
             }
 
@@ -128,6 +134,24 @@ open class DatabaseSeeder(
                 }
                 if (shouldSeedArticles && articles.isNotEmpty()) {
                     articleDao?.insertArticles(articles)
+                }
+                if (shouldSeedStreak) {
+                    val today = LocalDate.now().toString()
+                    streakDao?.insertOrUpdateStreak(
+                        StreakEntity(
+                            id = 1,
+                            currentStreak = 1,
+                            maxStreak = 1,
+                            lastActiveDate = today
+                        )
+                    )
+                    streakDao?.insertOrUpdateActivity(
+                        DailyActivityEntity(
+                            date = today,
+                            xpEarned = 70,
+                            exercisesCompleted = 10
+                        )
+                    )
                 }
             }
 

@@ -58,18 +58,24 @@ import com.code.Quiz.core.ui.component.button.CodeQuizButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.feature.library.domain.model.Article
 import com.code.Quiz.feature.library.domain.model.ArticleBlock
+import com.code.Quiz.feature.streak.domain.model.Streak
+import com.code.Quiz.feature.streak.domain.usecase.GetStreakUseCase
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
 fun LibraryScreen(
     onArticleClick: (articleId: String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: LibraryViewModel = koinViewModel()
+    viewModel: LibraryViewModel = koinViewModel(),
+    getStreakUseCase: GetStreakUseCase = koinInject()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val streak by getStreakUseCase().collectAsState(initial = Streak(0, 0, null, false))
 
     LibraryScreenContent(
         uiState = uiState,
+        streakCount = streak.currentStreak,
         onCategorySelect = viewModel::selectCategory,
         onArticleClick = onArticleClick,
         onRetry = viewModel::retry,
@@ -83,6 +89,7 @@ fun LibraryScreenContent(
     onCategorySelect: (category: String) -> Unit,
     onArticleClick: (articleId: String) -> Unit,
     onRetry: () -> Unit,
+    streakCount: Int = 1,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -91,7 +98,7 @@ fun LibraryScreenContent(
             .background(DarkBackground)
             .statusBarsPadding()
     ) {
-        // Top bar with "Biblioteca" in TextPrimary (18sp bold) and StreakBadge(streakCount = 1)
+        // Top bar with "Biblioteca" in TextPrimary (18sp bold) and StreakBadge(streakCount = streakCount)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -108,7 +115,7 @@ fun LibraryScreenContent(
                 color = TextPrimary
             )
 
-            StreakBadge(streakCount = 1)
+            StreakBadge(streakCount = streakCount)
         }
 
         when (uiState) {

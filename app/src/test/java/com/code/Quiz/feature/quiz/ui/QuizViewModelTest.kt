@@ -6,9 +6,15 @@ import com.code.Quiz.feature.quiz.domain.repository.QuizRepository
 import com.code.Quiz.feature.quiz.domain.usecase.CompleteLevelUseCase
 import com.code.Quiz.feature.quiz.domain.usecase.EvaluateAnswerUseCase
 import com.code.Quiz.feature.quiz.domain.usecase.GetLevelExercisesUseCase
+import com.code.Quiz.feature.streak.domain.model.DailyActivity
+import com.code.Quiz.feature.streak.domain.model.Streak
+import com.code.Quiz.feature.streak.domain.model.WeekDayStatus
+import com.code.Quiz.feature.streak.domain.repository.StreakRepository
+import com.code.Quiz.feature.streak.domain.usecase.RecordDailyActivityUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -27,6 +33,7 @@ class QuizViewModelTest {
 
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var fakeRepository: FakeQuizRepository
+    private lateinit var fakeStreakRepository: FakeStreakRepository
     private lateinit var viewModel: QuizViewModel
 
     private val sampleExercises = listOf(
@@ -58,9 +65,11 @@ class QuizViewModelTest {
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         fakeRepository = FakeQuizRepository(sampleExercises)
+        fakeStreakRepository = FakeStreakRepository()
         viewModel = QuizViewModel(
             getLevelExercisesUseCase = GetLevelExercisesUseCase(fakeRepository),
             completeLevelUseCase = CompleteLevelUseCase(fakeRepository),
+            recordDailyActivityUseCase = RecordDailyActivityUseCase(fakeStreakRepository),
             evaluateAnswerUseCase = EvaluateAnswerUseCase()
         )
     }
@@ -166,6 +175,25 @@ class QuizViewModelTest {
         assertEquals(2, completed.correctAnswers)
         assertTrue("XP earned should be > 0", completed.xpEarned > 0)
         assertEquals(1, fakeRepository.completeLevelCallCount)
+        assertEquals(1, fakeStreakRepository.recordActivityCallCount)
+        assertEquals(completed.xpEarned, fakeStreakRepository.lastXpEarned)
+        assertEquals(2, fakeStreakRepository.lastExercisesCount)
+    }
+
+    class FakeStreakRepository : StreakRepository {
+        var recordActivityCallCount = 0
+        var lastXpEarned = 0
+        var lastExercisesCount = 0
+
+        override fun getStreak(): Flow<Streak> = emptyFlow()
+        override fun getRecentActivities(limit: Int): Flow<List<DailyActivity>> = emptyFlow()
+        override fun getWeekStreak(): Flow<List<WeekDayStatus>> = emptyFlow()
+
+        override suspend fun recordActivity(xpEarned: Int, exercisesCount: Int) {
+            recordActivityCallCount++
+            lastXpEarned = xpEarned
+            lastExercisesCount = exercisesCount
+        }
     }
 
     class FakeQuizRepository(
