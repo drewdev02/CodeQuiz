@@ -23,70 +23,65 @@ class DatabaseSeederJsonTest {
         val content = file.readText()
         val dto = json.decodeFromString<SeedDataDto>(content)
 
-        assertEquals(3, dto.version)
-        assertEquals(5, dto.courses.size)
+        assertEquals(5, dto.version)
+        assertEquals(2, dto.courses.size)
 
-        // 1. intro_programming
+        // 1. C++ Linear Programming Course
         val c1 = dto.courses[0]
-        assertEquals("intro_programming", c1.id)
+        assertEquals("cpp_linear_programming", c1.id)
         assertEquals(1, c1.order)
-        assertEquals("Curso Top", c1.badge)
-        assertEquals("ROCKET", c1.iconType)
+        assertEquals("Fundamentos", c1.badge)
+        assertEquals("CODE", c1.iconType)
         assertTrue(c1.isUnlocked)
         assertEquals(6, c1.levels.size)
         assertEquals("ACTIVE", c1.levels[0].status)
+        assertEquals("cpp_lin_level_1", c1.levels[0].id)
+        assertEquals(5, c1.levels[0].exercises.size)
+        assertEquals("C++", c1.levels[0].exercises[0].language)
 
-        // 2. kotlin_basics
+        // 2. Java OOP Mastery Course
         val c2 = dto.courses[1]
-        assertEquals("kotlin_basics", c2.id)
+        assertEquals("java_oop_mastery", c2.id)
         assertEquals(2, c2.order)
-        assertEquals("Recomendado", c2.badge)
-        assertEquals("CODE", c2.iconType)
+        assertEquals("POO / OOP", c2.badge)
+        assertEquals("ROCKET", c2.iconType)
+        assertTrue(c2.isUnlocked)
         assertEquals(6, c2.levels.size)
+        assertEquals("ACTIVE", c2.levels[0].status)
+        assertEquals("java_oop_level_1", c2.levels[0].id)
+        assertEquals(5, c2.levels[0].exercises.size)
+        assertEquals("Java", c2.levels[0].exercises[0].language)
 
-        // 3. library articles verification
-        assertEquals(15, dto.library.size)
+        // Validate all 60 exercises
+        val allExercises = dto.courses.flatMap { it.levels.flatMap { lvl -> lvl.exercises } }
+        assertEquals(60, allExercises.size)
+        allExercises.forEach { ex ->
+            assertNotNull(ex.id)
+            assertTrue(ex.question.isNotBlank())
+            assertTrue(ex.explanation.isNotBlank())
+            val correctCount = ex.options.count { it.isCorrect }
+            assertEquals("Exercise ${ex.id} must have exactly 1 correct option", 1, correctCount)
+        }
+
+        // 3. Library articles verification
+        assertEquals(13, dto.library.size)
 
         val art1 = dto.library[0]
-        assertEquals("art_variables_tipos", art1.id)
-        assertEquals("Variables y Espacios de Memoria", art1.title)
-        assertEquals("Fundamentos", art1.category)
-        assertEquals(3, art1.readTimeMinutes)
-        assertEquals("intro_programming", art1.linkedCourseId)
-        assertEquals("intro_programming_level_1", art1.linkedLevelId)
+        assertEquals("art_cpp_intro_lineal", art1.id)
+        assertEquals("Introducción a C++ y Programación Lineal", art1.title)
+        assertEquals("C++ Fundamentos", art1.category)
+        assertEquals(4, art1.readTimeMinutes)
+        assertEquals("cpp_linear_programming", art1.linkedCourseId)
+        assertEquals("cpp_lin_level_1", art1.linkedLevelId)
         assertEquals(3, art1.blocks.size)
         assertEquals("TEXT", art1.blocks[0].type)
         assertEquals("CODE", art1.blocks[1].type)
         assertEquals("NOTE", art1.blocks[2].type)
 
-        val art2 = dto.library[1]
-        assertEquals("art_operadores_expresiones", art2.id)
-        assertEquals("Operadores y Evaluación Lógica", art2.title)
-        assertEquals("Fundamentos", art2.category)
-        assertEquals(4, art2.readTimeMinutes)
-
-        val art3 = dto.library[2]
-        assertEquals("art_condicionales_flujo", art3.id)
-        assertEquals("Control de Flujo: Estructuras Condicionales", art3.title)
-        assertEquals("Lógica", art3.category)
-
-        val art4 = dto.library[3]
-        assertEquals("art_bucles_repeticion", art4.id)
-        assertEquals("Bucles y Ciclos: Automatizando la Repetición", art4.title)
-        assertEquals("Lógica", art4.category)
-
-        val art5 = dto.library[4]
-        assertEquals("art_null_safety", art5.id)
-        assertEquals("Null Safety y Seguridad en Tipos", art5.title)
-        assertEquals("Buenas Prácticas", art5.category)
-        assertEquals("kotlin_basics", art5.linkedCourseId)
-        assertEquals("kotlin_basics_level_1", art5.linkedLevelId)
-
-        val art6 = dto.library[5]
-        assertEquals("art_funciones_modularidad", art6.id)
-        assertEquals("Funciones Limpias y Modularidad", art6.title)
-        assertEquals("Arquitectura", art6.category)
-        assertEquals("intro_programming", art6.linkedCourseId)
-        assertEquals("intro_programming_level_5", art6.linkedLevelId)
+        val artJava = dto.library.first { it.id == "art_java_clases_objetos" }
+        assertEquals("El Paradigma POO: Clases, Objetos e Instanciación en Java", artJava.title)
+        assertEquals("Java POO", artJava.category)
+        assertEquals("java_oop_mastery", artJava.linkedCourseId)
+        assertEquals("java_oop_level_1", artJava.linkedLevelId)
     }
 }

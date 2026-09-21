@@ -35,16 +35,16 @@ object CodeSyntaxHighlighter {
         "(//.*|/\\*[\\s\\S]*?\\*/)" +
         // Group 2: Strings (triple-quoted, double-quoted, single-quoted with escape sequences)
         "|(\"\"\"[\\s\\S]*?\"\"\"|\"(?:\\\\.|[^\"\\\\])*\"|'(?:\\\\.|[^'\\\\])*')" +
-        // Group 3: Keywords (Kotlin, Python, Java standard keywords)
-        "|(\\b(?:val|var|fun|if|else|when|for|while|return|class|interface|data|object|sealed|import|package|override|is|in|as|try|catch|finally|throw|true|false|null|def|elif|from)\\b)" +
-        // Group 4: Types & Classes (Built-in standard types and PascalCase identifiers)
-        "|(\\b(?:Int|String|Boolean|Double|Float|Long|Char|Byte|Short|List|Set|Map|Array|Unit|Any|Nothing|[A-Z][a-zA-Z0-9_]*)\\b)" +
+        // Group 3: Keywords (Kotlin, C++, Java, Python standard keywords)
+        "|(\\b(?:val|var|fun|if|else|when|for|while|do|return|class|interface|data|object|sealed|import|package|override|is|in|as|try|catch|finally|throw|throws|true|false|null|nullptr|def|elif|from|public|private|protected|static|final|abstract|extends|implements|new|this|super|switch|case|default|break|continue|void|const|constexpr|virtual|struct|namespace|using|include|sizeof|instanceof)\\b)" +
+        // Group 4: Types & Classes (Built-in standard types in C++, Java, Kotlin and PascalCase identifiers)
+        "|(\\b(?:Int|String|Boolean|Double|Float|Long|Char|Byte|Short|List|Set|Map|Array|Unit|Any|Nothing|int|double|float|char|bool|boolean|long|short|byte|string|[A-Z][a-zA-Z0-9_]*)\\b)" +
         // Group 5: Function calls (identifier followed by '(')
         "|(\\b[a-zA-Z_][a-zA-Z0-9_]*(?=\\s*\\())" +
         // Group 6: Numbers (hex, binary, floats, integers)
         "|(\\b(?:0[xX][0-9a-fA-F]+|0[bB][01]+|\\d+\\.\\d+(?:[fF]|L)?|\\d+(?:[fF]|L)?)\\b)" +
         // Group 7: Operators
-        "|(==|!=|<=|>=|->|::|[=<>?:+\\-*/%])"
+        "|(==|!=|<=|>=|->|::|<<|>>|&&|\\|\\||\\+\\+|--|\\+=|-=|\\*=|/=|%=|[=<>?:+\\-*/%])"
     )
 
     /**
