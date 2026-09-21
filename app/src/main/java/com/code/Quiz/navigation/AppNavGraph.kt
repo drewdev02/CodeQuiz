@@ -1,8 +1,6 @@
 package com.code.Quiz.navigation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -61,16 +59,6 @@ fun AppNavGraph(
     appNavViewModel: AppNavViewModel = koinViewModel()
 ) {
     val isOnboardingCompleted by appNavViewModel.isOnboardingCompleted.collectAsState()
-
-    if (isOnboardingCompleted == null) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(DarkBackground)
-        )
-        return
-    }
-
     val startDestination: Any = if (isOnboardingCompleted == true) CoursesRoute else OnboardingRoute
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
