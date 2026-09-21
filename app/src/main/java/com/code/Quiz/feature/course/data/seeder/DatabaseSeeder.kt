@@ -88,16 +88,20 @@ open class DatabaseSeeder(
 
             val existingLevelsMap = clDao.getAllLevels().associateBy { it.id }
             val levels = seedData.courses.flatMap { courseDto ->
+                val completedLevelNumbers = courseDto.levels
+                    .mapNotNull { levelDto -> existingLevelsMap[levelDto.id] }
+                    .filter { it.status == "COMPLETED" }
+                    .map { it.levelNumber }
+                    .toSet()
+                val maxCompleted = completedLevelNumbers.maxOrNull() ?: 0
+
                 courseDto.levels.map { levelDto ->
-                    val existing = existingLevelsMap[levelDto.id]
-                    val effectiveStatus = if (existing != null) {
-                        if (existing.status == "COMPLETED" || existing.status == "ACTIVE") {
-                            existing.status
-                        } else {
-                            levelDto.status
-                        }
+                    val effectiveStatus = if (completedLevelNumbers.contains(levelDto.levelNumber)) {
+                        "COMPLETED"
+                    } else if (levelDto.levelNumber == maxCompleted + 1) {
+                        "ACTIVE"
                     } else {
-                        levelDto.status
+                        "LOCKED"
                     }
                     CourseLevelEntity(
                         id = levelDto.id,
@@ -142,12 +146,18 @@ open class DatabaseSeeder(
             }
 
             db.withTransaction {
+                val validCourseIds = courses.map { it.id }
+                cDao.deleteCoursesNotIn(validCourseIds)
+                clDao.deleteLevelsForOrphanedCourses(validCourseIds)
                 cDao.insertCourses(courses)
                 clDao.insertLevels(levels)
                 if (exercises.isNotEmpty()) {
+                    exerciseDao?.deleteOrphanedExercises()
                     exerciseDao?.insertExercises(exercises)
                 }
                 if (articles.isNotEmpty()) {
+                    val validArticleIds = articles.map { it.id }
+                    articleDao?.deleteArticlesNotIn(validArticleIds)
                     articleDao?.insertArticles(articles)
                 }
                 if (isDbEmpty && streakDao != null && streakDao.getStreak() == null) {

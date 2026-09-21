@@ -23,4 +23,7 @@ interface CourseDao {
 
     @Query("SELECT COUNT(*) FROM courses")
     suspend fun count(): Int
+
+    @Query("DELETE FROM courses WHERE id NOT IN (:validIds)")
+    suspend fun deleteCoursesNotIn(validIds: List<String>)
 }

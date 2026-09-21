@@ -23,7 +23,7 @@ class DatabaseSeederJsonTest {
         val content = file.readText()
         val dto = json.decodeFromString<SeedDataDto>(content)
 
-        assertEquals(5, dto.version)
+        assertEquals(6, dto.version)
         assertEquals(2, dto.courses.size)
 
         // 1. C++ Linear Programming Course

@@ -24,4 +24,7 @@ interface ArticleDao {
 
     @Query("SELECT COUNT(*) FROM library_articles")
     suspend fun count(): Int
+
+    @Query("DELETE FROM library_articles WHERE id NOT IN (:validIds)")
+    suspend fun deleteArticlesNotIn(validIds: List<String>)
 }

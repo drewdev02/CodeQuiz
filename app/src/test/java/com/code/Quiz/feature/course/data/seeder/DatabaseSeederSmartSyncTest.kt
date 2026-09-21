@@ -25,7 +25,7 @@ class DatabaseSeederSmartSyncTest {
         val dto = json.decodeFromString<SeedDataDto>(content)
 
         assertTrue("Catalog version must be >= 1", dto.version >= 1)
-        assertEquals(5, dto.version)
+        assertEquals(6, dto.version)
     }
 
     @Test
@@ -73,26 +73,72 @@ class DatabaseSeederSmartSyncTest {
             Triple("intro_prog_level_new", "LOCKED", 4)
         )
 
-        val mergedStatuses = incomingLevels.map { (id, seedStatus, _) ->
-            val existing = existingLevelsMap[id]
-            if (existing != null) {
-                if (existing.status == "COMPLETED" || existing.status == "ACTIVE") {
-                    existing.status
-                } else {
-                    seedStatus
-                }
+        val completedLevelNumbers = incomingLevels
+            .mapNotNull { (id, _, _) -> existingLevelsMap[id] }
+            .filter { it.status == "COMPLETED" }
+            .map { it.levelNumber }
+            .toSet()
+        val maxCompleted = completedLevelNumbers.maxOrNull() ?: 0
+
+        val mergedStatuses = incomingLevels.map { (_, _, levelNumber) ->
+            if (completedLevelNumbers.contains(levelNumber)) {
+                "COMPLETED"
+            } else if (levelNumber == maxCompleted + 1) {
+                "ACTIVE"
             } else {
-                seedStatus
+                "LOCKED"
             }
         }
 
-        // Level 1 was COMPLETED -> remains COMPLETED (not overridden by incoming ACTIVE)
+        // Level 1 was COMPLETED -> remains COMPLETED
         assertEquals("COMPLETED", mergedStatuses[0])
-        // Level 2 was ACTIVE -> remains ACTIVE (not overridden by incoming LOCKED)
+        // Level 2 (next uncompleted) -> strictly ACTIVE
         assertEquals("ACTIVE", mergedStatuses[1])
-        // Level 3 was LOCKED -> incoming LOCKED
+        // Level 3 -> strictly LOCKED
         assertEquals("LOCKED", mergedStatuses[2])
-        // Level new was not present -> incoming LOCKED
+        // Level 4 -> strictly LOCKED
+        assertEquals("LOCKED", mergedStatuses[3])
+    }
+
+    @Test
+    fun levelProgressPreservation_resetsCorruptedMultipleActiveLevelsWhenZeroCompleted() {
+        // If an older database or faulty seed had multiple levels as ACTIVE with 0 completed
+        val existingLevels = listOf(
+            CourseLevelEntity("l1", "cpp", 1, "T1", "D", "ACTIVE", 5, 30),
+            CourseLevelEntity("l2", "cpp", 2, "T2", "D", "ACTIVE", 5, 30),
+            CourseLevelEntity("l3", "cpp", 3, "T3", "D", "ACTIVE", 5, 30),
+            CourseLevelEntity("l4", "cpp", 4, "T4", "D", "ACTIVE", 5, 30)
+        )
+        val existingLevelsMap = existingLevels.associateBy { it.id }
+
+        val incomingLevels = listOf(
+            Triple("l1", "ACTIVE", 1),
+            Triple("l2", "LOCKED", 2),
+            Triple("l3", "LOCKED", 3),
+            Triple("l4", "LOCKED", 4)
+        )
+
+        val completedLevelNumbers = incomingLevels
+            .mapNotNull { (id, _, _) -> existingLevelsMap[id] }
+            .filter { it.status == "COMPLETED" }
+            .map { it.levelNumber }
+            .toSet()
+        val maxCompleted = completedLevelNumbers.maxOrNull() ?: 0
+
+        val mergedStatuses = incomingLevels.map { (_, _, levelNumber) ->
+            if (completedLevelNumbers.contains(levelNumber)) {
+                "COMPLETED"
+            } else if (levelNumber == maxCompleted + 1) {
+                "ACTIVE"
+            } else {
+                "LOCKED"
+            }
+        }
+
+        // Only Level 1 must be ACTIVE, all other levels must be LOCKED!
+        assertEquals("ACTIVE", mergedStatuses[0])
+        assertEquals("LOCKED", mergedStatuses[1])
+        assertEquals("LOCKED", mergedStatuses[2])
         assertEquals("LOCKED", mergedStatuses[3])
     }
 

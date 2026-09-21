@@ -226,6 +226,9 @@ fun CourseLevelsContent(
                     Spacer(modifier = Modifier.height(Spacing.xs))
 
                     // Gamified Level Path
+                    val currentChallengeLevelId = uiState.levels.firstOrNull { it.status == LevelStatus.ACTIVE }?.id
+                        ?: uiState.levels.firstOrNull { it.status != LevelStatus.COMPLETED }?.id
+
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(
@@ -239,8 +242,10 @@ fun CourseLevelsContent(
                             items = uiState.levels,
                             key = { _, level -> level.id }
                         ) { index, level ->
+                            val isCurrent = level.id == currentChallengeLevelId
                             LevelNodeItem(
                                 level = level,
+                                isCurrentChallenge = isCurrent,
                                 showTopLine = index > 0,
                                 showBottomLine = index < uiState.levels.size - 1,
                                 onClick = { onSelectLevel(level) }

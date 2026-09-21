@@ -142,6 +142,10 @@ class CourseRepositoryImplTest {
             coursesFlow.value.find { it.id == id }
 
         override suspend fun count(): Int = coursesFlow.value.size
+
+        override suspend fun deleteCoursesNotIn(validIds: List<String>) {
+            coursesFlow.value = coursesFlow.value.filter { it.id in validIds }
+        }
     }
 
     class FakeCourseLevelDao : CourseLevelDao {
@@ -172,6 +176,10 @@ class CourseRepositoryImplTest {
             levelsFlow.value.filter { it.courseId == courseId }.sortedBy { it.levelNumber }
 
         override suspend fun getAllLevels(): List<CourseLevelEntity> = levelsFlow.value
+
+        override suspend fun deleteLevelsForOrphanedCourses(validCourseIds: List<String>) {
+            levelsFlow.value = levelsFlow.value.filter { it.courseId in validCourseIds }
+        }
     }
 
     class FakeDatabaseSeeder(

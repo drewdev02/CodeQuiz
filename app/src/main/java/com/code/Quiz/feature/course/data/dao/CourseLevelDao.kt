@@ -35,4 +35,7 @@ interface CourseLevelDao {
 
     @Query("SELECT * FROM course_levels")
     suspend fun getAllLevels(): List<CourseLevelEntity>
+
+    @Query("DELETE FROM course_levels WHERE courseId NOT IN (:validCourseIds)")
+    suspend fun deleteLevelsForOrphanedCourses(validCourseIds: List<String>)
 }

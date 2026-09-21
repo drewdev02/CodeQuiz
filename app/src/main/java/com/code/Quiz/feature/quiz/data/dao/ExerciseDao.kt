@@ -20,4 +20,7 @@ interface ExerciseDao {
 
     @Query("SELECT COUNT(*) FROM exercises")
     suspend fun count(): Int
+
+    @Query("DELETE FROM exercises WHERE levelId NOT IN (SELECT id FROM course_levels)")
+    suspend fun deleteOrphanedExercises()
 }

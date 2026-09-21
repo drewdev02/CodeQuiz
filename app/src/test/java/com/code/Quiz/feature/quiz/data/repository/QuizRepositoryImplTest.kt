@@ -158,6 +158,10 @@ class QuizRepositoryImplTest {
         }
 
         override suspend fun count(): Int = exercisesFlow.value.size
+
+        override suspend fun deleteOrphanedExercises() {
+            // no-op in test fake
+        }
     }
 
     class FakeCourseLevelDao : CourseLevelDao {
@@ -188,5 +192,9 @@ class QuizRepositoryImplTest {
             levelsFlow.value.filter { it.courseId == courseId }.sortedBy { it.levelNumber }
 
         override suspend fun getAllLevels(): List<CourseLevelEntity> = levelsFlow.value
+
+        override suspend fun deleteLevelsForOrphanedCourses(validCourseIds: List<String>) {
+            levelsFlow.value = levelsFlow.value.filter { it.courseId in validCourseIds }
+        }
     }
 }

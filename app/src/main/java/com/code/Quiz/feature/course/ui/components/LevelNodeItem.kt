@@ -75,6 +75,7 @@ fun LevelNodeItem(
     level: CourseLevel,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    isCurrentChallenge: Boolean = level.status == LevelStatus.ACTIVE,
     showTopLine: Boolean = true,
     showBottomLine: Boolean = true
 ) {
@@ -127,7 +128,7 @@ fun LevelNodeItem(
                 modifier = Modifier
                     .size(68.dp)
                     .then(
-                        if (level.status == LevelStatus.ACTIVE) {
+                        if (isCurrentChallenge) {
                             Modifier.drawBehind {
                                 drawCircle(
                                     brush = Brush.radialGradient(
@@ -149,7 +150,11 @@ fun LevelNodeItem(
 
                             LevelStatus.ACTIVE -> Modifier
                                 .background(DarkSurface)
-                                .border(BorderStroke(2.5.dp, HeroGradient), CircleShape)
+                                .border(
+                                    if (isCurrentChallenge) BorderStroke(2.5.dp, HeroGradient)
+                                    else BorderStroke(1.5.dp, AccentCyan),
+                                    CircleShape
+                                )
 
                             LevelStatus.LOCKED -> Modifier
                                 .background(DarkSurfaceElevated)
@@ -213,14 +218,14 @@ fun LevelNodeItem(
             modifier = Modifier
                 .weight(1f)
                 .padding(vertical = Spacing.xs),
-            variant = if (level.status == LevelStatus.ACTIVE) CodeQuizCardVariant.Elevated else CodeQuizCardVariant.Standard,
-            border = if (level.status == LevelStatus.ACTIVE) {
+            variant = if (isCurrentChallenge) CodeQuizCardVariant.Elevated else CodeQuizCardVariant.Standard,
+            border = if (isCurrentChallenge) {
                 BorderStroke(1.5.dp, AccentPurple.copy(alpha = 0.6f))
             } else {
                 BorderStroke(1.dp, DarkSurfaceBorder)
             }
         ) {
-            if (level.status == LevelStatus.ACTIVE) {
+            if (isCurrentChallenge) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
@@ -298,26 +303,43 @@ fun LevelNodeItem(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        if (level.status == LevelStatus.COMPLETED) {
-                            CodeQuizBadge(
-                                text = "COMPLETADO ✓",
-                                variant = BadgeVariant.Tag,
-                                customTextColor = SuccessMint,
-                                customBackgroundColor = DarkSurfaceElevated
-                            )
-                        } else {
-                            CodeQuizBadge(
-                                text = "BLOQUEADO",
-                                variant = BadgeVariant.Tag,
-                                customTextColor = TextMuted,
-                                customBackgroundColor = DarkSurfaceElevated
-                            )
+                        when (level.status) {
+                            LevelStatus.COMPLETED -> {
+                                CodeQuizBadge(
+                                    text = "COMPLETADO ✓",
+                                    variant = BadgeVariant.Tag,
+                                    customTextColor = SuccessMint,
+                                    customBackgroundColor = DarkSurfaceElevated
+                                )
+                            }
+
+                            LevelStatus.ACTIVE -> {
+                                CodeQuizBadge(
+                                    text = "DISPONIBLE",
+                                    variant = BadgeVariant.Tag,
+                                    customTextColor = AccentCyan,
+                                    customBackgroundColor = DarkSurfaceElevated
+                                )
+                            }
+
+                            LevelStatus.LOCKED -> {
+                                CodeQuizBadge(
+                                    text = "BLOQUEADO",
+                                    variant = BadgeVariant.Tag,
+                                    customTextColor = TextMuted,
+                                    customBackgroundColor = DarkSurfaceElevated
+                                )
+                            }
                         }
 
                         CodeQuizBadge(
                             text = "+${level.xpReward} XP",
                             variant = BadgeVariant.Tag,
-                            customTextColor = if (level.status == LevelStatus.COMPLETED) SuccessMint else TextMuted,
+                            customTextColor = when (level.status) {
+                                LevelStatus.COMPLETED -> SuccessMint
+                                LevelStatus.ACTIVE -> AccentCyan
+                                LevelStatus.LOCKED -> TextMuted
+                            },
                             customBackgroundColor = DarkSurfaceElevated
                         )
                     }

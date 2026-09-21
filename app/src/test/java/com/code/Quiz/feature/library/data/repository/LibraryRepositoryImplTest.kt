@@ -120,6 +120,10 @@ class LibraryRepositoryImplTest {
         }
 
         override suspend fun count(): Int = articlesFlow.value.size
+
+        override suspend fun deleteArticlesNotIn(validIds: List<String>) {
+            articlesFlow.value = articlesFlow.value.filter { it.id in validIds }
+        }
     }
 
     private class FakeDatabaseSeeder : DatabaseSeeder() {
