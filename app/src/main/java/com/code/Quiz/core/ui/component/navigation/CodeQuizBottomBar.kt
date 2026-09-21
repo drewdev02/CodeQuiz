@@ -53,6 +53,10 @@ enum class BottomBarTab(
         title = "Cursos",
         iconRes = R.drawable.ic_nav_courses
     ),
+    LIBRARY(
+        title = "Biblioteca",
+        iconRes = R.drawable.ic_nav_library
+    ),
     PROGRESS(
         title = "Progreso",
         iconRes = R.drawable.ic_nav_progress
@@ -148,6 +152,17 @@ private fun CodeQuizBottomBarCoursesPreview() {
     CodeQuizTheme {
         CodeQuizBottomBar(
             currentTab = BottomBarTab.COURSES,
+            onTabSelected = {}
+        )
+    }
+}
+
+@Preview(name = "Bottom Bar Preview - Library Selected", showBackground = true, backgroundColor = 0xFF020813)
+@Composable
+private fun CodeQuizBottomBarLibraryPreview() {
+    CodeQuizTheme {
+        CodeQuizBottomBar(
+            currentTab = BottomBarTab.LIBRARY,
             onTabSelected = {}
         )
     }

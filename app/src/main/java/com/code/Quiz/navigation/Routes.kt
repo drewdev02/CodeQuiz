@@ -15,6 +15,14 @@ data object CoursesRoute
 data object ProgressRoute
 
 @Serializable
+data object LibraryRoute
+
+@Serializable
+data class ArticleDetailRoute(
+    val articleId: String
+)
+
+@Serializable
 data class CourseLevelsRoute(
     val courseId: String,
     val courseTitle: String

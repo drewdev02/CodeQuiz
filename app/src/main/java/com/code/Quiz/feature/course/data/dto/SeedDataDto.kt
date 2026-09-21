@@ -1,5 +1,6 @@
 package com.code.Quiz.feature.course.data.dto
 
+import com.code.Quiz.feature.library.data.dto.ArticleDto
 import kotlinx.serialization.Serializable
 
 /**
@@ -8,7 +9,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SeedDataDto(
     val version: Int = 1,
-    val courses: List<CourseSeedDto>
+    val courses: List<CourseSeedDto>,
+    val library: List<ArticleDto> = emptyList()
 )
 
 /**

@@ -17,6 +17,7 @@ val courseModule = module {
             courseDao = get(),
             courseLevelDao = get(),
             exerciseDao = get(),
+            articleDao = get(),
             dispatcherProvider = get()
         )
     }

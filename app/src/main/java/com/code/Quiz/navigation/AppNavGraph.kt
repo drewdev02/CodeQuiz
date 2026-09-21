@@ -47,6 +47,8 @@ import com.code.Quiz.core.ui.component.navigation.BottomBarTab
 import com.code.Quiz.core.ui.component.navigation.CodeQuizBottomBar
 import com.code.Quiz.feature.course.ui.CourseLevelsScreen
 import com.code.Quiz.feature.course.ui.CoursePathScreen
+import com.code.Quiz.feature.library.ui.ArticleDetailScreen
+import com.code.Quiz.feature.library.ui.LibraryScreen
 import com.code.Quiz.feature.onboarding.ui.OnboardingScreen
 import com.code.Quiz.feature.profile.ui.ProgressScreen
 import com.code.Quiz.feature.quiz.ui.QuizScreen
@@ -75,10 +77,15 @@ fun AppNavGraph(
     val currentDestination = navBackStackEntry?.destination
 
     val isCoursesRoute = currentDestination?.hasRoute(CoursesRoute::class) == true
+    val isLibraryRoute = currentDestination?.hasRoute(LibraryRoute::class) == true
     val isProgressRoute = currentDestination?.hasRoute(ProgressRoute::class) == true
-    val showBottomBar = isCoursesRoute || isProgressRoute
+    val showBottomBar = isCoursesRoute || isLibraryRoute || isProgressRoute
 
-    val currentTab = if (isProgressRoute) BottomBarTab.PROGRESS else BottomBarTab.COURSES
+    val currentTab = when {
+        isProgressRoute -> BottomBarTab.PROGRESS
+        isLibraryRoute -> BottomBarTab.LIBRARY
+        else -> BottomBarTab.COURSES
+    }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -91,6 +98,7 @@ fun AppNavGraph(
                     onTabSelected = { selectedTab ->
                         val targetRoute: Any = when (selectedTab) {
                             BottomBarTab.COURSES -> CoursesRoute
+                            BottomBarTab.LIBRARY -> LibraryRoute
                             BottomBarTab.PROGRESS -> ProgressRoute
                         }
                         navController.navigate(targetRoute) {
@@ -135,6 +143,25 @@ fun AppNavGraph(
                                     courseTitle = title
                                 )
                             )
+                        }
+                    )
+                }
+
+                composable<LibraryRoute> {
+                    LibraryScreen(
+                        onArticleClick = { articleId ->
+                            navController.navigate(ArticleDetailRoute(articleId = articleId))
+                        }
+                    )
+                }
+
+                composable<ArticleDetailRoute> { backStackEntry ->
+                    val route = backStackEntry.toRoute<ArticleDetailRoute>()
+                    ArticleDetailScreen(
+                        articleId = route.articleId,
+                        onBack = { navController.popBackStack() },
+                        onNavigateToLevel = { levelId, title ->
+                            navController.navigate(QuizRoute(lessonId = levelId, title = title))
                         }
                     )
                 }
