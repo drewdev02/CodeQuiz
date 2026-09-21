@@ -50,6 +50,7 @@ import com.code.Quiz.core.theme.TextSecondary
 import com.code.Quiz.core.ui.component.badge.BadgeVariant
 import com.code.Quiz.core.ui.component.badge.CodeQuizBadge
 import com.code.Quiz.core.ui.component.button.ButtonVariant
+import com.code.Quiz.core.ui.component.button.CodeQuizBackButton
 import com.code.Quiz.core.ui.component.button.CodeQuizButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.card.CodeQuizCardVariant
@@ -104,7 +105,7 @@ fun ArticleDetailContent(
                         .padding(horizontal = Spacing.md, vertical = Spacing.md),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    BackButton(onClick = onBack)
+                    CodeQuizBackButton(onClick = onBack)
                 }
 
                 Box(
@@ -128,7 +129,7 @@ fun ArticleDetailContent(
                         .padding(horizontal = Spacing.md, vertical = Spacing.md),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    BackButton(onClick = onBack)
+                    CodeQuizBackButton(onClick = onBack)
                 }
 
                 Column(
@@ -163,7 +164,7 @@ fun ArticleDetailContent(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    BackButton(onClick = onBack)
+                    CodeQuizBackButton(onClick = onBack)
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -288,35 +289,6 @@ fun ArticleDetailContent(
     }
 }
 
-@Composable
-private fun BackButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val buttonShape = RoundedCornerShape(8.dp)
-    Box(
-        modifier = modifier
-            .size(36.dp)
-            .clip(buttonShape)
-            .background(DarkSurface)
-            .border(BorderStroke(1.dp, DarkSurfaceBorder), buttonShape)
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = ripple(color = AccentCyan),
-                onClick = onClick
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "←",
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            ),
-            color = TextPrimary
-        )
-    }
-}
 
 @Preview(name = "Article Detail Success Preview", showBackground = true, backgroundColor = 0xFF020813)
 @Composable

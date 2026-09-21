@@ -49,6 +49,7 @@ import com.code.Quiz.core.theme.Spacing
 import com.code.Quiz.core.theme.TextPrimary
 import com.code.Quiz.core.theme.TextSecondary
 import com.code.Quiz.core.ui.component.badge.StreakBadge
+import com.code.Quiz.core.ui.component.button.CodeQuizBackButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.card.CodeQuizCardVariant
 import com.code.Quiz.core.ui.component.progress.CodeQuizProgressBar
@@ -118,22 +119,7 @@ fun CourseLevelsContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Back Button
-                Box(
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(DarkSurfaceElevated)
-                        .border(BorderStroke(1.dp, DarkSurfaceBorder), CircleShape)
-                        .clickable(onClick = onBack),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_arrow_back),
-                        contentDescription = "Volver",
-                        tint = TextPrimary,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
+                CodeQuizBackButton(onClick = onBack)
 
                 // Course Title
                 Text(

@@ -169,6 +169,7 @@ To guarantee 100% visual consistency, maintainability, and encapsulation across 
    - **Never** use raw default Android or Material 3 components (`Button`, `OutlinedButton`, `Card`, `LinearProgressIndicator`, etc.) directly inside feature screens.
    - **Always** use the centralized wrappers in `com.code.Quiz.core.ui.component.*`:
      - `CodeQuizButton` instead of `Button` / `TextButton`.
+     - `CodeQuizIconButton` (`CodeQuizBackButton`, `CodeQuizCloseButton`) for circular action and navigation buttons.
      - `CodeQuizCard` instead of `Card` / `Surface`.
      - `CodeQuizOptionCard` for all quiz question answers.
      - `CodeQuizProgressBar` for all progress bars.
@@ -233,6 +234,7 @@ com.code.Quiz/
 │   ├── ui/                              # Core Design System Components (Mandatory Base)
 │   │   └── component/
 │   │       ├── button/CodeQuizButton.kt
+│   │       ├── button/CodeQuizIconButton.kt
 │   │       ├── card/CodeQuizCard.kt
 │   │       ├── card/CodeQuizOptionCard.kt
 │   │       ├── badge/StreakBadge.kt

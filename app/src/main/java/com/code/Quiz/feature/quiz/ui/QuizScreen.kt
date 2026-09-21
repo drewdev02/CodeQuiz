@@ -53,6 +53,7 @@ import com.code.Quiz.core.theme.TextPrimary
 import com.code.Quiz.core.theme.TextSecondary
 import com.code.Quiz.core.ui.component.button.CodeQuizButton
 import com.code.Quiz.core.ui.component.button.CodeQuizButtonVariant
+import com.code.Quiz.core.ui.component.button.CodeQuizCloseButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
 import com.code.Quiz.core.ui.component.card.CodeQuizCardVariant
 import com.code.Quiz.core.ui.component.card.CodeQuizOptionCard
@@ -207,23 +208,7 @@ fun QuizScreenContent(
                         horizontalArrangement = Arrangement.spacedBy(Spacing.md)
                     ) {
                         // Close Button (✕)
-                        Box(
-                            modifier = Modifier
-                                .size(40.dp)
-                                .clip(CircleShape)
-                                .background(DarkSurfaceElevated)
-                                .border(BorderStroke(1.dp, DarkSurfaceBorder), CircleShape)
-                                .clickable(onClick = { showExitDialog = true }),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = "✕",
-                                style = MaterialTheme.typography.titleMedium.copy(
-                                    fontWeight = FontWeight.Bold,
-                                    color = TextSecondary
-                                )
-                            )
-                        }
+                        CodeQuizCloseButton(onClick = { showExitDialog = true })
 
                         // Progress Bar showing (currentIndex + 1) / total
                         val progress = (uiState.currentIndex + 1).toFloat() / uiState.exercises.size.toFloat()
