@@ -266,22 +266,35 @@ com.code.Quiz/
 │   │   ├── data/
 │   │   │   ├── dao/StreakDao.kt
 │   │   │   ├── entity/StreakEntity.kt
+│   │   │   ├── entity/DailyActivityEntity.kt
+│   │   │   ├── mapper/StreakMapper.kt
 │   │   │   └── repository/StreakRepositoryImpl.kt
 │   │   ├── di/
 │   │   │   └── StreakModule.kt
-│   │   ├── domain/
-│   │   │   ├── model/Streak.kt
-│   │   │   ├── repository/StreakRepository.kt
-│   │   │   └── usecase/UpdateStreakUseCase.kt
-│   │   └── ui/
-│   │       ├── StreakBanner.kt
-│   │       └── StreakViewModel.kt
+│   │   └── domain/
+│   │       ├── model/Streak.kt
+│   │       ├── model/DailyActivity.kt
+│   │       ├── model/WeekDayStatus.kt
+│   │       ├── repository/StreakRepository.kt
+│   │       └── usecase/
+│   │           ├── GetStreakUseCase.kt
+│   │           ├── GetWeekStreakUseCase.kt
+│   │           └── RecordDailyActivityUseCase.kt
 │   │
 │   └── profile/                         # User Profile & Stats Feature
 │       ├── data/
+│       │   └── repository/ProfileRepositoryImpl.kt
 │       ├── di/
+│       │   └── ProfileModule.kt
 │       ├── domain/
+│       │   ├── model/UserProgressStats.kt
+│       │   └── repository/ProfileRepository.kt
 │       └── ui/
+│           ├── components/
+│           │   └── DuolingoStreakCard.kt
+│           ├── ProgressScreen.kt
+│           ├── ProgressUiState.kt
+│           └── ProgressViewModel.kt
 │
 ├── navigation/                          # Root navigation module (Type-Safe Navigation 2.8+)
 │   ├── Routes.kt
