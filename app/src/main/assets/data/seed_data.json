@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "courses": [
     {
       "id": "intro_programming",
@@ -787,6 +787,162 @@
                 }
               ],
               "explanation": "9 % 2 produce 1, por lo que la comparación con 0 es falsa."
+            }
+          ]
+        },
+        {
+          "id": "intro_programming_level_6",
+          "levelNumber": 6,
+          "title": "Arreglos y Colecciones",
+          "description": "Almacena conjuntos de elementos secuenciales y aprende a acceder a ellos mediante índices.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "intro_p_l6_ex1",
+              "question": "¿Cómo se accede al primer elemento de un arreglo en la mayoría de los lenguajes de programación?",
+              "codeSnippet": "val numbers = arrayOf(10, 20, 30)\nval first = numbers[0]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Con el índice 1: numbers[1]",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Con el índice 0: numbers[0]",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Con el índice -1: numbers[-1]",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Con la función numbers.firstIndex()",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La indexación en informática suele comenzar en base 0 (zero-based indexing). El primer elemento se ubica siempre en la posición 0."
+            },
+            {
+              "id": "intro_p_l6_ex2",
+              "question": "¿Qué ocurre si intentas acceder al índice 5 de un arreglo que solo contiene 3 elementos?",
+              "codeSnippet": "val items = arrayOf(\"A\", \"B\", \"C\")\nprintln(items[5])",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Retorna null silenciosamente",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Lanza un error de índice fuera de rango (IndexOutOfBounds)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Retorna el último elemento 'C'",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Crea 2 elementos vacíos automáticamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Intentar acceder a una posición mayor o igual al tamaño del arreglo genera una excepción ArrayIndexOutOfBoundsException."
+            },
+            {
+              "id": "intro_p_l6_ex3",
+              "question": "¿Cuál es la principal diferencia entre un arreglo de tamaño fijo y una lista dinámica?",
+              "codeSnippet": "// Array vs List\nval arr = IntArray(3)\nval list = mutableListOf<Int>()",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Un arreglo solo puede guardar números y una lista solo texto",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Una lista dinámica puede cambiar de tamaño agregando elementos en tiempo de ejecución",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Los arreglos no permiten lectura por índice",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "No existe ninguna diferencia",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Los arreglos tradicionales tienen una capacidad fija reservada en memoria, mientras que las listas dinámicas crecen o se reducen según la necesidad."
+            },
+            {
+              "id": "intro_p_l6_ex4",
+              "question": "¿Qué imprime este código al recorrer el arreglo?",
+              "codeSnippet": "val scores = arrayOf(2, 4, 6)\nvar sum = 0\nfor (s in scores) {\n    sum += s\n}\nprintln(sum)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "12",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "6",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "246",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "10",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El bucle acumula en 'sum' cada número: 0 + 2 = 2, luego 2 + 4 = 6, y 6 + 6 = 12."
+            },
+            {
+              "id": "intro_p_l6_ex5",
+              "question": "¿Qué propiedad o método nos indica cuántos elementos contiene una colección?",
+              "codeSnippet": "val names = listOf(\"Ana\", \"Luis\", \"Sara\")\nprintln(names.size)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "names.capacity",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "names.size (o names.count())",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "names.limit",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "names.max()",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Kotlin y Java, 'size' devuelve la cantidad actual de elementos en la colección."
             }
           ]
         }
@@ -1580,6 +1736,2535 @@
               "explanation": "Una jerarquía sellada permite representar explícitamente los estados posibles y obliga al consumidor a manejarlos."
             }
           ]
+        },
+        {
+          "id": "kotlin_basics_level_6",
+          "levelNumber": 6,
+          "title": "Manejo de Errores y Excepciones",
+          "description": "Controla situaciones imprevistas con bloques try-catch, Result y expresiones seguras.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "kt_b_l6_ex1",
+              "question": "¿Qué bloque de código se ejecuta SIEMPRE, haya ocurrido o no una excepción?",
+              "codeSnippet": "try {\n    performAction()\n} catch (e: Exception) {\n    handleError(e)\n} finally {\n    cleanup()\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "El bloque catch",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "El bloque finally",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "El bloque try",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Ninguno, el programa termina",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El bloque 'finally' garantiza su ejecución para liberar recursos (cerrar archivos, conexiones, etc.), sin importar si ocurrió un error."
+            },
+            {
+              "id": "kt_b_l6_ex2",
+              "question": "En Kotlin, 'try' es una expresión. ¿Qué valor tomará la variable 'number' en este código?",
+              "codeSnippet": "val input = \"abc\"\nval number = try {\n    input.toInt()\n} catch (e: NumberFormatException) {\n    0\n}\nprintln(number)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "null",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "0",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Lanza un error en consola",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "-1",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Al ser una expresión, el valor resultante de try-catch es el último valor del bloque ejecutado. Como 'abc' no es número, el catch retorna 0."
+            },
+            {
+              "id": "kt_b_l6_ex3",
+              "question": "¿Qué función de la biblioteca estándar de Kotlin encapsula una operación que puede fallar retornando Result<T>?",
+              "codeSnippet": "val result = runCatching {\n    apiService.fetchUserData()\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "safeExecute { ... }",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "runCatching { ... }",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "tryAsync { ... }",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "catchOrThrow { ... }",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "runCatching ejecuta la lambda y retorna una instancia de Result que encapsula Success(value) o Failure(exception)."
+            },
+            {
+              "id": "kt_b_l6_ex4",
+              "question": "¿Cuál es la forma correcta de lanzar una excepción intencionalmente en Kotlin?",
+              "codeSnippet": "fun validateAge(age: Int) {\n    if (age < 0) throw IllegalArgumentException(\"Edad inválida\")\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "raise IllegalArgumentException(\"...\")",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "throw IllegalArgumentException(\"...\")",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "error.emit(\"...\")",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "panic(\"...\")",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La palabra clave 'throw' lanza una excepción que puede ser capturada por un bloque catch superior."
+            },
+            {
+              "id": "kt_b_l6_ex5",
+              "question": "¿Qué función conveniente lanza una excepción IllegalStateException con un mensaje descriptivo si una condición es falsa?",
+              "codeSnippet": "check(user.isLoggedIn) { \"El usuario debe iniciar sesión\" }",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "assert()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "check()",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "validate()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "ensure()",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "check() valida el estado interno y lanza IllegalStateException si es falso; require() se usa para argumentos y lanza IllegalArgumentException."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "python_fundamentals",
+      "title": "Python para Principiantes",
+      "description": "Sintaxis limpia, tipos dinámicos, listas, diccionarios y funciones para crear programas y scripts prácticos.",
+      "order": 3,
+      "badge": "Popular",
+      "iconType": "PYTHON",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "python_level_1",
+          "levelNumber": 1,
+          "title": "Introducción a Python y Variables",
+          "description": "Conoce la filosofía de Python, variables dinámicas, salida por consola e interpolación con f-strings.",
+          "status": "ACTIVE",
+          "totalExercises": 5,
+          "xpReward": 30,
+          "exercises": [
+            {
+              "id": "py_l1_ex1",
+              "question": "¿Qué función se utiliza en Python para mostrar texto o valores en la consola?",
+              "codeSnippet": "print(\"¡Hola, mundo!\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "console.log()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "echo()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "print()",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "System.out.println()",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Python, la función integrada print() imprime en la salida estándar."
+            },
+            {
+              "id": "py_l1_ex2",
+              "question": "¿Cómo se declara una variable en Python sin especificar su tipo?",
+              "codeSnippet": "name = \"Ana\"\nage = 25",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "var name = \"Ana\"",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "name = \"Ana\"",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "String name = \"Ana\"",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "let name = \"Ana\"",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Python tiene tipado dinámico. No requiere palabras clave como var, let o tipos; se asigna directamente con el operador '='."
+            },
+            {
+              "id": "py_l1_ex3",
+              "question": "¿Cuál es la forma moderna y recomendada de interpolar variables dentro de un texto en Python?",
+              "codeSnippet": "user = \"Carlos\"\nxp = 150\nmessage = f\"Usuario {user} tiene {xp} XP\"",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "f-strings con prefijo 'f' y llaves {}",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Concatenación con el operador '+' únicamente",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Usando el símbolo $ como en Bash: \"$user\"",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Con comillas invertidas `...` como en JavaScript",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las f-strings (f\"...\") introducidas en Python 3.6 permiten evaluar expresiones directamente dentro de llaves {} con gran legibilidad."
+            },
+            {
+              "id": "py_l1_ex4",
+              "question": "¿Qué tipo de dato devuelve la función type(3.14)?",
+              "codeSnippet": "pi = 3.14\nprint(type(pi))",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "<class 'int'>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "<class 'float'>",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "<class 'double'>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "<class 'decimal'>",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Python, los números con coma decimal pertenecen al tipo 'float'."
+            },
+            {
+              "id": "py_l1_ex5",
+              "question": "¿Cómo se escribe un comentario de una sola línea en Python?",
+              "codeSnippet": "# Este es un comentario en Python\nx = 10",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "// Comentario",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "# Comentario",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "/* Comentario */",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "-- Comentario",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Python, los comentarios de una línea comienzan con el caracter almohadilla '#'."
+            }
+          ]
+        },
+        {
+          "id": "python_level_2",
+          "levelNumber": 2,
+          "title": "Control de Flujo: if, elif, else",
+          "description": "Toma de decisiones, operadores lógicos (and, or, not) y la importancia de la indentación en Python.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "py_l2_ex1",
+              "question": "¿Cómo delimita Python los bloques de código dentro de una estructura if?",
+              "codeSnippet": "if score >= 60:\n    print(\"Aprobado\")\nelse:\n    print(\"Reprobado\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Con llaves { }",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Con indentación consistente (espacios o tabulación)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Con palabras clave 'begin' y 'end'",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Con paréntesis ( )",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "A diferencia de otros lenguajes con llaves, Python usa la indentación (sangría de 4 espacios) para definir el alcance de los bloques."
+            },
+            {
+              "id": "py_l2_ex2",
+              "question": "¿Cuál es la palabra clave en Python para la condición intermedia 'else if'?",
+              "codeSnippet": "if points > 100:\n    print(\"Oro\")\nelif points > 50:\n    print(\"Plata\")\nelse:\n    print(\"Bronce\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "else if",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "elsif",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "elif",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "elseif",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Python utiliza la contracción 'elif' para evaluar múltiples condiciones encadenadas."
+            },
+            {
+              "id": "py_l2_ex3",
+              "question": "¿Qué imprimirá este código con operadores lógicos?",
+              "codeSnippet": "is_active = True\nhas_xp = False\n\nif is_active and not has_xp:\n    print(\"Novato activo\")\nelse:\n    print(\"Otro estado\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Novato activo",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Otro estado",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "False",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error de sintaxis",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "not has_xp es True, y is_active es True. True and True evalúa a True, ejecutando la primera rama."
+            },
+            {
+              "id": "py_l2_ex4",
+              "question": "¿Cómo se verifica si un elemento existe dentro de una lista o secuencia?",
+              "codeSnippet": "fruits = [\"manzana\", \"pera\", \"uva\"]\nif \"pera\" in fruits:\n    print(\"Encontrada\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "fruits.contains(\"pera\")",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "fruits.has(\"pera\")",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "El operador 'in': \"pera\" in fruits",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "fruits.exists(\"pera\")",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El operador 'in' en Python es conciso y legible para probar pertenencia en listas, tuplas, conjuntos o diccionarios."
+            },
+            {
+              "id": "py_l2_ex5",
+              "question": "¿Qué valor produce la expresión booleana bool(\"\")?",
+              "codeSnippet": "empty_text = \"\"\nprint(bool(empty_text))",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "True",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "False",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "None",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Python, los valores 'falsy' incluyen '', 0, [], {}, None y False. Una cadena vacía evalúa a False."
+            }
+          ]
+        },
+        {
+          "id": "python_level_3",
+          "levelNumber": 3,
+          "title": "Estructuras de Datos: Listas y Tuplas",
+          "description": "Secuencias en Python, indexación negativa, rebanado (slicing) y diferencias de mutabilidad.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "py_l3_ex1",
+              "question": "¿Qué devuelve el índice negativo -1 en una lista de Python?",
+              "codeSnippet": "colors = [\"rojo\", \"verde\", \"azul\"]\nprint(colors[-1])",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Error de índice negativo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "El último elemento: 'azul'",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "El primer elemento: 'rojo'",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "None",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Python, los índices negativos cuentan desde el final hacia el inicio: -1 es el último elemento, -2 el penúltimo, etc."
+            },
+            {
+              "id": "py_l3_ex2",
+              "question": "¿Qué porción de la lista extrae el slicing numbers[1:3]?",
+              "codeSnippet": "numbers = [10, 20, 30, 40, 50]\nsub = numbers[1:3]\nprint(sub)",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "[20, 30]",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "[10, 20, 30]",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "[20, 30, 40]",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "[10, 20]",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El slicing [start:stop] incluye el índice de inicio (1 -> 20) y excluye el índice de parada (3 -> no incluye 40), produciendo [20, 30]."
+            },
+            {
+              "id": "py_l3_ex3",
+              "question": "¿Cuál es la diferencia fundamental entre una lista [...] y una tupla (...)?",
+              "codeSnippet": "my_list = [1, 2, 3]\nmy_tuple = (1, 2, 3)",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Las listas son mutables y las tuplas son inmutables",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Las tuplas solo pueden contener texto",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Las listas no permiten indexación",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "No existe ninguna diferencia",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las tuplas no se pueden modificar después de creadas (son inmutables), lo que las hace más seguras y rápidas para datos fijos."
+            },
+            {
+              "id": "py_l3_ex4",
+              "question": "¿Qué método agrega un nuevo elemento al final de una lista en Python?",
+              "codeSnippet": "animals = [\"perro\", \"gato\"]\nanimals.append(\"loro\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "push()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "add()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "append()",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "insertEnd()",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "append(x) agrega el elemento x al final de la lista modificándola directamente."
+            },
+            {
+              "id": "py_l3_ex5",
+              "question": "¿Qué resultado produce el slicing con paso negativo numbers[::-1]?",
+              "codeSnippet": "letters = [\"A\", \"B\", \"C\"]\nprint(letters[::-1])",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "La lista invertida: ['C', 'B', 'A']",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Una lista vacía: []",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "['A', 'B', 'C']",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Error de paso negativo",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El modismo [::-1] recorre la secuencia en reversa con paso -1, produciendo una copia invertida."
+            }
+          ]
+        },
+        {
+          "id": "python_level_4",
+          "levelNumber": 4,
+          "title": "Diccionarios y Conjuntos (Sets)",
+          "description": "Colecciones clave-valor para búsquedas eficientes O(1) y conjuntos para elementos únicos.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 45,
+          "exercises": [
+            {
+              "id": "py_l4_ex1",
+              "question": "¿Cómo se define un diccionario en Python?",
+              "codeSnippet": "user = {\"name\": \"Elena\", \"streak\": 5}",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Con corchetes [ ]",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Con llaves { key: value }",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Con paréntesis ( key, value )",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Con palabras clave map( ... )",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Los diccionarios se declaran con llaves { } conteniendo pares de clave: valor separados por comas."
+            },
+            {
+              "id": "py_l4_ex2",
+              "question": "¿Por qué es más seguro usar user.get(\"email\", \"N/A\") en lugar de user[\"email\"]?",
+              "codeSnippet": "user = {\"name\": \"Lucía\"}\nemail = user.get(\"email\", \"No tiene\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Porque get() evita que el programa falle con KeyError si la clave no existe",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Porque get() encripta el valor",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "No hay diferencia, ambos hacen lo mismo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "get() solo funciona con números",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "get() devuelve un valor predeterminado si la clave no se encuentra, evitando la excepción KeyError."
+            },
+            {
+              "id": "py_l4_ex3",
+              "question": "¿Qué propiedad define a un conjunto (set) en Python?",
+              "codeSnippet": "tags = {\"python\", \"código\", \"python\"}\nprint(len(tags))",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Permite elementos duplicados en orden estricto",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "No permite elementos duplicados y almacena valores únicos",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Siempre está ordenado numéricamente",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Es de solo lectura",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Un set descarta automáticamente duplicados. {'python', 'código', 'python'} solo contendrá 2 elementos."
+            },
+            {
+              "id": "py_l4_ex4",
+              "question": "¿Cómo se iteran simultáneamente las claves y valores de un diccionario?",
+              "codeSnippet": "stats = {\"xp\": 100, \"vidas\": 3}\nfor key, value in stats.items():\n    print(f\"{key}: {value}\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Con el método stats.items()",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Con el método stats.all()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Con stats.pairs()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Con for key, value in stats:",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "dict.items() devuelve una vista de tuplas (clave, valor) ideal para desempaquetar en bucles for."
+            },
+            {
+              "id": "py_l4_ex5",
+              "question": "¿Qué operación de conjuntos devuelve los elementos presentes en AMBOS conjuntos?",
+              "codeSnippet": "set_a = {1, 2, 3}\nset_b = {2, 3, 4}\ncommon = set_a & set_b",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Unión (|)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Intersección (& o set_a.intersection(set_b))",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Diferencia (-)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Suma (+)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El operador '&' o intersection() obtiene los elementos que coinciden en ambos conjuntos: {2, 3}."
+            }
+          ]
+        },
+        {
+          "id": "python_level_5",
+          "levelNumber": 5,
+          "title": "Funciones y Reutilización",
+          "description": "Declara funciones limpias con def, valores por defecto, argumentos con nombre y retorno múltiple.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "py_l5_ex1",
+              "question": "¿Cuál es la palabra clave para definir una función en Python?",
+              "codeSnippet": "def greet(name):\n    return f\"Hola, {name}\"",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "function",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "fun",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "def",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "fn",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La palabra clave 'def' (de define) se usa para definir funciones en Python."
+            },
+            {
+              "id": "py_l5_ex2",
+              "question": "¿Qué imprimirá la función si se llama sin proporcionar el segundo argumento?",
+              "codeSnippet": "def greet(name, greeting=\"Hola\"):\n    return f\"{greeting}, {name}\"\n\nprint(greet(\"Ana\"))",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Error: falta argumento",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Hola, Ana",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "None, Ana",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "greeting, Ana",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Python permite argumentos por defecto. Si no se pasa 'greeting', usa su valor inicial 'Hola'."
+            },
+            {
+              "id": "py_l5_ex3",
+              "question": "En Python una función puede retornar múltiples valores. ¿En qué estructura se empaquetan?",
+              "codeSnippet": "def get_min_max(numbers):\n    return min(numbers), max(numbers)\n\nlow, high = get_min_max([1, 5, 10])",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Se empaquetan automáticamente en una tupla",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "En un arreglo de Java",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "En un diccionario",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Solo se puede retornar un valor en Python",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Separar valores por comas en el return los agrupa en una tupla, que se puede desempaquetar directamente."
+            },
+            {
+              "id": "py_l5_ex4",
+              "question": "¿Qué valor retorna una función de Python que no incluye una sentencia 'return' explícita?",
+              "codeSnippet": "def log_message(msg):\n    print(msg)\n\nresult = log_message(\"Iniciando\")",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "0",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "None",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "False",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "\"\"",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Toda función sin return explícito en Python devuelve el objeto singleton None."
+            },
+            {
+              "id": "py_l5_ex5",
+              "question": "¿Qué son las funciones 'lambda' en Python?",
+              "codeSnippet": "double = lambda x: x * 2\nprint(double(5))",
+              "language": "Python",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Funciones anónimas de una sola expresión",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Funciones que solo corren en servidores AWS",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Bucles infinitos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Funciones que no aceptan parámetros",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Las expresiones lambda permiten crear funciones anónimas cortas de una sola línea para transformaciones rápidas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data_structures",
+      "title": "Estructuras de Datos y Algoritmos",
+      "description": "Aprende cómo organizar datos en memoria, evaluar la eficiencia con Big-O y resolver problemas técnicos.",
+      "order": 4,
+      "badge": "Avanzado",
+      "iconType": "DATABASE",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "ds_level_1",
+          "levelNumber": 1,
+          "title": "Análisis de Complejidad (Big-O)",
+          "description": "Mide cómo escala tu código en tiempo y memoria frente a grandes volúmenes de datos.",
+          "status": "ACTIVE",
+          "totalExercises": 5,
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "ds_l1_ex1",
+              "question": "¿Cuál es la complejidad temporal de acceder a un elemento de un arreglo por su índice?",
+              "codeSnippet": "val item = array[42]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(n) - tiempo lineal",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(1) - tiempo constante",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) - tiempo logarítmico",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2) - tiempo cuadrático",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La dirección de memoria se calcula directamente con 'base + index * size', por lo que el acceso por índice toma siempre tiempo constante O(1)."
+            },
+            {
+              "id": "ds_l1_ex2",
+              "question": "¿Qué complejidad temporal tiene un algoritmo con dos bucles anidados que recorren una lista de tamaño n?",
+              "codeSnippet": "for (i in 0 until n) {\n    for (j in 0 until n) {\n        println(\"$i, $j\")\n    }\n}",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n^2) - cuadrática",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(2n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(log n)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El bucle externo itera n veces y el interno n veces por cada ciclo, resultando en n * n = O(n^2) operaciones."
+            },
+            {
+              "id": "ds_l1_ex3",
+              "question": "¿Qué representa la notación Big-O en el análisis de algoritmos?",
+              "codeSnippet": "// Big-O notation\n// O(f(n))",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "El tiempo exacto en milisegundos que tarda la CPU",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "El límite superior del crecimiento de operaciones en el peor caso",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "La cantidad de líneas de código de una función",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "La velocidad del internet requerida",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Big-O describe la asíntota superior del peor escenario posible conforme el tamaño de la entrada (n) tiende a infinito."
+            },
+            {
+              "id": "ds_l1_ex4",
+              "question": "¿Cuál de las siguientes complejidades es la más rápida para n grande?",
+              "codeSnippet": "// O(1) vs O(log n) vs O(n) vs O(n^2)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(n^2)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(1)",
+                  "isCorrect": true
+                }
+              ],
+              "explanation": "O(1) es tiempo constante: tarda exactamente lo mismo sin importar si la entrada tiene 10 o 10,000,000 elementos."
+            },
+            {
+              "id": "ds_l1_ex5",
+              "question": "¿Qué complejidad temporal tiene la búsqueda binaria sobre un arreglo ordenado?",
+              "codeSnippet": "// Binary search on sorted array",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(log n)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n log n)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Al descartar la mitad del espacio de búsqueda en cada iteración, el número de pasos es log2(n), es decir, O(log n)."
+            }
+          ]
+        },
+        {
+          "id": "ds_level_2",
+          "levelNumber": 2,
+          "title": "Pilas (Stacks) y Colas (Queues)",
+          "description": "Estructuras lineales de acceso restringido con principios LIFO (Last-In-First-Out) y FIFO (First-In-First-Out).",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "ds_l2_ex1",
+              "question": "¿Qué principio rige el comportamiento de una Pila (Stack)?",
+              "codeSnippet": "// Stack operations:\n// push(1), push(2), pop() -> 2",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "FIFO (First In, First Out)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "LIFO (Last In, First Out)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Prioridad aleatoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Acceso por clave",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En una pila, el último elemento en entrar es el primero en salir (LIFO), como una pila de platos o el historial de 'deshacer' (Ctrl+Z)."
+            },
+            {
+              "id": "ds_l2_ex2",
+              "question": "¿Qué principio rige el comportamiento de una Cola (Queue)?",
+              "codeSnippet": "// Queue operations:\n// enqueue(1), enqueue(2), dequeue() -> 1",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "FIFO (First In, First Out)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "LIFO (Last In, First Out)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Acceso aleatorio",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Búsqueda dicotómica",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En una cola, el primer elemento en ingresar es el primero en ser atendido (FIFO), como la fila de una tienda o una cola de impresión."
+            },
+            {
+              "id": "ds_l2_ex3",
+              "question": "¿Cuál es la complejidad temporal de insertar (push) o extraer (pop) en el tope de una Pila?",
+              "codeSnippet": "stack.push(42)\nval top = stack.pop()",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(1)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Tanto push como pop operan exclusivamente sobre la cabecera (tope) de la estructura en tiempo constante O(1)."
+            },
+            {
+              "id": "ds_l2_ex4",
+              "question": "¿Qué estructura de datos utiliza el sistema operativo para gestionar las llamadas a funciones y retornos?",
+              "codeSnippet": "fun a() { b() }\nfun b() { c() }\nfun c() { println(\"Fin\") }",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Call Stack (Pila de llamadas)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Cola circular",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Tabla Hash",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Árbol rojo-negro",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La Pila de Llamadas (Call Stack) almacena las direcciones de retorno y variables locales en orden LIFO."
+            },
+            {
+              "id": "ds_l2_ex5",
+              "question": "¿Qué operación consulta el elemento en el tope de la pila sin eliminarlo?",
+              "codeSnippet": "val current = stack.peek()",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "pop()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "peek() (o top())",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "poll()",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "drop()",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "peek() inspecciona el elemento superior de la pila sin modificar la estructura."
+            }
+          ]
+        },
+        {
+          "id": "ds_level_3",
+          "levelNumber": 3,
+          "title": "Tablas Hash y Búsqueda Eficiente",
+          "description": "Mapeo de claves con funciones hash, colisiones y tiempo de búsqueda O(1) promedio.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 45,
+          "exercises": [
+            {
+              "id": "ds_l3_ex1",
+              "question": "¿Cuál es la función principal de un algoritmo de hashing en una tabla hash?",
+              "codeSnippet": "val index = hash(key) % capacity",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Ordenar los elementos alfabéticamente",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Transformar una clave de tamaño arbitrario en un índice entero",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Comprimir datos para ahorrar memoria",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Eliminar datos repetidos automáticamente",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La función hash mapea cualquier tipo de clave (string, objeto) a un número entero que sirve de índice en el arreglo subyacente."
+            },
+            {
+              "id": "ds_l3_ex2",
+              "question": "¿Qué es una 'colisión' en una tabla hash?",
+              "codeSnippet": "// hash(\"claveA\") == 4\n// hash(\"claveB\") == 4",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Cuando la memoria RAM se satura",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Cuando dos claves diferentes producen el mismo índice hash",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Cuando se intenta guardar un valor nulo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Un error fatal de compilación",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Como el conjunto de posibles claves es mayor que el tamaño de la tabla, dos claves pueden coincidir en el mismo índice (colisión)."
+            },
+            {
+              "id": "ds_l3_ex3",
+              "question": "¿Cuál es una técnica clásica para resolver colisiones en tablas hash?",
+              "codeSnippet": "// Bucket[4] -> Node(claveA) -> Node(claveB)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Encadenamiento separado (Separate Chaining) con listas enlazadas",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Borrar el valor anterior",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Duplicar la CPU",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Lanzar una excepción",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El encadenamiento guarda una lista de elementos en cada posición de la tabla para alojar múltiples colisiones."
+            },
+            {
+              "id": "ds_l3_ex4",
+              "question": "¿Cuál es la complejidad temporal promedio de inserción, borrado y búsqueda en una tabla hash bien balanceada?",
+              "codeSnippet": "map[\"user_123\"] = \"Ana\"\nval user = map[\"user_123\"]",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(1) promedio",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n) promedio",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(log n) promedio",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(n^2)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Con un buen factor de carga y distribución uniforme, las tablas hash logran tiempo constante O(1) promedio."
+            },
+            {
+              "id": "ds_l3_ex5",
+              "question": "¿Qué ocurre si todas las claves colisionan en la misma casilla en el peor de los casos?",
+              "codeSnippet": "// Worst-case scenario in hash table",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "La búsqueda se degrada a tiempo lineal O(n)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Se mantiene en O(1)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "La tabla explota",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Mejora a O(log n)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Si todos los elementos van a parar a la misma lista de colisiones, la búsqueda debe recorrerla completa en O(n)."
+            }
+          ]
+        },
+        {
+          "id": "ds_level_4",
+          "levelNumber": 4,
+          "title": "Árboles Binarios y Grafos",
+          "description": "Estructuras no lineales, relaciones jerárquicas, nodos, recorridos y árboles binarios de búsqueda (BST).",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "ds_l4_ex1",
+              "question": "¿Qué es la 'raíz' (root) en un árbol?",
+              "codeSnippet": "//      (Raíz)\n//      /    \\\n//    (A)    (B)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "El nodo superior que no tiene ningún padre",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Los nodos sin hijos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "El elemento más pequeño",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Una rama lateral",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El nodo raíz es el punto de entrada de la jerarquía y no desciende de ningún otro nodo."
+            },
+            {
+              "id": "ds_l4_ex2",
+              "question": "¿Qué propiedad cumple un Árbol Binario de Búsqueda (Binary Search Tree - BST)?",
+              "codeSnippet": "//       (10)\n//       /  \\\n//     (5)  (15)",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Los hijos izquierdos son menores y los derechos son mayores que el nodo padre",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Todos los nodos tienen exactamente 3 hijos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Los datos se insertan al azar",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Solo almacena números negativos",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En un BST ordenado, para cada nodo: subtree_izq < nodo < subtree_der, permitiendo búsqueda eficiente."
+            },
+            {
+              "id": "ds_l4_ex3",
+              "question": "¿Cómo se llaman los nodos de un árbol que no tienen ningún hijo?",
+              "codeSnippet": "// Leaf nodes",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Ramas",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Hojas (Leaves)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Troncos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Vértices raíz",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Los nodos terminales sin descendientes se denominan nodos hoja (leaf nodes)."
+            },
+            {
+              "id": "ds_l4_ex4",
+              "question": "¿Qué recorrido de árbol binario visita: Izquierda -> Raíz -> Derecha, obteniendo los datos en orden ascendente?",
+              "codeSnippet": "// In-order traversal",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Pre-order",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "In-order (En orden)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Post-order",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Breadth-first",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El recorrido in-order en un BST visita los elementos exactamente en orden de menor a mayor."
+            },
+            {
+              "id": "ds_l4_ex5",
+              "question": "¿Cuál es la diferencia entre un Árbol y un Grafo general?",
+              "codeSnippet": "// Tree vs Graph",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Un árbol es un grafo acíclico y conectado; los grafos pueden contener ciclos y bucles",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Los árboles no tienen nodos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Los grafos solo se usan en matemáticas y no en software",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Son exactamente lo mismo",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Un árbol es un caso especial de grafo: conexo, no dirigido (o dirigido con raíz) y sin ningún ciclo cerrado."
+            }
+          ]
+        },
+        {
+          "id": "ds_level_5",
+          "levelNumber": 5,
+          "title": "Algoritmos de Búsqueda y Ordenamiento",
+          "description": "Compara algoritmos fundamentales: Búsqueda Binaria, Bubble Sort, Merge Sort y Quicksort.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 60,
+          "exercises": [
+            {
+              "id": "ds_l5_ex1",
+              "question": "¿Cuál es el requisito indispensable para aplicar el algoritmo de Búsqueda Binaria?",
+              "codeSnippet": "fun binarySearch(list: List<Int>, target: Int): Int",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "La colección debe estar previamente ordenada",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "La lista debe tener un número par de elementos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Solo funciona con cadenas de texto",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "No requiere ningún orden",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "La búsqueda binaria compara con el punto medio para descartar una mitad; esto solo es válido si los elementos están en orden."
+            },
+            {
+              "id": "ds_l5_ex2",
+              "question": "¿Qué complejidad temporal promedio tienen algoritmos eficientes de ordenamiento como Merge Sort?",
+              "codeSnippet": "// Merge Sort complexity",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "O(n^2)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "O(n log n)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "O(n)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "O(1)",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Merge Sort divide a la mitad (log n niveles) y fusiona n elementos en cada nivel, logrando O(n log n)."
+            },
+            {
+              "id": "ds_l5_ex3",
+              "question": "¿Qué paradigma de diseño de algoritmos utiliza Merge Sort al dividir el problema en subproblemas más pequeños?",
+              "codeSnippet": "// Divide and conquer pattern",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Divide y vencerás (Divide and Conquer)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Programación dinámica",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Algoritmo voraz (Greedy)",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Fuerza bruta",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Divide el arreglo a la mitad recursivamente hasta tamaños de 1 y luego combina las mitades ordenadas."
+            },
+            {
+              "id": "ds_l5_ex4",
+              "question": "¿Por qué Bubble Sort rara vez se usa en producción para grandes volúmenes de datos?",
+              "codeSnippet": "// Bubble sort swaps adjacent items",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Porque su complejidad temporal es O(n^2) en promedio y peor caso",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Porque no ordena correctamente",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Porque no es compatible con procesadores modernos",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Porque usa demasiada memoria RAM",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Comparar pares adyacentes repetidamente genera ~n^2 / 2 operaciones, lo que se vuelve muy lento con miles de registros."
+            },
+            {
+              "id": "ds_l5_ex5",
+              "question": "¿En cuántas comparaciones como máximo encuentra un objetivo la Búsqueda Binaria en una lista de 1,000,000 de elementos?",
+              "codeSnippet": "// log2(1_000_000) ≈ 19.93",
+              "language": "Kotlin",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Aproximadamente 1,000,000",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Aproximadamente 500,000",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Alrededor de 20 comparaciones",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "100 comparaciones",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Como 2^20 = 1,048,576, la búsqueda binaria necesita como máximo 20 comparaciones para encontrar cualquier elemento entre un millón."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terminal_git",
+      "title": "Terminal y Control de Versiones con Git",
+      "description": "Comandos esenciales de la consola, historial de cambios, ramas, fusión sin conflictos y trabajo colaborativo.",
+      "order": 5,
+      "badge": "Esencial",
+      "iconType": "TERMINAL",
+      "isUnlocked": true,
+      "levels": [
+        {
+          "id": "git_level_1",
+          "levelNumber": 1,
+          "title": "Navegación y Gestión en la Terminal",
+          "description": "Comandos básicos de la consola UNIX (bash/zsh): navegación en el sistema de archivos, lectura y gestión.",
+          "status": "ACTIVE",
+          "totalExercises": 5,
+          "xpReward": 30,
+          "exercises": [
+            {
+              "id": "git_l1_ex1",
+              "question": "¿Qué comando muestra la ruta del directorio de trabajo actual en la terminal?",
+              "codeSnippet": "$ pwd\n/Users/dev/projects",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "whereami",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "pwd (print working directory)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "path",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "dir",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'pwd' imprime la ruta absoluta del directorio donde se encuentra la sesión de la terminal."
+            },
+            {
+              "id": "git_l1_ex2",
+              "question": "¿Qué comando se utiliza para cambiar de directorio en la consola?",
+              "codeSnippet": "$ cd src/main",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "goto",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "move",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "cd (change directory)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "enter",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'cd' cambia la ubicación actual al directorio especificado."
+            },
+            {
+              "id": "git_l1_ex3",
+              "question": "¿Cómo se listan todos los archivos, incluyendo los ocultos que inician con punto (.), en la terminal?",
+              "codeSnippet": "$ ls -la\n.git\n.gitignore\nREADME.md",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "ls -la (o ls -a)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "ls -hidden",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "show all",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "find .",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El flag '-a' (all) le indica a 'ls' mostrar todos los archivos, incluyendo aquellos que inician con punto como '.git'."
+            },
+            {
+              "id": "git_l1_ex4",
+              "question": "¿Qué comando crea una nueva carpeta o directorio?",
+              "codeSnippet": "$ mkdir mi_nuevo_proyecto",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "newdir",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "mkdir (make directory)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "touch",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "create-folder",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'mkdir' crea nuevos directorios en la ruta especificada."
+            },
+            {
+              "id": "git_l1_ex5",
+              "question": "¿Qué operador de tubería (pipe) redirige la salida de un comando hacia la entrada del siguiente?",
+              "codeSnippet": "$ cat logs.txt | grep \"ERROR\"",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "La barra vertical '|'",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "El signo mayor que '>'",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "El ampersand '&'",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Dos puntos '::'",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El operador pipe '|' conecta la salida de un comando con la entrada del siguiente para componer flujos de datos."
+            }
+          ]
+        },
+        {
+          "id": "git_level_2",
+          "levelNumber": 2,
+          "title": "Primeros Pasos con Git",
+          "description": "Inicialización de repositorios, áreas de trabajo (Working Tree, Staging) y commits atómicos.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 35,
+          "exercises": [
+            {
+              "id": "git_l2_ex1",
+              "question": "¿Qué comando inicializa un nuevo repositorio Git en la carpeta actual?",
+              "codeSnippet": "$ git init",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git start",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git create",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git init",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git setup",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git init' crea el subdirectorio oculto .git que almacena la base de datos de control de versiones."
+            },
+            {
+              "id": "git_l2_ex2",
+              "question": "¿Qué comando añade los archivos modificados al área de preparación (Staging Area)?",
+              "codeSnippet": "$ git add .",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git stage",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git save",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git add",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git track",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git add <ruta>' pasa los cambios del Working Directory al Staging Area listos para el próximo commit."
+            },
+            {
+              "id": "git_l2_ex3",
+              "question": "¿Qué comando registra permanentemente los cambios del Staging con un mensaje explicativo?",
+              "codeSnippet": "$ git commit -m \"feat: implement login screen\"",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git save -m \"...\"",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git commit -m \"...\"",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git push -m \"...\"",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git checkpoint \"...\"",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git commit -m' crea una instantánea (snapshot) con un identificador SHA-1 y un mensaje descriptivo."
+            },
+            {
+              "id": "git_l2_ex4",
+              "question": "¿Qué comando muestra qué archivos han sido modificados, cuáles están en staging y cuáles sin rastrear?",
+              "codeSnippet": "$ git status",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git info",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git status",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git check",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git diff --all",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git status' es el comando principal para inspeccionar el estado actual del árbol de trabajo y del área de preparación."
+            },
+            {
+              "id": "git_l2_ex5",
+              "question": "¿Qué archivo especial le indica a Git qué archivos temporales, binarios o claves nunca deben incluirse en el repositorio?",
+              "codeSnippet": "# .gitignore\nbuild/\n.env\n*.log",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": ".gitexclude",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": ".gitignore",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "ignore.txt",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": ".gitconfig",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "El archivo '.gitignore' define patrones para excluir archivos generados automáticamente o secretos de ser rastreados."
+            }
+          ]
+        },
+        {
+          "id": "git_level_3",
+          "levelNumber": 3,
+          "title": "Ramas y Flujo de Trabajo",
+          "description": "Crea ramas independientes, cambia entre ellas y fusiona características terminadas con merge.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 40,
+          "exercises": [
+            {
+              "id": "git_l3_ex1",
+              "question": "¿Qué comando crea una nueva rama y se cambia a ella de inmediato en Git moderno?",
+              "codeSnippet": "$ git switch -c feature/dark-theme\n// o git checkout -b feature/dark-theme",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git switch -c <nombre> (o git checkout -b)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git new-branch <nombre>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git fork <nombre>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git branch --jump <nombre>",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git switch -c' (create) o 'git checkout -b' crea la rama e inmediatamente apunta HEAD a ella."
+            },
+            {
+              "id": "git_l3_ex2",
+              "question": "¿Qué comando fusiona los cambios de una rama secundaria dentro de la rama actual?",
+              "codeSnippet": "$ git checkout main\n$ git merge feature/login",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git combine feature/login",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git merge feature/login",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git join feature/login",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git integrate feature/login",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git merge <rama>' integra el historial de la rama especificada en la rama activa actual."
+            },
+            {
+              "id": "git_l3_ex3",
+              "question": "¿A qué apunta el puntero especial 'HEAD' en Git?",
+              "codeSnippet": "// HEAD -> refs/heads/main",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Al autor del repositorio",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "A la rama o commit activo actualmente en tu copia de trabajo",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Al servidor remoto en la nube",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "Al primer commit de la historia",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "HEAD es una referencia simbólica que indica la posición actual en el grafo de commits donde se aplicará el próximo cambio."
+            },
+            {
+              "id": "git_l3_ex4",
+              "question": "¿Qué ocurre cuando dos personas modifican la misma línea en ramas diferentes y se intenta hacer un merge?",
+              "codeSnippet": "CONFLICT (content): Merge conflict in App.kt",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Git elimina el archivo conflictivo",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Git marca un Conflicto de Fusión que debe ser resuelto manualmente por el desarrollador",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Git selecciona al azar una de las dos versiones",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "El repositorio se corrompe",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "Git inserta marcadores de conflicto (<<<<<<, ======, >>>>>>) para que el desarrollador decida qué versión conservar."
+            },
+            {
+              "id": "git_l3_ex5",
+              "question": "¿Qué comando lista todas las ramas locales existentes en el repositorio?",
+              "codeSnippet": "$ git branch\n* main\n  feature/auth",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git list --branches",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git branch",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git branches",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git show-branches",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git branch' muestra las ramas locales, marcando con un asterisco (*) la rama activa."
+            }
+          ]
+        },
+        {
+          "id": "git_level_4",
+          "levelNumber": 4,
+          "title": "Inspección y Diferencias",
+          "description": "Aprende a leer el historial con git log, comparar cambios con git diff y revisar commits puntuales.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 45,
+          "exercises": [
+            {
+              "id": "git_l4_ex1",
+              "question": "¿Qué comando muestra el historial cronológico de commits del repositorio?",
+              "codeSnippet": "$ git log --oneline -n 5",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git history",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git log",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git commits",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git timeline",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git log' lista los commits en orden cronológico inverso con sus autores, fechas y mensajes."
+            },
+            {
+              "id": "git_l4_ex2",
+              "question": "¿Qué comando muestra las diferencias línea por línea que aún NO han sido añadidas al Staging?",
+              "codeSnippet": "$ git diff",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git compare",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git diff",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git show-changes",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git inspect",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git diff' compara el Working Directory con el Staging Area, mostrando líneas añadidas (+) y eliminadas (-)."
+            },
+            {
+              "id": "git_l4_ex3",
+              "question": "¿Cómo se inspeccionan las diferencias que YA están preparadas en el Staging Area?",
+              "codeSnippet": "$ git diff --staged",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git diff --staged (o git diff --cached)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git diff --commit",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git diff --ready",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git status -v",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git diff --staged' compara el Staging Area contra el último commit registrado."
+            },
+            {
+              "id": "git_l4_ex4",
+              "question": "¿Qué comando muestra el detalle completo (mensaje y diff) de un commit específico por su hash?",
+              "codeSnippet": "$ git show 9f0b528",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git view <hash>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git show <hash>",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git print <hash>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git inspect-commit <hash>",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git show' inspecciona cualquier objeto de Git (commit, tag, blob) mostrando sus metadatos y contenido."
+            },
+            {
+              "id": "git_l4_ex5",
+              "question": "¿Qué comando muestra quién modificó cada línea de un archivo y en qué commit?",
+              "codeSnippet": "$ git blame MainActivity.kt",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git blame <archivo>",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git who <archivo>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git author <archivo>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git line-history <archivo>",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git blame' muestra anotaciones línea por línea con el autor, fecha y hash de commit de cada modificación."
+            }
+          ]
+        },
+        {
+          "id": "git_level_5",
+          "levelNumber": 5,
+          "title": "Deshacer Cambios y Stash",
+          "description": "Guarda trabajo en progreso temporalmente con git stash y recupera versiones anteriores de forma segura.",
+          "status": "LOCKED",
+          "totalExercises": 5,
+          "xpReward": 50,
+          "exercises": [
+            {
+              "id": "git_l5_ex1",
+              "question": "¿Qué comando guarda temporalmente cambios no confirmados para limpiar el espacio de trabajo?",
+              "codeSnippet": "$ git stash\nSaved working directory and index state WIP",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git pause",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git stash",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git hold",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git backup",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git stash' toma el estado sucio de tu directorio de trabajo y lo guarda en una pila interna para restaurarlo luego."
+            },
+            {
+              "id": "git_l5_ex2",
+              "question": "¿Qué comando recupera los cambios guardados con stash y los aplica de nuevo en el código?",
+              "codeSnippet": "$ git stash pop",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git stash restore",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git stash pop (o git stash apply)",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git unstash",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git stash reload",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git stash pop' aplica los cambios guardados en la cima de la pila y los elimina del stash."
+            },
+            {
+              "id": "git_l5_ex3",
+              "question": "¿Qué comando descarta las modificaciones no preparadas en un archivo para volver al último commit?",
+              "codeSnippet": "$ git restore MainActivity.kt",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git clean <archivo>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git restore <archivo>",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git undo <archivo>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git discard <archivo>",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "En Git moderno, 'git restore <archivo>' revierte los cambios no preparados devolviendo el archivo al estado del último commit."
+            },
+            {
+              "id": "git_l5_ex4",
+              "question": "¿Qué comando crea un nuevo commit que deshace exactamente los cambios de un commit previo de forma segura?",
+              "codeSnippet": "$ git revert <hash_del_commit>",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "git revert <hash>",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "git erase <hash>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "git undo-commit <hash>",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "git rollback <hash>",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git revert' es ideal para ramas públicas porque no reescribe la historia: añade un nuevo commit inverso que anula los cambios."
+            },
+            {
+              "id": "git_l5_ex5",
+              "question": "¿Por qué se desaconseja usar 'git reset --hard' en ramas compartidas con otros desarrolladores?",
+              "codeSnippet": "// Warning: git reset --hard destroys history!",
+              "language": "Bash",
+              "options": [
+                {
+                  "id": "opt_1",
+                  "text": "Porque reescribe el historial eliminando commits de forma destructiva para el resto del equipo",
+                  "isCorrect": true
+                },
+                {
+                  "id": "opt_2",
+                  "text": "Porque hace que Git sea más lento",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_3",
+                  "text": "Porque requiere reiniciar la computadora",
+                  "isCorrect": false
+                },
+                {
+                  "id": "opt_4",
+                  "text": "No tiene ningún riesgo",
+                  "isCorrect": false
+                }
+              ],
+              "explanation": "'git reset --hard' destruye cambios no confirmados y cambia la historia local, lo que causa desincronización grave en ramas remotas."
+            }
+          ]
         }
       ]
     }
@@ -1737,6 +4422,240 @@
         {
           "type": "NOTE",
           "content": "Principio de Responsabilidad Única (SRP): Cada función debe resolver un único objetivo conciso. Las funciones pequeñas y puras son triviales de testear con pruebas unitarias y favorecen la mantenibilidad del proyecto a largo plazo.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_python_sintaxis",
+      "title": "Zen de Python y Sintaxis Limpia",
+      "category": "Python",
+      "summary": "Comprende la filosofía de Python: legibilidad ante todo, indentación de 4 espacios y tipado dinámico.",
+      "readTimeMinutes": 3,
+      "linkedCourseId": "python_fundamentals",
+      "linkedLevelId": "python_level_1",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Python fue diseñado bajo un principio fundamental expresado en el 'Zen de Python' (PEP 20): 'Bello es mejor que feo. Explícito es mejor que implícito. Simple es mejor que complejo'. A diferencia de lenguajes como C, Java o JavaScript que usan llaves para agrupar bloques, Python utiliza la indentación obligatoria.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "# Estructura limpia y legible en Python\ndef calcular_descuento(precio: float, porcentaje: int = 10) -> float:\n    \"\"\"Calcula el precio final tras aplicar descuento.\"\"\"\n    if porcentaje < 0 or porcentaje > 100:\n        raise ValueError(\"Porcentaje fuera de rango\")\n    \n    descuento = precio * (porcentaje / 100.0)\n    return precio - descuento\n\nprecio_final = calcular_descuento(150.0, 20)\nprint(f\"Total a pagar: ${precio_final:.2f}\")",
+          "language": "Python"
+        },
+        {
+          "type": "NOTE",
+          "content": "Buenas prácticas: Usa siempre 4 espacios por nivel de indentación en lugar de tabuladores reales para mantener compatibilidad universal entre editores.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_python_listas_slicing",
+      "title": "Manipulación de Listas y Slicing en Python",
+      "category": "Python",
+      "summary": "Domina el rebanado con sintaxis [inicio:fin:paso], indexación negativa y comprensión de listas.",
+      "readTimeMinutes": 4,
+      "linkedCourseId": "python_fundamentals",
+      "linkedLevelId": "python_level_3",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Las listas son una de las estructuras más versátiles de Python. La técnica de 'slicing' permite extraer subsecuencias de cualquier lista o cadena usando la sintaxis [start:stop:step], donde 'start' es inclusivo y 'stop' es exclusivo.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]\n\n# Primeros 3 elementos\nprimeros = numeros[:3]      # [0, 1, 2]\n\n# Del índice 4 al 7\nmedio = numeros[4:8]        # [4, 5, 6, 7]\n\n# De 2 en 2\npares = numeros[::2]        # [0, 2, 4, 6, 8]\n\n# Invertir la lista completa\ninvertida = numeros[::-1]   # [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]",
+          "language": "Python"
+        },
+        {
+          "type": "NOTE",
+          "content": "El slicing nunca genera errores de índice fuera de rango; si el límite supera el tamaño de la lista, Python simplemente se detiene al final.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_python_diccionarios",
+      "title": "Diccionarios: Tablas Hash en Python",
+      "category": "Python",
+      "summary": "Estructuras clave-valor para búsquedas ultra rápidas O(1), método get() seguro y comprensión de diccionarios.",
+      "readTimeMinutes": 4,
+      "linkedCourseId": "python_fundamentals",
+      "linkedLevelId": "python_level_4",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Los diccionarios en Python son tablas hash altamente optimizadas. Permiten asociar claves inmutables (strings, números, tuplas) a cualquier valor. El tiempo de búsqueda, inserción y borrado promedio es de O(1), haciéndolos ideales para cachés e indexación.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "usuario = {\n    \"id\": \"usr_882\",\n    \"nombre\": \"Diana\",\n    \"xp\": 320,\n    \"activo\": True\n}\n\n# Acceso seguro con valor por defecto\nrol = usuario.get(\"rol\", \"Estudiante\")\n\n# Diccionario por comprensión (Dict comprehension)\ncuadrados = {x: x**2 for x in range(1, 6)}\n# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}",
+          "language": "Python"
+        },
+        {
+          "type": "NOTE",
+          "content": "Desde Python 3.7+, los diccionarios garantizan por especificación del lenguaje que mantienen el orden de inserción de las claves.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_complejidad_big_o",
+      "title": "Introducción a la Complejidad Big-O",
+      "category": "Algoritmos",
+      "summary": "Aprende a medir cómo escala tu algoritmo en tiempo y memoria conforme crece el volumen de datos de entrada.",
+      "readTimeMinutes": 5,
+      "linkedCourseId": "data_structures",
+      "linkedLevelId": "ds_level_1",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "La notación Big-O es el lenguaje universal que usan los ingenieros de software para analizar el rendimiento de un algoritmo de forma independiente al hardware. En lugar de contar segundos, mide la tasa de crecimiento de operaciones a medida que la entrada 'n' crece hacia el infinito.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "// O(1) - Constante: siempre 1 operación\nfun getFirst(list: List<Int>): Int = list[0]\n\n// O(n) - Lineal: 1 pasada por cada elemento\nfun findMax(list: List<Int>): Int {\n    var max = list[0]\n    for (item in list) {\n        if (item > max) max = item\n    }\n    return max\n}\n\n// O(n^2) - Cuadrática: pares combinados\nfun hasDuplicates(list: List<Int>): Boolean {\n    for (i in list.indices) {\n        for (j in i + 1 until list.size) {\n            if (list[i] == list[j]) return true\n        }\n    }\n    return false\n}",
+          "language": "Kotlin"
+        },
+        {
+          "type": "NOTE",
+          "content": "Regla de oro: O(1) y O(log n) son excelentes; O(n) y O(n log n) son buenos; O(n^2) debe evitarse en conjuntos masivos; y O(2^n) o O(n!) no escalan.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_pilas_colas",
+      "title": "Pilas y Colas: Patrones LIFO y FIFO",
+      "category": "Estructuras de Datos",
+      "summary": "Diferencias fundamentales entre Last-In-First-Out y First-In-First-Out con ejemplos de software de la vida real.",
+      "readTimeMinutes": 4,
+      "linkedCourseId": "data_structures",
+      "linkedLevelId": "ds_level_2",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Las Pilas (Stacks) y las Colas (Queues) son estructuras de datos lineales que restringen dónde se pueden agregar y extraer elementos. Una Pila opera bajo el principio LIFO: el último en entrar es el primero en salir. Una Cola opera bajo FIFO: el primero en entrar es el primero en salir.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "// Pila en Kotlin usando ArrayDeque\nval stack = ArrayDeque<String>()\nstack.addLast(\"Página 1\") // push\nstack.addLast(\"Página 2\")\nval back = stack.removeLast() // pop -> \"Página 2\"\n\n// Cola en Kotlin\nval queue = ArrayDeque<String>()\nqueue.addLast(\"Ticket 101\") // enqueue\nqueue.addLast(\"Ticket 102\")\nval next = queue.removeFirst() // dequeue -> \"Ticket 101\"",
+          "language": "Kotlin"
+        },
+        {
+          "type": "NOTE",
+          "content": "Casos prácticos: El botón 'Atrás' del navegador o Ctrl+Z usan una Pila. La cola de renderizado o envío de correos asíncronos usa una Cola.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_tablas_hash",
+      "title": "Cómo Funcionan las Tablas Hash por Dentro",
+      "category": "Estructuras de Datos",
+      "summary": "Funciones hash, distribución uniforme de llaves, resolución de colisiones y por qué logran O(1) promedio.",
+      "readTimeMinutes": 4,
+      "linkedCourseId": "data_structures",
+      "linkedLevelId": "ds_level_3",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Una tabla hash utiliza un arreglo continuo en memoria interna y una 'función hash' matemática. Cuando pasas una clave (por ejemplo, 'usuario_123'), la función calcula un código numérico entero y le aplica módulo con el tamaño del arreglo para saber exactamente en qué casilla guardar o buscar el dato.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "// Pseudocódigo simplificado de HashMap\nclass SimpleHashMap<K, V>(val capacity: Int = 16) {\n    private val buckets = Array<MutableList<Pair<K, V>>>(capacity) { mutableListOf() }\n    \n    fun put(key: K, value: V) {\n        val index = (key.hashCode() and 0x7fffffff) % capacity\n        val bucket = buckets[index]\n        bucket.removeAll { it.first == key }\n        bucket.add(key to value)\n    }\n    \n    fun get(key: K): V? {\n        val index = (key.hashCode() and 0x7fffffff) % capacity\n        return buckets[index].firstOrNull { it.first == key }?.second\n    }\n}",
+          "language": "Kotlin"
+        },
+        {
+          "type": "NOTE",
+          "content": "Para evitar que las colisiones degraden la velocidad a O(n), las tablas hash modernas se redimensionan automáticamente (rehash) cuando superan un factor de carga de ~0.75.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_busqueda_binaria",
+      "title": "Búsqueda Binaria: La Magia de O(log n)",
+      "category": "Algoritmos",
+      "summary": "Encuentra cualquier elemento en listas ordenadas de millones de registros en menos de 25 comparaciones.",
+      "readTimeMinutes": 4,
+      "linkedCourseId": "data_structures",
+      "linkedLevelId": "ds_level_5",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Si buscas una palabra en un diccionario de papel, no comienzas por la página 1; abres por la mitad y según la letra miras en la mitad izquierda o derecha. Ese es el principio de la Búsqueda Binaria: descartar el 50% de las opciones en cada paso.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "fun binarySearch(sortedList: List<Int>, target: Int): Int {\n    var left = 0\n    var right = sortedList.size - 1\n    \n    while (left <= right) {\n        val mid = left + (right - left) / 2\n        when {\n            sortedList[mid] == target -> return mid // ¡Encontrado!\n            sortedList[mid] < target -> left = mid + 1\n            else -> right = mid - 1\n        }\n    }\n    return -1 // No encontrado\n}",
+          "language": "Kotlin"
+        },
+        {
+          "type": "NOTE",
+          "content": "Consejo técnico: Calcular 'mid' como 'left + (right - left) / 2' previene el desbordamiento de enteros (integer overflow) que ocurriría con '(left + right) / 2' en arreglos gigantes.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_git_flujo_ramas",
+      "title": "Control de Versiones y Ramas en Git",
+      "category": "Herramientas",
+      "summary": "Buenas prácticas para trabajar con ramas: feature branches, commits atómicos y cómo evitar conflictos al fusionar.",
+      "readTimeMinutes": 4,
+      "linkedCourseId": "terminal_git",
+      "linkedLevelId": "git_level_3",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "Las ramas en Git son punteros ligeros a commits individuales. Trabajar en ramas aisladas ('feature branches') permite desarrollar nuevas funcionalidades o corregir errores sin afectar el código estable de la rama principal ('main').",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "# Flujo de trabajo estándar con ramas en Git\n# 1. Crear y moverse a nueva rama de desarrollo\ngit switch -c feature/nuevo-quiz\n\n# 2. Hacer cambios atómicos y commitear\ngit add .\ngit commit -m \"feat(quiz): add timer support\"\n\n# 3. Volver a main y fusionar\ngit switch main\ngit merge feature/nuevo-quiz\n\n# 4. Eliminar la rama terminada\ngit branch -d feature/nuevo-quiz",
+          "language": "Bash"
+        },
+        {
+          "type": "NOTE",
+          "content": "Regla de equipo: Haz commits pequeños y atómicos enfocados en una sola responsabilidad. Esto simplifica revisiones de código y el rastreo de regresiones con 'git bisect'.",
+          "language": ""
+        }
+      ]
+    },
+    {
+      "id": "art_terminal_pipes",
+      "title": "Tuberías y Redirección en la Terminal",
+      "category": "Herramientas",
+      "summary": "Combina comandos pequeños para construir herramientas poderosas usando pipes (|), grep y redirección de archivos.",
+      "readTimeMinutes": 3,
+      "linkedCourseId": "terminal_git",
+      "linkedLevelId": "git_level_1",
+      "blocks": [
+        {
+          "type": "TEXT",
+          "content": "La filosofía de UNIX establece: 'Crea programas que hagan una sola cosa y la hagan bien; y que trabajen juntos'. La tubería (pipe '|') toma la salida estándar (stdout) de un comando y la conecta directamente como entrada estándar (stdin) del siguiente comando sin escribir archivos intermedios en disco.",
+          "language": ""
+        },
+        {
+          "type": "CODE",
+          "content": "# Buscar cuántos errores ocurrieron en un log\ncat server.log | grep \"ERROR\" | wc -l\n\n# Redirección de salida a un archivo nuevo (sobrescribe)\nls -la > lista_archivos.txt\n\n# Redirección anexando al final (append)\necho \"Nueva entrada\" >> notas.log\n\n# Filtrar procesos que consumen mucha memoria\nps aux | grep \"python\" | sort -nk +4",
+          "language": "Bash"
+        },
+        {
+          "type": "NOTE",
+          "content": "Recuerda: '>' sobrescribe el archivo de destino por completo, mientras que '>>' anexa las nuevas líneas al final conservando el contenido anterior.",
           "language": ""
         }
       ]
