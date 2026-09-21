@@ -32,4 +32,7 @@ interface CourseLevelDao {
 
     @Query("SELECT * FROM course_levels WHERE courseId = :courseId ORDER BY levelNumber ASC")
     suspend fun getLevelsByCourse(courseId: String): List<CourseLevelEntity>
+
+    @Query("SELECT * FROM course_levels")
+    suspend fun getAllLevels(): List<CourseLevelEntity>
 }

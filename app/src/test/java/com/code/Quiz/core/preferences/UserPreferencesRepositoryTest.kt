@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -76,12 +77,44 @@ class UserPreferencesRepositoryTest {
     }
 
     @Test
+    fun defaultLastCatalogVersion_isZero() = runBlocking {
+        val version = repository.lastCatalogVersion.first()
+        assertEquals(0, version)
+    }
+
+    @Test
+    fun setLastCatalogVersion_emitsUpdatedVersion() = runBlocking {
+        repository.setLastCatalogVersion(2)
+        val version = repository.lastCatalogVersion.first()
+        assertEquals(2, version)
+
+        repository.setLastCatalogVersion(5)
+        assertEquals(5, repository.lastCatalogVersion.first())
+    }
+
+    @Test
+    fun ioExceptionHandling_catalogVersion_emitsZeroGracefully() = runBlocking {
+        fakeDataStore.shouldThrowIoException = true
+        val version = repository.lastCatalogVersion.first()
+        assertEquals(0, version)
+    }
+
+    @Test
     fun fakeUserPreferencesRepository_validatesDefaultFalseAndEmitsTrueOnCompletion() = runBlocking {
         val fakeRepo = FakeUserPreferencesRepository()
         assertFalse(fakeRepo.isOnboardingCompleted.first())
 
         fakeRepo.setOnboardingCompleted(true)
         assertTrue(fakeRepo.isOnboardingCompleted.first())
+    }
+
+    @Test
+    fun fakeUserPreferencesRepository_validatesDefaultZeroAndEmitsNewVersion() = runBlocking {
+        val fakeRepo = FakeUserPreferencesRepository()
+        assertEquals(0, fakeRepo.lastCatalogVersion.first())
+
+        fakeRepo.setLastCatalogVersion(3)
+        assertEquals(3, fakeRepo.lastCatalogVersion.first())
     }
 
     class FakeDataStore(initialPreferences: Preferences = emptyPreferences()) : DataStore<Preferences> {
@@ -103,13 +136,21 @@ class UserPreferencesRepositoryTest {
     }
 
     class FakeUserPreferencesRepository(
-        initialCompleted: Boolean = false
+        initialCompleted: Boolean = false,
+        initialCatalogVersion: Int = 0
     ) : UserPreferencesRepository {
         private val _isOnboardingCompleted = MutableStateFlow(initialCompleted)
         override val isOnboardingCompleted: Flow<Boolean> = _isOnboardingCompleted
 
         override suspend fun setOnboardingCompleted(completed: Boolean) {
             _isOnboardingCompleted.value = completed
+        }
+
+        private val _lastCatalogVersion = MutableStateFlow(initialCatalogVersion)
+        override val lastCatalogVersion: Flow<Int> = _lastCatalogVersion
+
+        override suspend fun setLastCatalogVersion(version: Int) {
+            _lastCatalogVersion.value = version
         }
     }
 }

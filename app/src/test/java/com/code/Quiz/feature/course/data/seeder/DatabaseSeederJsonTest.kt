@@ -23,8 +23,8 @@ class DatabaseSeederJsonTest {
         val content = file.readText()
         val dto = json.decodeFromString<SeedDataDto>(content)
 
-        assertEquals(2, dto.version)
-        assertEquals(2, dto.courses.size)
+        assertEquals(3, dto.version)
+        assertEquals(5, dto.courses.size)
 
         // 1. intro_programming
         val c1 = dto.courses[0]
@@ -33,7 +33,7 @@ class DatabaseSeederJsonTest {
         assertEquals("Curso Top", c1.badge)
         assertEquals("ROCKET", c1.iconType)
         assertTrue(c1.isUnlocked)
-        assertEquals(5, c1.levels.size)
+        assertEquals(6, c1.levels.size)
         assertEquals("ACTIVE", c1.levels[0].status)
 
         // 2. kotlin_basics
@@ -42,10 +42,10 @@ class DatabaseSeederJsonTest {
         assertEquals(2, c2.order)
         assertEquals("Recomendado", c2.badge)
         assertEquals("CODE", c2.iconType)
-        assertEquals(5, c2.levels.size)
+        assertEquals(6, c2.levels.size)
 
         // 3. library articles verification
-        assertEquals(6, dto.library.size)
+        assertEquals(15, dto.library.size)
 
         val art1 = dto.library[0]
         assertEquals("art_variables_tipos", art1.id)

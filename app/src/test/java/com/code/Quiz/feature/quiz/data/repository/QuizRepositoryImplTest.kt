@@ -186,5 +186,7 @@ class QuizRepositoryImplTest {
 
         override suspend fun getLevelsByCourse(courseId: String): List<CourseLevelEntity> =
             levelsFlow.value.filter { it.courseId == courseId }.sortedBy { it.levelNumber }
+
+        override suspend fun getAllLevels(): List<CourseLevelEntity> = levelsFlow.value
     }
 }

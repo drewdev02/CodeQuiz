@@ -3,6 +3,7 @@ package com.code.Quiz.feature.course.data.seeder
 import android.content.Context
 import androidx.room.withTransaction
 import com.code.Quiz.core.database.CodeQuizDatabase
+import com.code.Quiz.core.preferences.UserPreferencesRepository
 import com.code.Quiz.core.util.DispatcherProvider
 import com.code.Quiz.feature.course.data.dao.CourseDao
 import com.code.Quiz.feature.course.data.dao.CourseLevelDao
@@ -17,6 +18,7 @@ import com.code.Quiz.feature.streak.data.dao.StreakDao
 import com.code.Quiz.feature.streak.data.entity.DailyActivityEntity
 import com.code.Quiz.feature.streak.data.entity.StreakEntity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -34,6 +36,7 @@ open class DatabaseSeeder(
     private val exerciseDao: ExerciseDao? = null,
     private val articleDao: ArticleDao? = null,
     private val streakDao: StreakDao? = null,
+    private val userPreferencesRepository: UserPreferencesRepository? = null,
     private val dispatcherProvider: DispatcherProvider? = null
 ) {
 
@@ -43,8 +46,9 @@ open class DatabaseSeeder(
     }
 
     /**
-     * Seeds initial courses, course levels, exercises, and library articles if the database is currently empty.
-     * Returns true if database was seeded, false if already populated.
+     * Seeds initial courses, course levels, exercises, and library articles if the database is currently empty,
+     * or synchronizes new catalog versions and missing items while preserving user level progress.
+     * Returns true if database was seeded or updated, false if already up-to-date.
      */
     open suspend fun seedIfNeeded(): Boolean {
         val dispatcher = dispatcherProvider?.io ?: Dispatchers.IO
@@ -54,19 +58,21 @@ open class DatabaseSeeder(
             val db = database ?: return@withContext false
             val ctx = context ?: return@withContext false
 
-            val shouldSeedCourses = cDao.count() == 0
-            val shouldSeedExercises = exerciseDao != null && exerciseDao.count() == 0
-            val shouldSeedArticles = articleDao != null && articleDao.count() == 0
-            val shouldSeedStreak = streakDao != null && streakDao.getStreak() == null
-
-            if (!shouldSeedCourses && !shouldSeedExercises && !shouldSeedArticles && !shouldSeedStreak) {
-                return@withContext false
-            }
+            val storedVersion = userPreferencesRepository?.lastCatalogVersion?.firstOrNull() ?: 0
 
             val jsonString = ctx.assets.open("data/seed_data.json").bufferedReader().use {
                 it.readText()
             }
             val seedData = json.decodeFromString<SeedDataDto>(jsonString)
+
+            val isDbEmpty = cDao.count() == 0
+            val hasNewCatalogVersion = seedData.version > storedVersion
+            val hasMissingCourses = cDao.count() < seedData.courses.size
+            val hasMissingArticles = articleDao != null && articleDao.count() < seedData.library.size
+
+            if (!isDbEmpty && !hasNewCatalogVersion && !hasMissingCourses && !hasMissingArticles) {
+                return@withContext false
+            }
 
             val courses = seedData.courses.map { courseDto ->
                 CourseEntity(
@@ -80,15 +86,26 @@ open class DatabaseSeeder(
                 )
             }
 
+            val existingLevelsMap = clDao.getAllLevels().associateBy { it.id }
             val levels = seedData.courses.flatMap { courseDto ->
                 courseDto.levels.map { levelDto ->
+                    val existing = existingLevelsMap[levelDto.id]
+                    val effectiveStatus = if (existing != null) {
+                        if (existing.status == "COMPLETED" || existing.status == "ACTIVE") {
+                            existing.status
+                        } else {
+                            levelDto.status
+                        }
+                    } else {
+                        levelDto.status
+                    }
                     CourseLevelEntity(
                         id = levelDto.id,
                         courseId = courseDto.id,
                         levelNumber = levelDto.levelNumber,
                         title = levelDto.title,
                         description = levelDto.description,
-                        status = levelDto.status,
+                        status = effectiveStatus,
                         totalExercises = levelDto.totalExercises,
                         xpReward = levelDto.xpReward
                     )
@@ -125,19 +142,17 @@ open class DatabaseSeeder(
             }
 
             db.withTransaction {
-                if (shouldSeedCourses) {
-                    cDao.insertCourses(courses)
-                    clDao.insertLevels(levels)
-                }
-                if (shouldSeedExercises && exercises.isNotEmpty()) {
+                cDao.insertCourses(courses)
+                clDao.insertLevels(levels)
+                if (exercises.isNotEmpty()) {
                     exerciseDao?.insertExercises(exercises)
                 }
-                if (shouldSeedArticles && articles.isNotEmpty()) {
+                if (articles.isNotEmpty()) {
                     articleDao?.insertArticles(articles)
                 }
-                if (shouldSeedStreak) {
+                if (isDbEmpty && streakDao != null && streakDao.getStreak() == null) {
                     val today = LocalDate.now().toString()
-                    streakDao?.insertOrUpdateStreak(
+                    streakDao.insertOrUpdateStreak(
                         StreakEntity(
                             id = 1,
                             currentStreak = 1,
@@ -145,7 +160,7 @@ open class DatabaseSeeder(
                             lastActiveDate = today
                         )
                     )
-                    streakDao?.insertOrUpdateActivity(
+                    streakDao.insertOrUpdateActivity(
                         DailyActivityEntity(
                             date = today,
                             xpEarned = 70,
@@ -154,6 +169,8 @@ open class DatabaseSeeder(
                     )
                 }
             }
+
+            userPreferencesRepository?.setLastCatalogVersion(seedData.version)
 
             true
         }
