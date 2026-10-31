@@ -32,6 +32,24 @@ fun CodeQuizMascot(
 ) {
     val isPreview = LocalInspectionMode.current
 
+    val riveResId = androidx.compose.runtime.remember {
+        try {
+            R.raw::class.java.getField("raccoon_mascot").getInt(null)
+        } catch (_: Exception) {
+            0
+        }
+    }
+
+    if (!isPreview && riveResId != 0) {
+        CodeQuizRiveMascot(
+            state = state,
+            resourceId = riveResId,
+            modifier = modifier,
+            contentDescription = contentDescription
+        )
+        return
+    }
+
     @RawRes val resId = when (state) {
         MascotState.IDLE -> R.raw.raccoon_idle
         MascotState.THINKING -> R.raw.raccoon_thinking
