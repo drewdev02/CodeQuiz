@@ -181,3 +181,12 @@ En cumplimiento con las directrices oficiales de accesibilidad de Google y Andro
 
 
 
+
+8. **Integración del Motor Rive (Skeletal & Bone Animation al estilo Duolingo):**
+   - **Tecnología:** Se integró el runtime oficial de Rive (`app.rive:rive-android:11.15.0`) con soporte nativo para articulaciones de huesos (patas, cola, pestañas) y máquinas de estados interactivas.
+   - **Adaptador Compose ([`CodeQuizRiveMascot.kt`](app/src/main/java/com/code/Quiz/core/ui/component/mascot/CodeQuizRiveMascot.kt)):** Renderizado acelerado por hardware a 60 FPS con enlace dinámico de entradas de estado (`stateIndex`).
+   - **Arquitectura Resiliente y Fallback Elegante:**
+     - Inicialización nativa de C++ en [`CodeQuizApplication.kt`](app/src/main/java/com/code/Quiz/CodeQuizApplication.kt).
+     - Detección de entorno `@Preview` en Android Studio para evitar caídas de JNI.
+     - Fallback automático e instantáneo a Lottie y Drawables si el binario `.riv` no se encuentra o falla la inicialización.
+   - **Especificación Técnica del Rig:** Documentada en [`docs/superpowers/specs/raccoon_rive_rig_spec.md`](docs/superpowers/specs/raccoon_rive_rig_spec.md).
