@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.code.Quiz.R
 import com.code.Quiz.core.theme.AccentCyan
 import com.code.Quiz.core.theme.AccentPurple
@@ -109,10 +110,28 @@ fun LevelNodeItem(
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .width(72.dp)
+                .width(56.dp)
                 .fillMaxHeight()
         ) {
-            if (showTopLine) {
+            if (isCurrentChallenge) {
+                if (showTopLine) {
+                    Box(
+                        modifier = Modifier
+                            .width(3.dp)
+                            .weight(1f)
+                            .background(connectorLineColor)
+                    )
+                } else {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+
+                CodeQuizMascot(
+                    state = MascotState.IDLE,
+                    modifier = Modifier
+                        .size(38.dp)
+                        .padding(bottom = 2.dp)
+                )
+            } else if (showTopLine) {
                 Box(
                     modifier = Modifier
                         .width(3.dp)
@@ -126,7 +145,7 @@ fun LevelNodeItem(
             // Circular Node Container
             Box(
                 modifier = Modifier
-                    .size(68.dp)
+                    .size(50.dp)
                     .then(
                         if (isCurrentChallenge) {
                             Modifier.drawBehind {
@@ -174,7 +193,7 @@ fun LevelNodeItem(
                             painter = painterResource(id = R.drawable.ic_check),
                             contentDescription = "Nivel completado",
                             tint = SuccessMint,
-                            modifier = Modifier.size(28.dp)
+                            modifier = Modifier.size(24.dp)
                         )
                     }
 
@@ -183,7 +202,7 @@ fun LevelNodeItem(
                             painter = painterResource(id = R.drawable.ic_play_arrow),
                             contentDescription = "Nivel activo",
                             tint = AccentCyan,
-                            modifier = Modifier.size(28.dp)
+                            modifier = Modifier.size(24.dp)
                         )
                     }
 
@@ -192,7 +211,7 @@ fun LevelNodeItem(
                             painter = painterResource(id = R.drawable.ic_lock),
                             contentDescription = "Nivel bloqueado",
                             tint = TextMuted,
-                            modifier = Modifier.size(24.dp)
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 }
@@ -210,7 +229,7 @@ fun LevelNodeItem(
             }
         }
 
-        Spacer(modifier = Modifier.width(Spacing.md))
+        Spacer(modifier = Modifier.width(Spacing.sm))
 
         // Level Details Card
         CodeQuizCard(
@@ -220,89 +239,24 @@ fun LevelNodeItem(
                 .padding(vertical = Spacing.xs),
             variant = if (isCurrentChallenge) CodeQuizCardVariant.Elevated else CodeQuizCardVariant.Standard,
             border = if (isCurrentChallenge) {
-                BorderStroke(1.5.dp, AccentPurple.copy(alpha = 0.6f))
+                BorderStroke(1.5.dp, AccentPurple.copy(alpha = 0.8f))
             } else {
                 BorderStroke(1.dp, DarkSurfaceBorder)
             }
         ) {
-            if (isCurrentChallenge) {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                // Top header: Status Badge on left, XP Badge on right
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(modifier = Modifier.weight(1f)) {
+                    if (isCurrentChallenge) {
                         CodeQuizBadge(
                             text = "¡Tu reto actual!",
                             variant = BadgeVariant.Highlight
                         )
-
-                        Spacer(modifier = Modifier.height(Spacing.xs))
-
-                        Text(
-                            text = "Nivel ${level.levelNumber}: ${level.title}",
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            color = TextPrimary
-                        )
-
-                        Spacer(modifier = Modifier.height(Spacing.xs))
-
-                        Text(
-                            text = level.description,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = TextSecondary,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis
-                        )
-
-                        Spacer(modifier = Modifier.height(Spacing.sm))
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(Spacing.sm)
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
-                            ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_target),
-                                    contentDescription = null,
-                                    tint = AccentCyan,
-                                    modifier = Modifier.size(13.dp)
-                                )
-                                Text(
-                                    text = "${level.totalExercises} micro-retos",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = TextSecondary
-                                )
-                            }
-
-                            CodeQuizBadge(
-                                text = "+${level.xpReward} XP",
-                                variant = BadgeVariant.Tag,
-                                customTextColor = SuccessMint,
-                                customBackgroundColor = DarkSurfaceElevated
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.width(Spacing.xs))
-
-                    CodeQuizMascot(
-                        state = MascotState.IDLE,
-                        modifier = Modifier.size(80.dp)
-                    )
-                }
-            } else {
-                Column(modifier = Modifier.fillMaxWidth()) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
+                    } else {
                         when (level.status) {
                             LevelStatus.COMPLETED -> {
                                 CodeQuizBadge(
@@ -331,57 +285,63 @@ fun LevelNodeItem(
                                 )
                             }
                         }
-
-                        CodeQuizBadge(
-                            text = "+${level.xpReward} XP",
-                            variant = BadgeVariant.Tag,
-                            customTextColor = when (level.status) {
-                                LevelStatus.COMPLETED -> SuccessMint
-                                LevelStatus.ACTIVE -> AccentCyan
-                                LevelStatus.LOCKED -> TextMuted
-                            },
-                            customBackgroundColor = DarkSurfaceElevated
-                        )
                     }
 
-                    Spacer(modifier = Modifier.height(Spacing.xs))
-
-                    Text(
-                        text = "Nivel ${level.levelNumber}: ${level.title}",
-                        style = MaterialTheme.typography.titleMedium.copy(
-                            fontWeight = FontWeight.SemiBold
-                        ),
-                        color = if (level.status == LevelStatus.LOCKED) TextSecondary else TextPrimary
+                    CodeQuizBadge(
+                        text = "+${level.xpReward} XP",
+                        variant = BadgeVariant.Tag,
+                        customTextColor = when (level.status) {
+                            LevelStatus.COMPLETED -> SuccessMint
+                            LevelStatus.ACTIVE -> AccentCyan
+                            LevelStatus.LOCKED -> TextMuted
+                        },
+                        customBackgroundColor = DarkSurfaceElevated
                     )
+                }
 
-                    Spacer(modifier = Modifier.height(Spacing.xs))
+                Spacer(modifier = Modifier.height(Spacing.xs))
 
-                    Text(
-                        text = level.description,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = if (level.status == LevelStatus.LOCKED) TextMuted else TextSecondary,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
+                // Title - 100% full width without being squished!
+                Text(
+                    text = "Nivel ${level.levelNumber}: ${level.title}",
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = if (isCurrentChallenge) FontWeight.Bold else FontWeight.SemiBold,
+                        fontSize = 16.sp
+                    ),
+                    color = if (level.status == LevelStatus.LOCKED) TextSecondary else TextPrimary,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Spacer(modifier = Modifier.height(Spacing.xs))
+
+                // Description
+                Text(
+                    text = level.description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (level.status == LevelStatus.LOCKED) TextMuted else TextSecondary,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Spacer(modifier = Modifier.height(Spacing.sm))
+
+                // Bottom row: Target icon + micro-retos
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_target),
+                        contentDescription = null,
+                        tint = if (level.status == LevelStatus.LOCKED) TextMuted else AccentCyan,
+                        modifier = Modifier.size(13.dp)
                     )
-
-                    Spacer(modifier = Modifier.height(Spacing.sm))
-
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_target),
-                            contentDescription = null,
-                            tint = if (level.status == LevelStatus.LOCKED) TextMuted else AccentCyan,
-                            modifier = Modifier.size(13.dp)
-                        )
-                        Text(
-                            text = "${level.totalExercises} micro-retos",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = if (level.status == LevelStatus.LOCKED) TextMuted else TextSecondary
-                        )
-                    }
+                    Text(
+                        text = "${level.totalExercises} micro-retos",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = if (level.status == LevelStatus.LOCKED) TextMuted else TextSecondary
+                    )
                 }
             }
         }

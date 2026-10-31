@@ -164,5 +164,11 @@ En cumplimiento con las directrices oficiales de accesibilidad de Google y Andro
    - Delimitación con `heightIn(max = 140.dp)` y scroll vertical en el área de explicación del `bottomBar`, garantizando que el botón de avance nunca quede fuera del viewport.
 5. **Tarjeta de Racha ([`DuolingoStreakCard.kt`](app/src/main/java/com/code/Quiz/feature/profile/ui/components/DuolingoStreakCard.kt)):**
    - Peso flexible `Modifier.weight(1f, fill = false)` en la columna de texto del encabezado para evitar desbordes en pantallas compactas.
+6. **Rediseño de Tarjetas de Nivel y Mascota en Línea de Tiempo ([`LevelNodeItem.kt`](app/src/main/java/com/code/Quiz/feature/course/ui/components/LevelNodeItem.kt)):**
+   - Se reubicó la mascota del interior de la tarjeta activa a la cabecera del nodo circular en la línea de tiempo (estilo Duolingo), liberando el 100% del ancho horizontal de la tarjeta para el título y la descripción.
+   - Se estandarizó la posición del badge `+XP` en la esquina superior derecha en todas las tarjetas, eliminando por completo el aplastamiento vertical de letras (`+30 XP`).
+   - Se compactó la columna del nodo lateral de 72 dp a 56 dp (círculo de 50 dp), ganando más de 20 dp de ancho útil para todas las tarjetas de la ruta.
+   - En la tarjeta superior de progreso de [`CourseLevelsScreen.kt`](app/src/main/java/com/code/Quiz/feature/course/ui/CourseLevelsScreen.kt), se implementó una píldora compacta (`completed/total (progress%)`) con contraste mejorado en la barra.
+
 
 

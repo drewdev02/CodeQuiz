@@ -48,6 +48,8 @@ import com.code.Quiz.core.theme.DarkSurfaceElevated
 import com.code.Quiz.core.theme.Spacing
 import com.code.Quiz.core.theme.TextPrimary
 import com.code.Quiz.core.theme.TextSecondary
+import com.code.Quiz.core.ui.component.badge.BadgeVariant
+import com.code.Quiz.core.ui.component.badge.CodeQuizBadge
 import com.code.Quiz.core.ui.component.badge.StreakBadge
 import com.code.Quiz.core.ui.component.button.CodeQuizBackButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
@@ -206,21 +208,25 @@ fun CourseLevelsContent(
                         ) {
                             Text(
                                 text = "Progreso del curso",
-                                style = MaterialTheme.typography.bodySmall,
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    fontWeight = FontWeight.Medium
+                                ),
                                 color = TextSecondary
                             )
-                            Text(
-                                text = "$completedCount de $totalCount niveles completados ($progressPercent%)",
-                                style = MaterialTheme.typography.labelSmall.copy(
-                                    fontWeight = FontWeight.Bold,
-                                    color = AccentCyan
-                                )
+                            CodeQuizBadge(
+                                text = "$completedCount/$totalCount ($progressPercent%)",
+                                variant = BadgeVariant.Tag,
+                                customTextColor = AccentCyan,
+                                customBackgroundColor = DarkSurfaceElevated
                             )
                         }
 
                         Spacer(modifier = Modifier.height(Spacing.sm))
 
-                        CodeQuizProgressBar(progress = progress)
+                        CodeQuizProgressBar(
+                            progress = progress,
+                            trackColor = DarkSurfaceBorder.copy(alpha = 0.8f)
+                        )
                     }
 
                     Spacer(modifier = Modifier.height(Spacing.xs))
