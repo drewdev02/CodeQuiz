@@ -32,6 +32,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -88,7 +90,7 @@ fun CodeQuizBottomBar(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(64.dp),
+                    .height(68.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -102,41 +104,52 @@ fun CodeQuizBottomBar(
                         targetValue = if (isSelected) DarkSurfaceElevated else Color.Transparent,
                         label = "bottomBarPillColor"
                     )
-                    val pillShape = RoundedCornerShape(20.dp)
+                    val pillShape = RoundedCornerShape(16.dp)
 
                     Box(
                         modifier = Modifier
                             .weight(1f)
-                            .fillMaxHeight(),
+                            .fillMaxHeight()
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = ripple(color = ActiveNavColor),
+                                onClick = { onTabSelected(tab) }
+                            ),
                         contentAlignment = Alignment.Center
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .clip(pillShape)
-                                .background(pillColor)
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = ripple(color = ActiveNavColor),
-                                    onClick = { onTabSelected(tab) }
-                                )
-                                .padding(horizontal = Spacing.md, vertical = Spacing.sm),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier.padding(horizontal = Spacing.xs, vertical = Spacing.xxs)
                         ) {
-                            Icon(
-                                painter = painterResource(id = tab.iconRes),
-                                contentDescription = tab.title,
-                                tint = contentColor,
-                                modifier = Modifier.size(24.dp)
-                            )
-                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            // Icon container with optional pill background when selected
+                            Box(
+                                modifier = Modifier
+                                    .clip(pillShape)
+                                    .background(pillColor)
+                                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = tab.iconRes),
+                                    contentDescription = tab.title,
+                                    tint = contentColor,
+                                    modifier = Modifier.size(22.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.height(2.dp))
+
                             Text(
                                 text = tab.title,
-                                style = MaterialTheme.typography.labelLarge.copy(
-                                    fontSize = 14.sp,
+                                style = MaterialTheme.typography.labelSmall.copy(
+                                    fontSize = 11.sp,
                                     fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
                                 ),
-                                color = contentColor
+                                color = contentColor,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                                textAlign = TextAlign.Center
                             )
                         }
                     }

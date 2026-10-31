@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
@@ -25,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,11 +77,12 @@ fun ProgressScreenContent(
         modifier = modifier.fillMaxSize(),
         containerColor = DarkBackground,
         topBar = {
-            Box(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .statusBarsPadding()
-                    .padding(horizontal = Spacing.lg, vertical = Spacing.md)
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.md),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = "Tu Progreso",
@@ -88,14 +91,14 @@ fun ProgressScreenContent(
                         fontWeight = FontWeight.SemiBold
                     ),
                     color = TextPrimary,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.align(Alignment.Center)
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
                 )
 
-                StreakBadge(
-                    streakCount = currentStreakCount,
-                    modifier = Modifier.align(Alignment.CenterEnd)
-                )
+                Spacer(modifier = Modifier.width(Spacing.sm))
+
+                StreakBadge(streakCount = currentStreakCount)
             }
         }
     ) { innerPadding ->
@@ -254,15 +257,18 @@ private fun StatItemCard(
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Medium
                 ),
-                color = TextSecondary
+                color = TextSecondary,
+                modifier = Modifier.weight(1f, fill = false)
             )
+            Spacer(modifier = Modifier.width(Spacing.sm))
             Text(
                 text = value,
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 ),
-                color = valueColor
+                color = valueColor,
+                textAlign = TextAlign.End
             )
         }
     }

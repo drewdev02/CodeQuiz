@@ -1,6 +1,8 @@
 package com.code.Quiz.feature.course.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -93,6 +95,7 @@ fun LevelDetailBottomSheet(
             onStartLevel = onStartLevel,
             modifier = Modifier
                 .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
                 .navigationBarsPadding()
                 .padding(horizontal = Spacing.lg, vertical = Spacing.md)
         )
@@ -185,7 +188,10 @@ fun LevelDetailContent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Micro-retos
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(
                         text = "${level.totalExercises}",
                         style = MaterialTheme.typography.titleLarge.copy(
@@ -197,7 +203,8 @@ fun LevelDetailContent(
                     Text(
                         text = "Micro-retos",
                         style = MaterialTheme.typography.labelSmall,
-                        color = TextSecondary
+                        color = TextSecondary,
+                        textAlign = TextAlign.Center
                     )
                 }
 
@@ -210,7 +217,10 @@ fun LevelDetailContent(
                 )
 
                 // XP Reward
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(
                         text = "+${level.xpReward}",
                         style = MaterialTheme.typography.titleLarge.copy(
@@ -222,7 +232,8 @@ fun LevelDetailContent(
                     Text(
                         text = "XP Recompensa",
                         style = MaterialTheme.typography.labelSmall,
-                        color = TextSecondary
+                        color = TextSecondary,
+                        textAlign = TextAlign.Center
                     )
                 }
 
@@ -235,7 +246,10 @@ fun LevelDetailContent(
                 )
 
                 // Estimated time
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(
+                    modifier = Modifier.weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Text(
                         text = "~${level.totalExercises * 2} min",
                         style = MaterialTheme.typography.titleLarge.copy(
@@ -247,7 +261,8 @@ fun LevelDetailContent(
                     Text(
                         text = "Tiempo estimado",
                         style = MaterialTheme.typography.labelSmall,
-                        color = TextSecondary
+                        color = TextSecondary,
+                        textAlign = TextAlign.Center
                     )
                 }
             }
@@ -256,21 +271,21 @@ fun LevelDetailContent(
         Spacer(modifier = Modifier.height(Spacing.sm))
 
         // Progressive Difficulty Curve Info Banner
-        Row(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(8.dp))
                 .background(DarkSurfaceElevated.copy(alpha = 0.6f))
                 .padding(horizontal = Spacing.md, vertical = Spacing.sm),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.spacedBy(Spacing.xs)
         ) {
             Text(
-                text = "Curva pedagógica:",
+                text = "Curva pedagógica del nivel:",
                 style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
                 color = TextSecondary
             )
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
             ) {

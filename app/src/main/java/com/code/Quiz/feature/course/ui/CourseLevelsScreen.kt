@@ -132,11 +132,11 @@ fun CourseLevelsContent(
                 Text(
                     text = displayTitle,
                     style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 17.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold
                     ),
                     color = TextPrimary,
-                    maxLines = 1,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
                         .weight(1f)

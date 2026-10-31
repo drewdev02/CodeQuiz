@@ -144,3 +144,25 @@ En cumplimiento estricto con la metodología pedagógica de **microaprendizaje**
    - En conjunto con los 6 niveles de Java (5 ejercicios cada uno), la app ofrece **39 niveles** ágiles y progresivos.
    - Sincronización inteligente de catálogo implementada en Room (Catálogo v8, Base de datos Room v5).
 
+---
+
+## 6. Mejoras de Accesibilidad y Adaptabilidad de Pantallas (WCAG & Material Design)
+
+En cumplimiento con las directrices oficiales de accesibilidad de Google y Android (escalado de fuentes hasta 200% y dispositivos compactos $\le 360\text{ dp}$):
+
+1. **Barra de Navegación Inferior ([`CodeQuizBottomBar.kt`](app/src/main/java/com/code/Quiz/core/ui/component/navigation/CodeQuizBottomBar.kt)):**
+   - Migración de disposición horizontal rígida a disposición vertical estándar de Material 3 Navigation Bar (Icono centrado con píldora activa + Texto con `maxLines = 1` y `TextOverflow.Ellipsis`).
+   - Se eliminó el truncado y fragmentación vertical de palabras como `"Biblioteca"`.
+2. **Curva Pedagógica y Métricas ([`LevelDetailBottomSheet.kt`](app/src/main/java/com/code/Quiz/feature/course/ui/components/LevelDetailBottomSheet.kt)):**
+   - La curva de dificultad ahora se apila verticalmente con ancho completo para los badges, evitando que `DIFÍCIL` sea empujado fuera de la pantalla.
+   - Las métricas (`Micro-retos`, `XP Recompensa`, `Tiempo estimado`) se equilibran mediante `weight(1f)`.
+   - Se habilitó scroll vertical en el contenido del bottom sheet para pantallas pequeñas.
+3. **Encabezados TopBar ([`CoursePathScreen.kt`](app/src/main/java/com/code/Quiz/feature/course/ui/CoursePathScreen.kt), [`ProgressScreen.kt`](app/src/main/java/com/code/Quiz/feature/profile/ui/ProgressScreen.kt), [`CourseLevelsScreen.kt`](app/src/main/java/com/code/Quiz/feature/course/ui/CourseLevelsScreen.kt)):**
+   - Reemplazo de alineaciones fijas en `Box` por `Row` con `weight(1f)` y `TextOverflow.Ellipsis`, previniendo colisiones contra el `StreakBadge`.
+   - Soporte para 2 líneas en títulos largos de cursos.
+4. **Retroalimentación en Quiz ([`QuizScreen.kt`](app/src/main/java/com/code/Quiz/feature/quiz/ui/QuizScreen.kt)):**
+   - Delimitación con `heightIn(max = 140.dp)` y scroll vertical en el área de explicación del `bottomBar`, garantizando que el botón de avance nunca quede fuera del viewport.
+5. **Tarjeta de Racha ([`DuolingoStreakCard.kt`](app/src/main/java/com/code/Quiz/feature/profile/ui/components/DuolingoStreakCard.kt)):**
+   - Peso flexible `Modifier.weight(1f, fill = false)` en la columna de texto del encabezado para evitar desbordes en pantallas compactas.
+
+

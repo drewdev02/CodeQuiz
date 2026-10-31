@@ -98,7 +98,7 @@ fun DuolingoStreakCard(
                     color = StreakOrange
                 )
                 Spacer(modifier = Modifier.width(Spacing.sm))
-                Column {
+                Column(modifier = Modifier.weight(1f, fill = false)) {
                     Text(
                         text = "Días de racha",
                         style = MaterialTheme.typography.titleMedium.copy(
