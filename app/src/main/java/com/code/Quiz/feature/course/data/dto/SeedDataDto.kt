@@ -53,7 +53,8 @@ data class ExerciseSeedDto(
     val codeSnippet: String? = null,
     val language: String = "Kotlin",
     val options: List<ExerciseOptionSeedDto> = emptyList(),
-    val explanation: String
+    val explanation: String,
+    val difficulty: String = "EASY"
 )
 
 /**

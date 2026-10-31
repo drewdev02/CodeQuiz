@@ -126,7 +126,8 @@ open class DatabaseSeeder(
                             codeSnippet = exerciseDto.codeSnippet,
                             language = exerciseDto.language,
                             optionsJson = json.encodeToString(exerciseDto.options),
-                            explanation = exerciseDto.explanation
+                            explanation = exerciseDto.explanation,
+                            difficulty = exerciseDto.difficulty
                         )
                     }
                 }

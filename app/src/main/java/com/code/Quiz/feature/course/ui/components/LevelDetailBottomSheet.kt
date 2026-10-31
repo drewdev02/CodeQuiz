@@ -41,8 +41,10 @@ import com.code.Quiz.core.theme.SuccessMint
 import com.code.Quiz.core.theme.TextMuted
 import com.code.Quiz.core.theme.TextPrimary
 import com.code.Quiz.core.theme.TextSecondary
+import com.code.Quiz.core.model.ExerciseDifficulty
 import com.code.Quiz.core.ui.component.badge.BadgeVariant
 import com.code.Quiz.core.ui.component.badge.CodeQuizBadge
+import com.code.Quiz.core.ui.component.badge.DifficultyBadge
 import com.code.Quiz.core.ui.component.button.ButtonVariant
 import com.code.Quiz.core.ui.component.button.CodeQuizButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
@@ -248,6 +250,35 @@ fun LevelDetailContent(
                         color = TextSecondary
                     )
                 }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(Spacing.sm))
+
+        // Progressive Difficulty Curve Info Banner
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp))
+                .background(DarkSurfaceElevated.copy(alpha = 0.6f))
+                .padding(horizontal = Spacing.md, vertical = Spacing.sm),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "Curva pedagógica:",
+                style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                color = TextSecondary
+            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(Spacing.xs)
+            ) {
+                DifficultyBadge(difficulty = ExerciseDifficulty.EASY)
+                Text(text = "➔", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                DifficultyBadge(difficulty = ExerciseDifficulty.MEDIUM)
+                Text(text = "➔", style = MaterialTheme.typography.labelSmall, color = TextMuted)
+                DifficultyBadge(difficulty = ExerciseDifficulty.HARD)
             }
         }
 

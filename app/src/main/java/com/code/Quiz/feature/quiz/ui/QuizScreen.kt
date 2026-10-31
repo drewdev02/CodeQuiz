@@ -51,7 +51,9 @@ import com.code.Quiz.core.theme.Spacing
 import com.code.Quiz.core.theme.SuccessMint
 import com.code.Quiz.core.theme.TextPrimary
 import com.code.Quiz.core.theme.TextSecondary
+import com.code.Quiz.core.ui.component.badge.DifficultyBadge
 import com.code.Quiz.core.ui.component.button.CodeQuizButton
+import com.code.Quiz.core.ui.component.badge.DifficultyBadge
 import com.code.Quiz.core.ui.component.button.CodeQuizButtonVariant
 import com.code.Quiz.core.ui.component.button.CodeQuizCloseButton
 import com.code.Quiz.core.ui.component.card.CodeQuizCard
@@ -329,6 +331,30 @@ fun QuizScreenContent(
                         .padding(horizontal = Spacing.lg, vertical = Spacing.md),
                     verticalArrangement = Arrangement.spacedBy(Spacing.md)
                 ) {
+                    // Difficulty indicator & language chip
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(Spacing.sm)
+                    ) {
+                        DifficultyBadge(difficulty = exercise.difficulty)
+
+                        if (exercise.language.isNotBlank()) {
+                            Text(
+                                text = "•",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = TextSecondary
+                            )
+                            Text(
+                                text = exercise.language,
+                                style = MaterialTheme.typography.labelSmall.copy(
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 11.sp
+                                ),
+                                color = TextSecondary
+                            )
+                        }
+                    }
+
                     // Question text
                     Text(
                         text = exercise.question,

@@ -41,9 +41,12 @@ For the current phase of the project, exercises follow a clean, highly focused *
 
 - **Question Structure**:
   - **Prompt / Text**: Conceptual question or problem statement.
+  - **Difficulty Indicator**: Explicit cognitive difficulty level (`FÁCIL`, `MEDIO`, `DIFÍCIL`) with dedicated visual tokens (`SuccessMint`, `StreakOrange`, `AccentPurple`).
   - **Code Snippet (Optional)**: Formatted code block for analysis, syntax review, or output prediction.
   - **Options**: $N$ possible answer choices (text or inline code tokens).
   - **Explanation**: Pedagogical rationale displayed immediately upon submission explaining why the correct answers are right and why distractors are wrong.
+- **Cognitive Scaffolding & Progressive Difficulty Curve**:
+  - Every lesson presents challenges in progressive order: **Fácil** (conceptual recognition) ➔ **Medio** (application, tracing, typing) ➔ **Difícil** (multi-concept integration, arrays/matrices, output prediction).
 - **Selection Modes**:
   1. **Single-Choice (1 correct answer)**: Radio-style selection where only one option can be chosen.
   2. **Multi-Select (1 or more correct answers)**: Checkbox-style selection where the learner must select all applicable correct options to succeed.
@@ -126,17 +129,18 @@ This application serves as a core artifact for a **Master's Degree (Maestría)**
 - [x] **Phase 0: Project Setup & Baseline**
   - Android Studio template configured with Jetpack Compose & Material 3.
   - Gradle version catalog setup.
-- [ ] **Phase 1: Core Domain Models & Challenge Engine**
+- [x] **Phase 1: Core Domain Models & Challenge Engine**
   - Define challenge types, lesson data models, and answer evaluation logic.
-  - Unit tests for scoring, answer validation, and streak calculations.
-- [ ] **Phase 2: Interactive Compose Challenge Components**
-  - Implement interactive UI composables: Code snippet viewers, Parson's reordering lists, multiple-choice selectors.
+  - Unit tests for scoring, answer validation, difficulty levels (`EASY`, `MEDIUM`, `HARD`), and streak calculations.
+  - Bundled curriculum with 178 micro-challenges across 39 bite-sized levels (33 C++ Linear Programming micro-levels and 6 Java OOP Mastery levels, strictly <= 5 exercises per level honoring the 3-5 minute microlearning format).
+- [x] **Phase 2: Interactive Compose Challenge Components**
+  - Implement interactive UI composables: Code snippet viewers with native syntax highlighting, difficulty badges (`DifficultyBadge`), multiple-choice selectors.
   - Animated feedback bottom-sheet (correct/incorrect states, explanations, sound/haptics).
-- [ ] **Phase 3: Curriculum Navigation & Skill Tree**
-  - Interactive path/map screen showing lesson nodes, progress status, and unlock conditions.
-- [ ] **Phase 4: Gamification & Local Persistence**
-  - Implement Room DB for offline-first progress tracking.
-  - Streak tracking, XP system, and user stats screen.
+- [x] **Phase 3: Curriculum Navigation & Skill Tree**
+  - Interactive path/map screen showing lesson nodes, progress status, difficulty breakdown, and unlock conditions.
+- [x] **Phase 4: Gamification & Local Persistence**
+  - Implement Room DB for offline-first progress tracking with smart catalog synchronization.
+  - Streak tracking, XP system, and user stats screen with Duolingo streak calendar.
 - [ ] **Phase 5: Academic Evaluation & Validation**
   - Pilot testing with student groups, usability benchmarks, and thesis evaluation metrics.
 

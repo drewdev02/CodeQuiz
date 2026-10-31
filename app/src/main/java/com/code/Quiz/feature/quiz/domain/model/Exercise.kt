@@ -11,5 +11,6 @@ data class Exercise(
     val codeSnippet: String? = null,
     val language: String = "Kotlin",
     val options: List<ExerciseOption>,
-    val explanation: String
+    val explanation: String,
+    val difficulty: ExerciseDifficulty = ExerciseDifficulty.EASY
 )

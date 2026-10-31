@@ -28,7 +28,7 @@ import com.code.Quiz.feature.streak.data.entity.StreakEntity
         StreakEntity::class,
         DailyActivityEntity::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

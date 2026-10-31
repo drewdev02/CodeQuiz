@@ -25,7 +25,7 @@ class DatabaseSeederSmartSyncTest {
         val dto = json.decodeFromString<SeedDataDto>(content)
 
         assertTrue("Catalog version must be >= 1", dto.version >= 1)
-        assertEquals(6, dto.version)
+        assertEquals(8, dto.version)
     }
 
     @Test

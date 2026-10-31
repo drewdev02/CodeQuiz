@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.code.Quiz.feature.quiz.domain.model.Exercise
+import com.code.Quiz.feature.quiz.domain.model.ExerciseDifficulty
 import com.code.Quiz.feature.quiz.domain.model.ExerciseOption
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
@@ -36,7 +37,8 @@ data class ExerciseEntity(
     val codeSnippet: String? = null,
     val language: String = "Kotlin",
     val optionsJson: String,
-    val explanation: String
+    val explanation: String,
+    val difficulty: String = "EASY"
 )
 
 /**
@@ -56,6 +58,12 @@ fun ExerciseEntity.toDomain(): Exercise {
         emptyList()
     }
 
+    val domainDifficulty = try {
+        ExerciseDifficulty.valueOf(difficulty)
+    } catch (_: Exception) {
+        ExerciseDifficulty.EASY
+    }
+
     return Exercise(
         id = id,
         levelId = levelId,
@@ -63,7 +71,8 @@ fun ExerciseEntity.toDomain(): Exercise {
         codeSnippet = codeSnippet,
         language = language,
         options = optionsList,
-        explanation = explanation
+        explanation = explanation,
+        difficulty = domainDifficulty
     )
 }
 
@@ -87,6 +96,7 @@ fun Exercise.toEntity(): ExerciseEntity {
         codeSnippet = codeSnippet,
         language = language,
         optionsJson = jsonString,
-        explanation = explanation
+        explanation = explanation,
+        difficulty = difficulty.name
     )
 }

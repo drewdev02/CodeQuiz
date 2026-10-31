@@ -23,7 +23,7 @@ class DatabaseSeederJsonTest {
         val content = file.readText()
         val dto = json.decodeFromString<SeedDataDto>(content)
 
-        assertEquals(6, dto.version)
+        assertEquals(8, dto.version)
         assertEquals(2, dto.courses.size)
 
         // 1. C++ Linear Programming Course
@@ -33,11 +33,17 @@ class DatabaseSeederJsonTest {
         assertEquals("Fundamentos", c1.badge)
         assertEquals("CODE", c1.iconType)
         assertTrue(c1.isUnlocked)
-        assertEquals(6, c1.levels.size)
+        assertEquals(33, c1.levels.size)
         assertEquals("ACTIVE", c1.levels[0].status)
         assertEquals("cpp_lin_level_1", c1.levels[0].id)
         assertEquals(5, c1.levels[0].exercises.size)
         assertEquals("C++", c1.levels[0].exercises[0].language)
+
+        // Verify all C++ levels have <= 5 exercises
+        c1.levels.forEach { lvl ->
+            assertTrue("Level ${lvl.id} has at most 5 exercises", lvl.exercises.size <= 5)
+            assertEquals(lvl.exercises.size, lvl.totalExercises)
+        }
 
         // 2. Java OOP Mastery Course
         val c2 = dto.courses[1]
@@ -52,15 +58,16 @@ class DatabaseSeederJsonTest {
         assertEquals(5, c2.levels[0].exercises.size)
         assertEquals("Java", c2.levels[0].exercises[0].language)
 
-        // Validate all 60 exercises
+        // Validate all 178 exercises
         val allExercises = dto.courses.flatMap { it.levels.flatMap { lvl -> lvl.exercises } }
-        assertEquals(60, allExercises.size)
+        assertEquals(178, allExercises.size)
         allExercises.forEach { ex ->
             assertNotNull(ex.id)
             assertTrue(ex.question.isNotBlank())
             assertTrue(ex.explanation.isNotBlank())
+            assertTrue("Difficulty must be valid", ex.difficulty in listOf("EASY", "MEDIUM", "HARD"))
             val correctCount = ex.options.count { it.isCorrect }
-            assertEquals("Exercise ${ex.id} must have exactly 1 correct option", 1, correctCount)
+            assertTrue("Exercise ${ex.id} must have at least 1 correct option", correctCount >= 1)
         }
 
         // 3. Library articles verification
