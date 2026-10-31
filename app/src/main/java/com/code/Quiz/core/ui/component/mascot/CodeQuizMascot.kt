@@ -42,9 +42,17 @@ fun CodeQuizMascot(
 
     val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(resId))
 
+    val fallbackResId = when (state) {
+        MascotState.IDLE -> R.drawable.mascot_raccoon_idle
+        MascotState.THINKING -> R.drawable.mascot_raccoon_thinking
+        MascotState.SUCCESS -> R.drawable.mascot_raccoon_success
+        MascotState.ERROR -> R.drawable.mascot_raccoon_error
+        MascotState.CELEBRATION -> R.drawable.mascot_raccoon_celebration
+    }
+
     if (isPreview || composition == null) {
         Image(
-            painter = painterResource(id = R.drawable.mascot_raccoon),
+            painter = painterResource(id = fallbackResId),
             contentDescription = contentDescription,
             modifier = modifier,
             contentScale = contentScale

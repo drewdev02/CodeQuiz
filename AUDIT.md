@@ -169,6 +169,15 @@ En cumplimiento con las directrices oficiales de accesibilidad de Google y Andro
    - Se estandarizó la posición del badge `+XP` en la esquina superior derecha en todas las tarjetas, eliminando por completo el aplastamiento vertical de letras (`+30 XP`).
    - Se compactó la columna del nodo lateral de 72 dp a 56 dp (círculo de 50 dp), ganando más de 20 dp de ancho útil para todas las tarjetas de la ruta.
    - En la tarjeta superior de progreso de [`CourseLevelsScreen.kt`](app/src/main/java/com/code/Quiz/feature/course/ui/CourseLevelsScreen.kt), se implementó una píldora compacta (`completed/total (progress%)`) con contraste mejorado en la barra.
+7. **Sistema de Animación y Emociones de la Mascota ([`CodeQuizMascot.kt`](app/src/main/java/com/code/Quiz/core/ui/component/mascot/CodeQuizMascot.kt)):**
+   - **Diagnóstico del problema:** Las 5 animaciones Lottie (`raccoon_idle.json`, `raccoon_thinking.json`, `raccoon_success.json`, `raccoon_error.json`, `raccoon_celebration.json`) compartían internamente el mismo PNG estático en Base64 en pose pensativa (pata en la barbilla y sonrisa ladina), provocando que en todos los estados la mascota luciera idéntica y sonriera incluso ante respuestas incorrectas.
+   - **Solución implementada:** Se generaron e integraron ilustraciones vectoriales dedicadas por estado:
+     - `SUCCESS`: Mapache saltando con ambas patas arriba en señal de victoria y gran sonrisa festiva.
+     - `ERROR`: Mapache rascándose la cabeza con expresión empática y compasiva.
+     - `CELEBRATION`: Mapache de victoria con gorrito festivo de fiesta (`party hat`) y lluvia de confeti.
+     - `THINKING`: Mapache reflexivo con pata en la barbilla y bombilla de ideas flotante.
+     - `IDLE`: Mapache posado amigablemente en reposo.
+   - Se inyectaron los nuevos assets en los 5 archivos Lottie JSON de `res/raw/` y se actualizaron los fallbacks de Compose y Previews a los recursos específicos de `res/drawable/`.
 
 
 
