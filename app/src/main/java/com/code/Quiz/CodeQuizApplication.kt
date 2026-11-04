@@ -24,11 +24,5 @@ class CodeQuizApplication : Application() {
         CoroutineScope(Dispatchers.IO).launch {
             seeder.seedIfNeeded()
         }
-
-        try {
-            app.rive.runtime.kotlin.core.Rive.init(this)
-        } catch (e: Throwable) {
-            android.util.Log.e("CodeQuizApplication", "Rive initialization skipped or failed", e)
-        }
     }
 }

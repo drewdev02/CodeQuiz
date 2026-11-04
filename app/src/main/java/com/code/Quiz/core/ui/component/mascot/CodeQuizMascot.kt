@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -34,27 +31,6 @@ fun CodeQuizMascot(
     contentScale: ContentScale = ContentScale.Fit
 ) {
     val isPreview = LocalInspectionMode.current
-
-    var isRiveFailed by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(false) }
-
-    val riveResId = androidx.compose.runtime.remember {
-        try {
-            R.raw::class.java.getField("raccoon_mascot").getInt(null)
-        } catch (_: Exception) {
-            0
-        }
-    }
-
-    if (!isPreview && riveResId != 0 && !isRiveFailed) {
-        CodeQuizRiveMascot(
-            state = state,
-            resourceId = riveResId,
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onError = { isRiveFailed = true }
-        )
-        return
-    }
 
     @RawRes val resId = when (state) {
         MascotState.IDLE -> R.raw.raccoon_idle
