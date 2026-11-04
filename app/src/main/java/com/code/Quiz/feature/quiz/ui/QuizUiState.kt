@@ -13,18 +13,41 @@ sealed interface QuizUiState {
         val levelTitle: String,
         val exercises: List<Exercise>,
         val currentIndex: Int,
-        val selectedOptionId: String? = null,
+        val selectedOptionIds: Set<String> = emptySet(),
         val isSubmitted: Boolean = false,
         val isCorrect: Boolean = false,
         val score: Int = 0
-    ) : QuizUiState
+    ) : QuizUiState {
+        val selectedOptionId: String? get() = selectedOptionIds.firstOrNull()
+
+        constructor(
+            levelId: String,
+            levelTitle: String,
+            exercises: List<Exercise>,
+            currentIndex: Int,
+            selectedOptionId: String?,
+            isSubmitted: Boolean = false,
+            isCorrect: Boolean = false,
+            score: Int = 0
+        ) : this(
+            levelId = levelId,
+            levelTitle = levelTitle,
+            exercises = exercises,
+            currentIndex = currentIndex,
+            selectedOptionIds = selectedOptionId?.let { setOf(it) } ?: emptySet(),
+            isSubmitted = isSubmitted,
+            isCorrect = isCorrect,
+            score = score
+        )
+    }
 
     data class Completed(
         val levelId: String,
         val levelTitle: String,
         val totalQuestions: Int,
         val correctAnswers: Int,
-        val xpEarned: Int
+        val xpEarned: Int,
+        val isPassed: Boolean = true
     ) : QuizUiState
 
     data class Error(val message: String) : QuizUiState

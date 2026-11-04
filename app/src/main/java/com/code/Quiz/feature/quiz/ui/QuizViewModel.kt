@@ -52,7 +52,7 @@ class QuizViewModel(
                             levelTitle = levelTitle,
                             exercises = exercises,
                             currentIndex = 0,
-                            selectedOptionId = null,
+                            selectedOptionIds = emptySet(),
                             isSubmitted = false,
                             isCorrect = false,
                             score = 0
@@ -62,18 +62,33 @@ class QuizViewModel(
         }
     }
 
-    fun selectOption(optionId: String) {
+    fun toggleOption(optionId: String) {
         val state = _uiState.value
         if (state is QuizUiState.Content && !state.isSubmitted) {
-            _uiState.value = state.copy(selectedOptionId = optionId)
+            val exercise = state.exercises.getOrNull(state.currentIndex) ?: return
+            val isMultiChoice = exercise.options.count { it.isCorrect } > 1
+            val updated = if (isMultiChoice) {
+                if (state.selectedOptionIds.contains(optionId)) {
+                    state.selectedOptionIds - optionId
+                } else {
+                    state.selectedOptionIds + optionId
+                }
+            } else {
+                setOf(optionId)
+            }
+            _uiState.value = state.copy(selectedOptionIds = updated)
         }
+    }
+
+    fun selectOption(optionId: String) {
+        toggleOption(optionId)
     }
 
     fun submitAnswer() {
         val state = _uiState.value
-        if (state is QuizUiState.Content && state.selectedOptionId != null && !state.isSubmitted) {
+        if (state is QuizUiState.Content && state.selectedOptionIds.isNotEmpty() && !state.isSubmitted) {
             val exercise = state.exercises.getOrNull(state.currentIndex) ?: return
-            val isCorrect = evaluateAnswerUseCase(exercise, state.selectedOptionId)
+            val isCorrect = evaluateAnswerUseCase(exercise, state.selectedOptionIds)
             val updatedScore = if (isCorrect) state.score + 1 else state.score
 
             _uiState.value = state.copy(
@@ -90,7 +105,7 @@ class QuizViewModel(
             if (state.currentIndex + 1 < state.exercises.size) {
                 _uiState.value = state.copy(
                     currentIndex = state.currentIndex + 1,
-                    selectedOptionId = null,
+                    selectedOptionIds = emptySet(),
                     isSubmitted = false,
                     isCorrect = false
                 )
@@ -98,18 +113,27 @@ class QuizViewModel(
                 // Completed all exercises
                 val totalQuestions = state.exercises.size
                 val correctAnswers = state.score
-                val xpEarned = (correctAnswers * 10).coerceAtLeast(15)
+                val accuracy = (correctAnswers * 100) / totalQuestions.coerceAtLeast(1)
+                val isPassed = accuracy >= 80
 
-                viewModelScope.launch {
-                    completeLevelUseCase(
-                        courseId = "",
-                        levelId = state.levelId,
-                        xpEarned = xpEarned
-                    )
-                    recordDailyActivityUseCase(
-                        xpEarned = xpEarned,
-                        exercisesCount = correctAnswers
-                    )
+                val xpEarned = if (isPassed) {
+                    (correctAnswers * 10).coerceAtLeast(15)
+                } else {
+                    0
+                }
+
+                if (isPassed) {
+                    viewModelScope.launch {
+                        completeLevelUseCase(
+                            courseId = "",
+                            levelId = state.levelId,
+                            xpEarned = xpEarned
+                        )
+                        recordDailyActivityUseCase(
+                            xpEarned = xpEarned,
+                            exercisesCount = correctAnswers
+                        )
+                    }
                 }
 
                 _uiState.value = QuizUiState.Completed(
@@ -117,7 +141,8 @@ class QuizViewModel(
                     levelTitle = state.levelTitle,
                     totalQuestions = totalQuestions,
                     correctAnswers = correctAnswers,
-                    xpEarned = xpEarned
+                    xpEarned = xpEarned,
+                    isPassed = isPassed
                 )
             }
         }

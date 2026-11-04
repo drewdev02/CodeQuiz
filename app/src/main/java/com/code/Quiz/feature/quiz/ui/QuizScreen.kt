@@ -250,7 +250,7 @@ fun QuizScreenContent(
                                     CodeQuizButton(
                                         text = "Comprobar",
                                         onClick = onAnswerSubmit,
-                                        enabled = uiState.selectedOptionId != null,
+                                        enabled = uiState.selectedOptionIds.isNotEmpty(),
                                         modifier = Modifier.fillMaxWidth()
                                     )
                                 }
@@ -382,18 +382,37 @@ fun QuizScreenContent(
 
                     Spacer(modifier = Modifier.height(Spacing.xs))
 
+                    // Multi-choice instruction hint
+                    val isMultiChoice = exercise.options.count { it.isCorrect } > 1
+                    val indicatorType = if (isMultiChoice) {
+                        OptionIndicatorType.MULTI_CHOICE
+                    } else {
+                        OptionIndicatorType.SINGLE_CHOICE
+                    }
+
+                    if (isMultiChoice) {
+                        Text(
+                            text = "Selecciona todas las opciones correctas",
+                            style = MaterialTheme.typography.labelMedium.copy(
+                                color = AccentCyan,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        )
+                    }
+
                     // Answer Options Cards
                     exercise.options.forEachIndexed { index, option ->
+                        val isSelected = option.id in uiState.selectedOptionIds
                         val cardState = when {
                             !uiState.isSubmitted -> {
-                                if (uiState.selectedOptionId == option.id) {
+                                if (isSelected) {
                                     OptionSelectionState.SELECTED
                                 } else {
                                     OptionSelectionState.DEFAULT
                                 }
                             }
                             option.isCorrect -> OptionSelectionState.CORRECT
-                            uiState.selectedOptionId == option.id -> OptionSelectionState.INCORRECT
+                            isSelected -> OptionSelectionState.INCORRECT
                             else -> OptionSelectionState.DEFAULT
                         }
 
@@ -401,7 +420,7 @@ fun QuizScreenContent(
                             text = option.text,
                             label = ('A' + index).toString(),
                             state = cardState,
-                            indicatorType = OptionIndicatorType.SINGLE_CHOICE,
+                            indicatorType = indicatorType,
                             enabled = !uiState.isSubmitted,
                             onClick = { onOptionSelected(option.id) }
                         )
@@ -413,6 +432,8 @@ fun QuizScreenContent(
         }
 
         is QuizUiState.Completed -> {
+            val accuracy = (uiState.correctAnswers * 100) / uiState.totalQuestions.coerceAtLeast(1)
+
             Scaffold(
                 modifier = modifier.fillMaxSize(),
                 containerColor = DarkBackground
@@ -432,78 +453,212 @@ fun QuizScreenContent(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        CodeQuizMascot(
-                            state = MascotState.CELEBRATION,
-                            modifier = Modifier.size(190.dp)
-                        )
+                        if (uiState.isPassed) {
+                            CodeQuizMascot(
+                                state = MascotState.CELEBRATION,
+                                modifier = Modifier.size(190.dp)
+                            )
 
-                        Spacer(modifier = Modifier.height(Spacing.md))
+                            Spacer(modifier = Modifier.height(Spacing.md))
 
-                        Text(
-                            text = "¡Nivel Completado!",
-                            style = MaterialTheme.typography.headlineMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                                color = TextPrimary
-                            ),
-                            textAlign = TextAlign.Center
-                        )
+                            Text(
+                                text = "¡Felicidades! 🎉",
+                                style = MaterialTheme.typography.headlineMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextPrimary
+                                ),
+                                textAlign = TextAlign.Center
+                            )
 
-                        Spacer(modifier = Modifier.height(Spacing.xs))
+                            Spacer(modifier = Modifier.height(Spacing.xs))
 
-                        Text(
-                            text = uiState.levelTitle,
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = TextSecondary,
-                            textAlign = TextAlign.Center
-                        )
+                            Text(
+                                text = "${uiState.levelTitle} • ¡Nivel Superado con Éxito!",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = TextSecondary,
+                                textAlign = TextAlign.Center
+                            )
 
-                        Spacer(modifier = Modifier.height(Spacing.lg))
+                            Spacer(modifier = Modifier.height(Spacing.lg))
 
-                        // Rewards card
-                        CodeQuizCard(
-                            modifier = Modifier.fillMaxWidth(),
-                            variant = CodeQuizCardVariant.Elevated
-                        ) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = Spacing.sm),
-                                horizontalArrangement = Arrangement.SpaceAround,
-                                verticalAlignment = Alignment.CenterVertically
+                            // Rewards card with Trophy & Medal
+                            CodeQuizCard(
+                                modifier = Modifier.fillMaxWidth(),
+                                variant = CodeQuizCardVariant.Elevated
                             ) {
-                                // XP Earned
-                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text(
-                                        text = "+${uiState.xpEarned} XP",
-                                        style = MaterialTheme.typography.headlineSmall.copy(
-                                            fontWeight = FontWeight.Bold,
-                                            color = SuccessMint
-                                        )
-                                    )
-                                    Spacer(modifier = Modifier.height(Spacing.xs))
-                                    Text(
-                                        text = "Experiencia",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = TextSecondary
-                                    )
-                                }
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = Spacing.sm),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceAround,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        // XP Earned
+                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text(
+                                                text = "+${uiState.xpEarned} XP",
+                                                style = MaterialTheme.typography.headlineSmall.copy(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = SuccessMint
+                                                )
+                                            )
+                                            Spacer(modifier = Modifier.height(Spacing.xs))
+                                            Text(
+                                                text = "Experiencia",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = TextSecondary
+                                            )
+                                        }
 
-                                // Accuracy
-                                val accuracy = (uiState.correctAnswers * 100) / uiState.totalQuestions.coerceAtLeast(1)
-                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text(
-                                        text = "$accuracy%",
-                                        style = MaterialTheme.typography.headlineSmall.copy(
-                                            fontWeight = FontWeight.Bold,
-                                            color = AccentCyan
-                                        )
-                                    )
-                                    Spacer(modifier = Modifier.height(Spacing.xs))
-                                    Text(
-                                        text = "Aciertos (${uiState.correctAnswers}/${uiState.totalQuestions})",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = TextSecondary
-                                    )
+                                        // Accuracy
+                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text(
+                                                text = "$accuracy%",
+                                                style = MaterialTheme.typography.headlineSmall.copy(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = AccentCyan
+                                                )
+                                            )
+                                            Spacer(modifier = Modifier.height(Spacing.xs))
+                                            Text(
+                                                text = "Aciertos (${uiState.correctAnswers}/${uiState.totalQuestions})",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = TextSecondary
+                                            )
+                                        }
+                                    }
+
+                                    Spacer(modifier = Modifier.height(Spacing.md))
+
+                                    // Prize Trophy Banner
+                                    Surface(
+                                        color = SuccessMint.copy(alpha = 0.12f),
+                                        shape = MaterialTheme.shapes.small,
+                                        border = BorderStroke(1.dp, SuccessMint.copy(alpha = 0.3f)),
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = Spacing.md, vertical = Spacing.sm),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.Center
+                                        ) {
+                                            Text(
+                                                text = "🏆 Premio de Nivel Desbloqueado 🏅",
+                                                style = MaterialTheme.typography.labelLarge.copy(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = SuccessMint
+                                                )
+                                            )
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            CodeQuizMascot(
+                                state = MascotState.ERROR,
+                                modifier = Modifier.size(160.dp)
+                            )
+
+                            Spacer(modifier = Modifier.height(Spacing.md))
+
+                            Text(
+                                text = "Nivel No Superado",
+                                style = MaterialTheme.typography.headlineMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    color = TextPrimary
+                                ),
+                                textAlign = TextAlign.Center
+                            )
+
+                            Spacer(modifier = Modifier.height(Spacing.xs))
+
+                            Text(
+                                text = "Necesitas al menos 80% de aciertos para desbloquear el siguiente tema.",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = TextSecondary,
+                                textAlign = TextAlign.Center
+                            )
+
+                            Spacer(modifier = Modifier.height(Spacing.lg))
+
+                            // Stats card showing required vs obtained
+                            CodeQuizCard(
+                                modifier = Modifier.fillMaxWidth(),
+                                variant = CodeQuizCardVariant.Elevated
+                            ) {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = Spacing.sm),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceAround,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        // 0 XP Earned
+                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text(
+                                                text = "0 XP",
+                                                style = MaterialTheme.typography.headlineSmall.copy(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = TextSecondary
+                                                )
+                                            )
+                                            Spacer(modifier = Modifier.height(Spacing.xs))
+                                            Text(
+                                                text = "Experiencia",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = TextSecondary
+                                            )
+                                        }
+
+                                        // Accuracy
+                                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                            Text(
+                                                text = "$accuracy%",
+                                                style = MaterialTheme.typography.headlineSmall.copy(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = ErrorRed
+                                                )
+                                            )
+                                            Spacer(modifier = Modifier.height(Spacing.xs))
+                                            Text(
+                                                text = "Aciertos (${uiState.correctAnswers}/${uiState.totalQuestions})",
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = TextSecondary
+                                            )
+                                        }
+                                    }
+
+                                    Spacer(modifier = Modifier.height(Spacing.md))
+
+                                    // Requirement warning
+                                    Surface(
+                                        color = ErrorRed.copy(alpha = 0.12f),
+                                        shape = MaterialTheme.shapes.small,
+                                        border = BorderStroke(1.dp, ErrorRed.copy(alpha = 0.3f)),
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Row(
+                                            modifier = Modifier.padding(horizontal = Spacing.md, vertical = Spacing.sm),
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            horizontalArrangement = Arrangement.Center
+                                        ) {
+                                            Text(
+                                                text = "Mínimo requerido para avanzar: 80%",
+                                                style = MaterialTheme.typography.labelMedium.copy(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = ErrorRed
+                                                )
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -511,14 +666,35 @@ fun QuizScreenContent(
 
                     Spacer(modifier = Modifier.height(Spacing.xl))
 
-                    // Exit action button
-                    CodeQuizButton(
-                        text = "Volver al Mapa de Niveles",
-                        onClick = onExit,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = Spacing.xl)
-                    )
+                    // Buttons
+                    if (uiState.isPassed) {
+                        CodeQuizButton(
+                            text = "Continuar al Mapa de Niveles",
+                            onClick = onExit,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = Spacing.xl)
+                        )
+                    } else {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = Spacing.xl),
+                            verticalArrangement = Arrangement.spacedBy(Spacing.sm)
+                        ) {
+                            CodeQuizButton(
+                                text = "Reintentar Nivel",
+                                onClick = onRetry,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                            CodeQuizButton(
+                                text = "Volver al Mapa",
+                                onClick = onExit,
+                                variant = CodeQuizButtonVariant.Secondary,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -650,7 +826,7 @@ private fun QuizScreenContentIncorrectPreview() {
     }
 }
 
-@Preview(name = "Quiz Completed Celebration", showBackground = true, backgroundColor = 0xFF020813)
+@Preview(name = "Quiz Completed Celebration (Passed)", showBackground = true, backgroundColor = 0xFF020813)
 @Composable
 private fun QuizScreenContentCompletedPreview() {
     CodeQuizTheme {
@@ -660,7 +836,30 @@ private fun QuizScreenContentCompletedPreview() {
                 levelTitle = "Variables y Tipos de Datos",
                 totalQuestions = 5,
                 correctAnswers = 4,
-                xpEarned = 40
+                xpEarned = 40,
+                isPassed = true
+            ),
+            onOptionSelected = {},
+            onAnswerSubmit = {},
+            onNextExercise = {},
+            onRetry = {},
+            onExit = {}
+        )
+    }
+}
+
+@Preview(name = "Quiz Completed (Failed <80%)", showBackground = true, backgroundColor = 0xFF020813)
+@Composable
+private fun QuizScreenContentFailedPreview() {
+    CodeQuizTheme {
+        QuizScreenContent(
+            uiState = QuizUiState.Completed(
+                levelId = "intro_prog_level_1",
+                levelTitle = "Variables y Tipos de Datos",
+                totalQuestions = 5,
+                correctAnswers = 2,
+                xpEarned = 0,
+                isPassed = false
             ),
             onOptionSelected = {},
             onAnswerSubmit = {},

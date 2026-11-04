@@ -45,4 +45,43 @@ class EvaluateAnswerUseCaseTest {
         val result = evaluateAnswerUseCase(testExercise, "opt_999")
         assertFalse(result)
     }
+
+    @Test
+    fun invoke_whenMultipleCorrectOptionsAndOnlyOneSelected_returnsFalse() {
+        val multiExercise = testExercise.copy(
+            options = listOf(
+                ExerciseOption("opt_1", "A", true),
+                ExerciseOption("opt_2", "B", true),
+                ExerciseOption("opt_3", "C", false)
+            )
+        )
+        val result = evaluateAnswerUseCase(multiExercise, setOf("opt_1"))
+        assertFalse(result)
+    }
+
+    @Test
+    fun invoke_whenMultipleCorrectOptionsAndAllSelected_returnsTrue() {
+        val multiExercise = testExercise.copy(
+            options = listOf(
+                ExerciseOption("opt_1", "A", true),
+                ExerciseOption("opt_2", "B", true),
+                ExerciseOption("opt_3", "C", false)
+            )
+        )
+        val result = evaluateAnswerUseCase(multiExercise, setOf("opt_1", "opt_2"))
+        assertTrue(result)
+    }
+
+    @Test
+    fun invoke_whenCorrectOptionsSelectedWithExtraIncorrect_returnsFalse() {
+        val multiExercise = testExercise.copy(
+            options = listOf(
+                ExerciseOption("opt_1", "A", true),
+                ExerciseOption("opt_2", "B", true),
+                ExerciseOption("opt_3", "C", false)
+            )
+        )
+        val result = evaluateAnswerUseCase(multiExercise, setOf("opt_1", "opt_2", "opt_3"))
+        assertFalse(result)
+    }
 }

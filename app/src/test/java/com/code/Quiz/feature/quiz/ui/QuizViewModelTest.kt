@@ -91,19 +91,54 @@ class QuizViewModelTest {
         assertEquals("Variables y Tipos", content.levelTitle)
         assertEquals(2, content.exercises.size)
         assertEquals(0, content.currentIndex)
-        assertEquals(null, content.selectedOptionId)
+        assertEquals(emptySet<String>(), content.selectedOptionIds)
         assertFalse(content.isSubmitted)
         assertEquals(0, content.score)
     }
 
     @Test
-    fun selectOption_updatesSelectedOptionId() = runTest {
+    fun selectOption_updatesSelectedOptionIds() = runTest {
         viewModel.loadLevel("intro_prog_level_1", "Variables y Tipos")
         advanceUntilIdle()
 
         viewModel.selectOption("opt_2")
         val content = viewModel.uiState.value as QuizUiState.Content
-        assertEquals("opt_2", content.selectedOptionId)
+        assertEquals(setOf("opt_2"), content.selectedOptionIds)
+    }
+
+    @Test
+    fun toggleOption_inMultiChoiceExercise_addsAndRemovesOptions() = runTest {
+        val multiChoiceExercises = listOf(
+            Exercise(
+                id = "multi_ex",
+                levelId = "lvl_multi",
+                question = "Selecciona todas las correctas",
+                options = listOf(
+                    ExerciseOption("opt_1", "A", true),
+                    ExerciseOption("opt_2", "B", true),
+                    ExerciseOption("opt_3", "C", false)
+                ),
+                explanation = "A y B son correctas"
+            )
+        )
+        val multiRepo = FakeQuizRepository(multiChoiceExercises)
+        val multiVm = QuizViewModel(
+            getLevelExercisesUseCase = GetLevelExercisesUseCase(multiRepo),
+            completeLevelUseCase = CompleteLevelUseCase(multiRepo),
+            recordDailyActivityUseCase = RecordDailyActivityUseCase(fakeStreakRepository),
+            evaluateAnswerUseCase = EvaluateAnswerUseCase()
+        )
+        multiVm.loadLevel("lvl_multi", "Multi Level")
+        advanceUntilIdle()
+
+        multiVm.toggleOption("opt_1")
+        assertEquals(setOf("opt_1"), (multiVm.uiState.value as QuizUiState.Content).selectedOptionIds)
+
+        multiVm.toggleOption("opt_2")
+        assertEquals(setOf("opt_1", "opt_2"), (multiVm.uiState.value as QuizUiState.Content).selectedOptionIds)
+
+        multiVm.toggleOption("opt_1")
+        assertEquals(setOf("opt_2"), (multiVm.uiState.value as QuizUiState.Content).selectedOptionIds)
     }
 
     @Test
@@ -145,14 +180,42 @@ class QuizViewModelTest {
 
         val content = viewModel.uiState.value as QuizUiState.Content
         assertEquals(1, content.currentIndex)
-        assertEquals(null, content.selectedOptionId)
+        assertEquals(emptySet<String>(), content.selectedOptionIds)
         assertFalse(content.isSubmitted)
         assertFalse(content.isCorrect)
         assertEquals(1, content.score)
     }
 
     @Test
-    fun nextExercise_onLastExercise_completesLevelAndTransitionsToCompleted() = runTest {
+    fun nextExercise_onLastExercise_whenAccuracyLessThan80Percent_doesNotCompleteLevelAndMarksNotPassed() = runTest {
+        viewModel.loadLevel("intro_prog_level_1", "Variables y Tipos")
+        advanceUntilIdle()
+
+        // Total: 2 questions. 1 correct = 50% (< 80%)
+        // Question 1: correct
+        viewModel.selectOption("opt_2")
+        viewModel.submitAnswer()
+        viewModel.nextExercise()
+
+        // Question 2 (last): incorrect
+        viewModel.selectOption("opt_4")
+        viewModel.submitAnswer()
+        viewModel.nextExercise()
+        advanceUntilIdle()
+
+        val state = viewModel.uiState.value
+        assertTrue("State should be Completed", state is QuizUiState.Completed)
+        val completed = state as QuizUiState.Completed
+        assertEquals("intro_prog_level_1", completed.levelId)
+        assertEquals(2, completed.totalQuestions)
+        assertEquals(1, completed.correctAnswers)
+        assertFalse("Level should NOT be marked as passed", completed.isPassed)
+        assertEquals(0, completed.xpEarned)
+        assertEquals("completeLevel should NOT be called when < 80%", 0, fakeRepository.completeLevelCallCount)
+    }
+
+    @Test
+    fun nextExercise_onLastExercise_whenAccuracyAtLeast80Percent_completesLevelAndMarksPassed() = runTest {
         viewModel.loadLevel("intro_prog_level_1", "Variables y Tipos")
         advanceUntilIdle()
 
@@ -161,7 +224,7 @@ class QuizViewModelTest {
         viewModel.submitAnswer()
         viewModel.nextExercise()
 
-        // Question 2 (last): correct
+        // Question 2 (last): correct (2/2 = 100% >= 80%)
         viewModel.selectOption("opt_3")
         viewModel.submitAnswer()
         viewModel.nextExercise()
@@ -173,6 +236,7 @@ class QuizViewModelTest {
         assertEquals("intro_prog_level_1", completed.levelId)
         assertEquals(2, completed.totalQuestions)
         assertEquals(2, completed.correctAnswers)
+        assertTrue("Level should be marked as passed", completed.isPassed)
         assertTrue("XP earned should be > 0", completed.xpEarned > 0)
         assertEquals(1, fakeRepository.completeLevelCallCount)
         assertEquals(1, fakeStreakRepository.recordActivityCallCount)
