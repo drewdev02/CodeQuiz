@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.code.Quiz.R
 import com.code.Quiz.core.theme.AccentCyan
 import com.code.Quiz.core.theme.AccentPurple
@@ -106,14 +108,18 @@ fun LevelNodeItem(
             .alpha(itemAlpha),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Vertical connector and circular node column
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+        // Vertical connector and circular node container
+        Box(
             modifier = Modifier
-                .width(56.dp)
-                .fillMaxHeight()
+                .width(68.dp)
+                .fillMaxHeight(),
+            contentAlignment = Alignment.Center
         ) {
-            if (isCurrentChallenge) {
+            // Continuous vertical connector lines behind the circular node
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxHeight()
+            ) {
                 if (showTopLine) {
                     Box(
                         modifier = Modifier
@@ -125,24 +131,22 @@ fun LevelNodeItem(
                     Spacer(modifier = Modifier.weight(1f))
                 }
 
-                CodeQuizMascot(
-                    state = MascotState.IDLE,
-                    modifier = Modifier
-                        .size(38.dp)
-                        .padding(bottom = 2.dp)
-                )
-            } else if (showTopLine) {
-                Box(
-                    modifier = Modifier
-                        .width(3.dp)
-                        .weight(1f)
-                        .background(connectorLineColor)
-                )
-            } else {
-                Spacer(modifier = Modifier.weight(1f))
+                // Space reserved for the centered 50.dp circular node
+                Spacer(modifier = Modifier.height(50.dp))
+
+                if (showBottomLine) {
+                    Box(
+                        modifier = Modifier
+                            .width(3.dp)
+                            .weight(1f)
+                            .background(connectorLineColor)
+                    )
+                } else {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
             }
 
-            // Circular Node Container
+            // Circular Node Container (centered with the card)
             Box(
                 modifier = Modifier
                     .size(50.dp)
@@ -217,15 +221,16 @@ fun LevelNodeItem(
                 }
             }
 
-            if (showBottomLine) {
-                Box(
+            // Mascot perched directly on top of the active circular node
+            if (isCurrentChallenge) {
+                CodeQuizMascot(
+                    state = MascotState.IDLE,
                     modifier = Modifier
-                        .width(3.dp)
-                        .weight(1f)
-                        .background(connectorLineColor)
+                        .align(Alignment.Center)
+                        .offset(x = (-3).dp, y = (-43).dp)
+                        .size(62.dp)
+                        .zIndex(2f)
                 )
-            } else {
-                Spacer(modifier = Modifier.weight(1f))
             }
         }
 
