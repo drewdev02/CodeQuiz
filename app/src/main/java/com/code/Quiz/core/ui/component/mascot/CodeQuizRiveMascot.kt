@@ -31,6 +31,8 @@ fun CodeQuizRiveMascot(
                     contentDescription?.let { this.contentDescription = it }
                     setRiveResource(
                         resId = resourceId,
+                        artboardName = RiveMascotConstants.ARTBOARD_NAME,
+                        stateMachineName = RiveMascotConstants.STATE_MACHINE_NAME,
                         autoplay = true,
                         fit = Fit.CONTAIN,
                         alignment = Alignment.CENTER

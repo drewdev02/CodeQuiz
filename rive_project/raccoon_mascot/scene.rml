@@ -1,0 +1,177 @@
+<Rive version="1" kind="fragment">
+    <Artboard defaultStateMachineId="0:70" width="500" height="500" name="Raccoon" id="0:2">
+        <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+
+        <!-- Contact Shadow -->
+        <Shape x="250" y="445" name="Shadow" id="0:10">
+            <Ellipse originX="0.5" originY="0.5" width="160" height="26" name="ShadowEllipse"/>
+            <Fill name="ShadowFill">
+                <SolidColor colorValue="40000000" name="Color"/>
+            </Fill>
+        </Shape>
+
+        <!-- Solo Container for Mascot Emotional Poses -->
+        <Solo x="250" y="270" activeComponentId="0:20" name="MascotSolo" id="0:15">
+            <Image originX="0.5" originY="0.5" assetId="0:100" name="Idle" id="0:20"/>
+            <Image originX="0.5" originY="0.5" assetId="0:101" name="Thinking" id="0:21"/>
+            <Image originX="0.5" originY="0.5" assetId="0:102" name="Success" id="0:22"/>
+            <Image originX="0.5" originY="0.5" assetId="0:103" name="Error" id="0:23"/>
+            <Image originX="0.5" originY="0.5" assetId="0:104" name="Celebration" id="0:24"/>
+        </Solo>
+
+        <!-- State Machine Driven by stateIndex -->
+        <StateMachine name="MascotStateMachine" id="0:70">
+            <StateMachineNumber name="stateIndex" id="0:80"/>
+
+            <StateMachineLayer name="MascotLayer" id="0:71">
+                <AnyState x="0" y="0">
+                    <StateTransition stateToId="0:30">
+                        <TransitionNumberCondition inputId="0:80" opValue="equal" value="0"/>
+                    </StateTransition>
+                    <StateTransition stateToId="0:31">
+                        <TransitionNumberCondition inputId="0:80" opValue="equal" value="1"/>
+                    </StateTransition>
+                    <StateTransition stateToId="0:32">
+                        <TransitionNumberCondition inputId="0:80" opValue="equal" value="2"/>
+                    </StateTransition>
+                    <StateTransition stateToId="0:33">
+                        <TransitionNumberCondition inputId="0:80" opValue="equal" value="3"/>
+                    </StateTransition>
+                    <StateTransition stateToId="0:34">
+                        <TransitionNumberCondition inputId="0:80" opValue="equal" value="4"/>
+                    </StateTransition>
+                </AnyState>
+
+                <ExitState x="400" y="-120"/>
+
+                <EntryState>
+                    <StateTransition stateToId="0:30"/>
+                </EntryState>
+
+                <AnimationState x="150" y="0" animationId="0:40" id="0:30"/>
+                <AnimationState x="150" y="60" animationId="0:41" id="0:31"/>
+                <AnimationState x="150" y="120" animationId="0:42" id="0:32"/>
+                <AnimationState x="150" y="180" animationId="0:43" id="0:33"/>
+                <AnimationState x="150" y="240" animationId="0:44" id="0:34"/>
+            </StateMachineLayer>
+        </StateMachine>
+
+        <!-- 0: IDLE Animation (Gentle floating & breathing) -->
+        <LinearAnimation loopValue="1" duration="120" name="AnimIdle" id="0:40">
+            <KeyedObject objectId="0:15">
+                <KeyedProperty propertyKey="296">
+                    <KeyFrameId value="0:20"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="270" interpolationType="1"/>
+                    <KeyFrameDouble value="258" frame="60" interpolationType="1"/>
+                    <KeyFrameDouble value="270" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+            <KeyedObject objectId="0:10">
+                <KeyedProperty propertyKey="16">
+                    <KeyFrameDouble value="1.0" interpolationType="1"/>
+                    <KeyFrameDouble value="0.88" frame="60" interpolationType="1"/>
+                    <KeyFrameDouble value="1.0" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="18">
+                    <KeyFrameDouble value="1.0" interpolationType="1"/>
+                    <KeyFrameDouble value="0.65" frame="60" interpolationType="1"/>
+                    <KeyFrameDouble value="1.0" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+
+        <!-- 1: THINKING Animation (Curious tilt) -->
+        <LinearAnimation loopValue="1" duration="120" name="AnimThinking" id="0:41">
+            <KeyedObject objectId="0:15">
+                <KeyedProperty propertyKey="296">
+                    <KeyFrameId value="0:21"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="-0.04" interpolationType="1"/>
+                    <KeyFrameDouble value="0.04" frame="60" interpolationType="1"/>
+                    <KeyFrameDouble value="-0.04" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+
+        <!-- 2: SUCCESS Animation (Victory jumping bounce) -->
+        <LinearAnimation loopValue="1" duration="120" name="AnimSuccess" id="0:42">
+            <KeyedObject objectId="0:15">
+                <KeyedProperty propertyKey="296">
+                    <KeyFrameId value="0:22"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="270" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="284" frame="15" interpolationType="1"/>
+                    <KeyFrameDouble value="175" frame="45" interpolationType="1"/>
+                    <KeyFrameDouble value="175" frame="55" interpolationType="1"/>
+                    <KeyFrameDouble value="284" frame="75" interpolationType="1"/>
+                    <KeyFrameDouble value="250" frame="90" interpolationType="1"/>
+                    <KeyFrameDouble value="270" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="16">
+                    <KeyFrameDouble value="1.0" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="1.12" frame="15" interpolationType="1"/>
+                    <KeyFrameDouble value="0.92" frame="35" interpolationType="1"/>
+                    <KeyFrameDouble value="1.0" frame="55" interpolationType="1"/>
+                    <KeyFrameDouble value="1.15" frame="75" interpolationType="1"/>
+                    <KeyFrameDouble value="1.0" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+            <KeyedObject objectId="0:10">
+                <KeyedProperty propertyKey="16">
+                    <KeyFrameDouble value="1.0" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="1.2" frame="15" interpolationType="1"/>
+                    <KeyFrameDouble value="0.45" frame="45" interpolationType="1"/>
+                    <KeyFrameDouble value="1.25" frame="75" interpolationType="1"/>
+                    <KeyFrameDouble value="1.0" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+
+        <!-- 3: ERROR Animation (Gentle empathetic sway) -->
+        <LinearAnimation loopValue="1" duration="120" name="AnimError" id="0:43">
+            <KeyedObject objectId="0:15">
+                <KeyedProperty propertyKey="296">
+                    <KeyFrameId value="0:23"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="0" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="-0.06" frame="30" interpolationType="1"/>
+                    <KeyFrameDouble value="0.06" frame="90" interpolationType="1"/>
+                    <KeyFrameDouble value="0" frame="120" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+
+        <!-- 4: CELEBRATION Animation (Party bouncing celebration) -->
+        <LinearAnimation loopValue="1" duration="60" name="AnimCelebration" id="0:44">
+            <KeyedObject objectId="0:15">
+                <KeyedProperty propertyKey="296">
+                    <KeyFrameId value="0:24"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="14">
+                    <KeyFrameDouble value="270" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="230" frame="15" interpolationType="1"/>
+                    <KeyFrameDouble value="270" frame="30" interpolationType="1"/>
+                    <KeyFrameDouble value="230" frame="45" interpolationType="1"/>
+                    <KeyFrameDouble value="270" frame="60" interpolationType="1"/>
+                </KeyedProperty>
+                <KeyedProperty propertyKey="15">
+                    <KeyFrameDouble value="-0.05" frame="0" interpolationType="1"/>
+                    <KeyFrameDouble value="0.05" frame="30" interpolationType="1"/>
+                    <KeyFrameDouble value="-0.05" frame="60" interpolationType="1"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+    </Artboard>
+
+    <!-- Embedded Assets -->
+    <ImageAsset file="idle.png" name="idle" id="0:100"/>
+    <ImageAsset file="thinking.png" name="thinking" id="0:101"/>
+    <ImageAsset file="success.png" name="success" id="0:102"/>
+    <ImageAsset file="error.png" name="error" id="0:103"/>
+    <ImageAsset file="celebration.png" name="celebration" id="0:104"/>
+</Rive>

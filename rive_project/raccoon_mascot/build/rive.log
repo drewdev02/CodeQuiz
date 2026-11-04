@@ -1,0 +1,8 @@
+[03:10:37.339] error   scene.rml:14:1  [rml] Solo has no property "originX"
+[03:10:37.340] error   scene.rml:14:1  [rml] Solo has no property "originY"
+[03:10:37.340] rive  build failed (0 bytes, 28ms, 2 errors, 0 warnings)
+[03:11:37.288] rive  built rive_project/raccoon_mascot/build/raccoon_mascot.riv (1142350 bytes, 33ms, 0 errors, 0 warnings)
+[03:11:58.768] rive  built rive_project/raccoon_mascot/build/raccoon_mascot.riv (1142350 bytes, 34ms, 0 errors, 0 warnings)
+[03:11:58.770] rive  showing Raccoon [1/1]
+[03:11:58.770] rive  viewport 500x500 @1x
+[03:11:58.939] rive  wrote /tmp/raccoon_rive_test.png
